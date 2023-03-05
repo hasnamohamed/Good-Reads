@@ -6,6 +6,7 @@ const users = new mongoose.Schema(
         last_name:String,
         image:String,
         email:String,
+        password:String,
         isAdmin:Boolean,
         books:[{
             bookId: {type: mongoose.Schema.Types.ObjectId,ref: "Book"},

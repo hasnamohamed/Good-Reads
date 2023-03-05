@@ -1,4 +1,4 @@
-const products = require('../models/author.js')
+const Author = require('../models/author.js')
 
 const getAuthors = ((req, res) => {
     res.send("All authors");

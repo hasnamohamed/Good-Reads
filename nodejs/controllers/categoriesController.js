@@ -1,4 +1,4 @@
-const products = require('../models/category.js')
+const Category = require('../models/category.js')
 
 const getCategories = ((req, res) => {
     res.send("All categories");

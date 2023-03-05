@@ -1,7 +1,7 @@
-const products = require('../models/book.js')
+const Book = require('../models/book.js')
 
 const getBooks = ((req, res) => {
-    res.send("All books");
+    
 })
 
 const getBook = ((req, res) => {

@@ -1,4 +1,4 @@
-const products = require('../models/user.js')
+const User = require('../models/user.js')
 
 const login = ((req, res) => {
     res.send("login");

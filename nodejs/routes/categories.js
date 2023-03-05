@@ -1,36 +1,21 @@
 const express = require('express');
 const Route = express.Router();
+const  { 
+    getCategories,
+    getCategory,
+    createCategory,
+    updateCategory,
+    deleteCategory
+} = require('../controllers/categoriesController.js')
+Route.get('/',getCategories);
 
-Route.get('/', (req, res) => {
+Route.get('/:id',getCategory);
 
-    res.send("Get all Cat")
+Route.post('/', createCategory);
 
-});
+Route.put('/:id',updateCategory);
 
-Route.get('/:id', (req, res) => {
-
-    res.send("Get one Cat")
-
-});
-
-Route.post('/', (req, res) => {
-
-    res.send("Adding Cat")
-
-});
-
-Route.put('/', (req, res) => {
-
-    res.send("edit Cat")
-
-});
-
-
-Route.delete('/:id', (req, res) => {
-
-    res.send("remove Cat")
-
-});
+Route.delete('/:id',deleteCategory);
 
 
 

@@ -1,27 +1,14 @@
 const express = require('express');
 const Route = express.Router();
+const  { 
+    login,
+    register
+} = require('../controllers/usersController.js')
 
+Route.post('/admin',login);
 
-Route.post('/admin', (req, res) => {
+Route.post('/login',login);
 
-    res.send("Admin route works")
-
-});
-
-Route.post('/login', (req, res) => {
-
-    res.send("login works")
-
-});
-
-
-Route.post('/register', (req, res) => {
-
-    res.send("register works")
-
-});
-
-
-
+Route.post('/register',register);
 
 module.exports = Route;

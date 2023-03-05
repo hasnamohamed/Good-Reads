@@ -1,38 +1,20 @@
 const express = require('express');
 const Route = express.Router();
+const  { 
+    getAuthors,
+    getAuthor,
+    createAuthor,
+    updateAuthor,
+    deleteAuthor
+} = require('../controllers/authorsController.js')
+Route.get('/',getAuthors);
 
-Route.get('/', (req, res) => {
+Route.get('/:id',getAuthor);
 
-    res.send("Get all authors")
+Route.post('/', createAuthor);
 
-});
+Route.put('/:id',updateAuthor);
 
-Route.get('/:id', (req, res) => {
-
-    res.send("Get one author")
-
-});
-
-Route.post('/', (req, res) => {
-
-    res.send("Adding author")
-
-});
-
-Route.put('/', (req, res) => {
-
-    res.send("edit author")
-
-});
-
-
-Route.delete('/:id', (req, res) => {
-
-    res.send("remove author")
-
-});
-
-
-
+Route.delete('/:id',deleteAuthor);
 
 module.exports = Route;

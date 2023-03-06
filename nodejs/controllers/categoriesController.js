@@ -9,14 +9,11 @@ const getCategory = ((req, res) => {
 })
 
 const createCategory = (async function (req, res) {
-    let categoryInfo = {
-        ...req.body
-    }
     try {
-        let alldata = new Category({name:req.body.name});
+        let alldata = new Category();
         alldata.name = req.body.name;
         await alldata.save()
-        res.send("data saved successfully")
+        res.send("Category saved successfully")
     } catch (err) {
         if (err.name === "ParallelSaveError") {
             console.log("There was a parallel save error for", keyA, keyB);

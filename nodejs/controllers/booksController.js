@@ -14,15 +14,22 @@ const getBook = ((req, res) => {
     res.send("one book");
 })
 
-const createBook = ((req, res) => {
-    var myData = new Book(req.body);
-  myData.save()
-    .then(item => {
-      res.send("item saved to database");
-    })
-    .catch(err => {
-      res.status(400).send(err);
-    });
+const createBook = (async function (req, res) {
+    try {
+        let alldata = new Book();
+        alldata.title = req.body.title,
+            alldata.image = req.body.image,
+            alldata.description = req.body.description,
+            alldata.authorId = req.body.authorId,
+            alldata.catId = req.body.catId,
+            alldata.reviews = req.body.reviews,
+            await alldata.save()
+        res.send("Book saved successfully")
+    } catch (err) {
+        if (err.name === "ParallelSaveError") {
+            console.log("There was a parallel save error for", keyA, keyB);
+        }
+    }
 })
 
 const updateBook = ((req, res) => {

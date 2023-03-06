@@ -9,7 +9,7 @@ const register = ((req, res) => {
         ...req.body
     }
     try {
-        let newUser = new userModel(userInfo)
+        let newUser = new User(userInfo)
         newUser.save()
         res.status(200).send("User has been Added")
     } catch (err) {

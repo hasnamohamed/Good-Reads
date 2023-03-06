@@ -5,11 +5,21 @@ const login = ((req, res) => {
 })
 
 const register = ((req, res) => {
-    res.send("register/Create user");
+    let userInfo = {
+        ...req.body
+    }
+    try {
+        let newUser = new userModel(userInfo)
+        newUser.save()
+        res.status(200).send("User has been Added")
+    } catch (err) {
+        res.status(502).send(err);
+    }
+
 })
 
 
- 
+
 module.exports = {
     login,
     register

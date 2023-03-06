@@ -8,8 +8,9 @@ const getCategory = ((req, res) => {
     res.send("one Category");
 })
 
-const createCategory = ((req, res) => {
-    res.send("create Category");   
+const createCategory = (function(req, res) {
+    var myData = new Category(req.body);
+    myData.save(); 
 })
 
 const updateCategory = ((req, res) => {

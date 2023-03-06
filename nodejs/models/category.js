@@ -1,11 +1,10 @@
 const mongoose = require('mongoose')
-const categories = new mongoose.Schema(
-    {
-        _id:Number,
-        name:String,
-       // author:{type:mongoose.Schema.Types.ObjectId, ref: "users"}
-    }
-)
+const categories = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+})
 
 const Category = mongoose.model('categories', categories)
 

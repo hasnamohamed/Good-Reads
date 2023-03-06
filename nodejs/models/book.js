@@ -1,17 +1,34 @@
 const mongoose = require('mongoose')
 const books = new mongoose.Schema({
-    _id: Number,
-    title: String,
-    rating: Number,
-    image: String,
-    description: String,
+    title: {
+        type: String,
+        required: true
+    },
+    rating: {
+        totalVotes: Number,
+        totalPoints: Number,
+        rate: {
+            type: Number,
+            default: 0
+        }
+    },
+    image: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: String,
+        required: true
+    },
     authorId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Author"
+        ref: "Author",
+        required: true
     },
     catId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Category"
+        ref: "Category",
+        required: true
     },
     reviews: [{
         userId: {

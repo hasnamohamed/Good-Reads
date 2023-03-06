@@ -1,14 +1,14 @@
 const Author = require('../models/author.js')
 
-const getAuthors = ((req, res) => {
+const getAuthors = ((req, res) => { // 
     res.send("All authors");
 })
 
-const getAuthor = ((req, res) => {
+const getAuthor = ((req, res) => { 
     res.send("one Author");
 })
 
-const createAuthor = ((req, res) => {
+const createAuthor = ((req, res) => { post /
     res.send("create Author");
 })
 

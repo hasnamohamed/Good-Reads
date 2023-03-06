@@ -1,7 +1,13 @@
 const Book = require('../models/book.js')
 
 const getBooks = ((req, res) => {
-    
+    Book.find((err, data) => {
+        if (!err) {
+            res.send(data)
+        } else {
+            console.log('Failed to retrieve the Course List: ' + err);
+        }
+    });
 })
 
 const getBook = ((req, res) => {
@@ -9,7 +15,14 @@ const getBook = ((req, res) => {
 })
 
 const createBook = ((req, res) => {
-    res.send("create book");
+    var myData = new Book(req.body);
+  myData.save()
+    .then(item => {
+      res.send("item saved to database");
+    })
+    .catch(err => {
+      res.status(400).send(err);
+    });
 })
 
 const updateBook = ((req, res) => {

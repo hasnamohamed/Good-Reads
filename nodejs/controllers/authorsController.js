@@ -16,7 +16,7 @@ const getAuthor = (async(req, res) => {
         const authorID = req.params.id
         const author = await Author.findOne({_id:authorID});
         if(!author){
-            return res.status(400).json({message:'Author not found'})
+            return res.status(404).json({message:'Author not found'})
         }
             res.json(author)
     } catch (error) {

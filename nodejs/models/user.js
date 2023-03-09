@@ -15,7 +15,8 @@ const user = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        
     },
     password: {
         type: String,
@@ -24,6 +25,18 @@ const user = new mongoose.Schema({
     isAdmin: {
         type: Boolean,
         default: false
+    },
+    isLogedIn:{
+        type:Boolean,
+        default:false
+    },
+    secretQuestion:{
+        type: String,
+        required: true,
+    },
+    secretAnswer:{
+        type: String,
+        required: true,        
     },
     books: [{
         bookId: {

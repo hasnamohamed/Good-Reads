@@ -1,5 +1,7 @@
 const express = require('express');
 const Route = express.Router();
+const Auth = require('../middleware/auth')
+
 const  { 
     getBooks,
     getBook,

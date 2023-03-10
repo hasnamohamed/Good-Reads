@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken')
 
 async function register(req, res)
 {
-
     try 
     {
         const {first_name, last_name, image, email, password, secretQuestion, secretAnswer} = req.body

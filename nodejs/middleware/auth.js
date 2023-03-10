@@ -13,7 +13,7 @@ async function verifyToken (req, res, next)
        return res.status(403).send("A token is required for authentication")
     }
 
-    if(user.isLogedIn == false)
+    if(user.isLogedIn == false)//!user
     {
         return res.status(403).send("Access Denied");
     }

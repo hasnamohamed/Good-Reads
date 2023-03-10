@@ -1,11 +1,12 @@
 const dotenv = require("dotenv").config();
 const express = require('express');
-const app = express();
 const db = require('./config/db')
-app.use(express.json())
-const config = process.env
 const Auth = require('./middleware/auth')
 
+const app = express();
+const config = process.env
+
+app.use(express.json())
 
 const userRoutes = require('./routes/users-auth.js')
 const booksRoutes = require('./routes/books.js')

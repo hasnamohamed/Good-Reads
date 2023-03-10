@@ -1,11 +1,11 @@
 const Category = require('../models/category.js')
 
-const getCategories = ((req, res) => {
-    res.send("All categories");
+const getCategories = (async function (req, res) {
+
 })
 
-const getCategory = ((req, res) => {
-    res.send("one Category");
+const getCategory = (async function (req, res) {
+
 })
 
 const createCategory = (async function (req, res) {
@@ -22,11 +22,11 @@ const createCategory = (async function (req, res) {
 
 })
 
-const updateCategory = ((req, res) => {
-    res.send("update Category");
+const updateCategory = (async (req, res) => {
+
 })
-const deleteCategory = ((req, res) => {
-    res.send("delete Category");
+const deleteCategory = (async (req, res) => {
+
 })
 module.exports = {
     getCategories,

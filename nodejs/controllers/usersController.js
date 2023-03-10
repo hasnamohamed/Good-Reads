@@ -106,10 +106,6 @@ async function logout (req, res)
 {
   const token =
     req.body.token || req.query.token || req.headers["x-access-token"];
-
-  if (!token) {
-    return res.status(403).send("A token is required for authentication");
-  }
     
   await User.updateOne({email:req.body.email}, {isLogedIn:false}) 
   return res.status(401).send("You are know loged out");

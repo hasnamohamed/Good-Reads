@@ -3,10 +3,10 @@ const Author = require('../models/author.js')
 // 1-get all authors from database
 const getAuthors = (async(req, res) => {
     try {
-       const authors = await Author.find({})
-       res.json(authors)
+        const authors = await Author.find({})
+        res.json(authors)
     } catch (error) {
-        console.log(error);
+        res.status(400).json(error.message);
     }
 })
 
@@ -16,11 +16,11 @@ const getAuthor = (async(req, res) => {
         const authorID = req.params.id
         const author = await Author.findOne({_id:authorID});
         if(!author){
-            return res.status(400).json({message:'Author not found'})
+            return res.status(404).json({message:'Author not found'})
         }
             res.json(author)
     } catch (error) {
-        console.log(error);
+        res.status(400).json(error.message);
     }
 })
 
@@ -32,9 +32,9 @@ const createAuthor = (async(req, res) => {
           }
         const newAuthor = {...req.body}
         const createdAuthor = await Author.create(newAuthor)
-        res.status(200).json(createdAuthor);
+        res.status(200).json.status(200).json({message: 'Author created successfully'});
     } catch (error) {
-        console.log(error);
+        res.status(400).json(error.message);
     }
 })
 
@@ -59,9 +59,9 @@ const updateAuthor = (async(req, res) => {
           return res.status(404).json({ message: 'Author not found' });
         }
     
-        return res.json(updatedAuthor);
+        return res.status(200).json({message: 'Author updated successfully'});
       } catch (error) {
-        console.error(error);
+        res.status(400).json(error.message);
       }
 })
 
@@ -69,14 +69,15 @@ const updateAuthor = (async(req, res) => {
 const deleteAuthor = (async(req, res) => {
    try {
     const authorID = req.params.id
-    const result = await Author.deleteOne({_id : authorID})
+    const result = await Author.deleteOne({ _id: authorID });
+    if (result.deletedCount === 0) {
+        return res.status(404).json({ error: 'Author not found' });
+      }
 
-    if(result.deletedCount === 0){
-        return res.status(500).json({message:'Author not found'})
-    }
-    res.json(result)
+      res.status(200).json({ message: 'Author deleted successfully' });
+
    } catch (error) {
-    console.log(error);
+    res.status(400).json(error.message);
    }
 })
 module.exports = {

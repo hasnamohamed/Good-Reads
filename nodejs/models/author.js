@@ -3,7 +3,7 @@ const authors = new mongoose.Schema(
     {
         name:{type:String, required: true},
         birth:{type:Date, required: true}, //validate form date #REMEmBER
-        background:{type:String, required: true},
+        bio:{type:String, required: true},
     }
 )
 

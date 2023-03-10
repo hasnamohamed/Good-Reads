@@ -1,7 +1,7 @@
 const Category = require('../models/category.js')
 
 const getCategories = (async function (req, res) {
-
+    
 })
 
 const getCategory = (async function (req, res) {
@@ -19,7 +19,6 @@ const createCategory = (async function (req, res) {
             console.log("There was a parallel save error for", keyA, keyB);
         }
     }
-
 })
 
 const updateCategory = (async (req, res) => {

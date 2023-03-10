@@ -31,8 +31,8 @@ const createAuthor = (async(req, res) => {
             return res.status(400).json({ message: 'Missing required fields' });
           }
         const newAuthor = {...req.body}
-        const createdAuthor = await Author.create(newAuthor)
-        res.status(200).json.status(200).json({message: 'Author created successfully'});
+        await Author.create(newAuthor)
+        res.json.status(200).json({message: 'Author created successfully'});
     } catch (error) {
         res.status(400).json(error.message);
     }

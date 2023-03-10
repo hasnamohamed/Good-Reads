@@ -1,11 +1,34 @@
 const Category = require('../models/category.js')
 
 const getCategories = (async function (req, res) {
-    
+    Category.find((err, data) => {
+        if (!err) {
+            res.status(200);
+            res.send(data);
+        }
+        else {
+            res.status(400);
+            res.send(err.message);
+        }
+    })
 })
 
 const getCategory = (async function (req, res) {
-
+    try {
+        const catId = req.params.id;
+        const cat = await Category.findOne({ id: catId })
+        if (!cat) {
+            return
+             res.status(400).json({message:'Category not found'})
+        }
+        else {
+            res.status(200);
+            res.send(cat)
+        }
+    } catch (err) {
+        res.status(400);
+        res.send(err);
+    }
 })
 
 const createCategory = (async function (req, res) {

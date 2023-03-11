@@ -1,59 +1,110 @@
-const Category = require('../models/category.js')
+const Book = require('../models/book.js')
 
-const getCategories = (async function (req, res) {
-    Category.find((err, data) => {
+const getBooks = (async (req, res) => {
+    Book.find((err, data) => {
         if (!err) {
-            res.status(200);
-            res.send(data);
+            res.status(200).send(data)
+        } else {
+            res.status(400).send('something went wrong : ' + err)
         }
-        else {
-            res.status(400);
-            res.send(err.message);
-        }
-    })
+    });
 })
 
-const getCategory = (async function (req, res) {
+const getBook = (async (req, res) => {
     try {
-        const catId = req.params.id;
-        const cat = await Category.findOne({ id: catId })
-        if (!cat) {
-            return
-             res.status(400).json({message:'Category not found'})
+        const bookID = req.params.id
+        const book = await Book.findOne({_id:bookID});
+        if(!book){
+            return res.status(400).json({message:'Book not found'})
         }
-        else {
-            res.status(200);
-            res.send(cat)
-        }
+        res.status(200).json(book)
     } catch (err) {
-        res.status(400);
-        res.send(err);
+        res.status(400).send('something went wrong : ' + err)
     }
 })
 
-const createCategory = (async function (req, res) {
+const createBook = (async function (req, res) {
     try {
-        let alldata = new Category();
-        alldata.name = req.body.name;
-        await alldata.save()
-        res.send("Category saved successfully")
+        if (!req.body.title || !req.body.image || !req.body.description || !req.body.authorId || !req.body.catId) {
+            return res.status(400).json({ message: 'Missing required fields' });
+          }
+        data = new Book();
+        data.title = req.body.title,
+        data.image = req.body.image,
+        data.description = req.body.description,
+        data.authorId = req.body.authorId,
+        data.catId = req.body.catId,
+        data.reviews = req.body.reviews,
+        await data.save()
+        res.status(200).send("Book saved successfully")
     } catch (err) {
         if (err.name === "ParallelSaveError") {
-            console.log("There was a parallel save error for", keyA, keyB);
+            res.status(400).send("Parallel Save Error" + err);
+        }
+        else{
+            res.status(400).send("Something went wrong" + err);
         }
     }
 })
 
-const updateCategory = (async (req, res) => {
+const updateBook = (async (req, res) => {
+    try {
+        const bookId = req.params.id;
+        if (!req.body.title || !req.body.image || !req.body.description || !req.body.authorId || !req.body.catId) {
+            return res.status(400).json({ message: 'Missing required fields' });
+          }
+        const {
+            title,
+            image,
+            description,
+            authorId,
+            catId
+        } = req.body;
+        
+        const updatedBook = await Book.findByIdAndUpdate(
+            bookId, {
+                title,
+                image,
+                description,
+                authorId,
+                catId
+            }, {
+                new: true
+            }
+        );
+        if (!updatedBook) {
+            return res.status(404).json({
+                message: 'Book not found'
+            });
+        }
+        return res.status(200).json("Book updated");
+    } catch (err) {
+        res.status(400).send(err);
+    }
 
 })
-const deleteCategory = (async (req, res) => {
+const deleteBook = (async (req, res) => {
+    try {
+        const bookId = req.params.id
+        const result = await Book.deleteOne({
+            _id: bookId
+        })
+
+        if (result.Count === 0) {
+            return res.status(400).json({
+                message: 'Book not found'
+            })
+        }
+        res.status(200).json(result)
+    } catch (err) {
+        res.status(200).send(err);
+    }
 
 })
 module.exports = {
-    getCategories,
-    getCategory,
-    createCategory,
-    updateCategory,
-    deleteCategory
+    getBooks,
+    getBook,
+    createBook,
+    updateBook,
+    deleteBook
 }

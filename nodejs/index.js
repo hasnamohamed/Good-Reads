@@ -10,11 +10,13 @@ app.use(express.json())
 
 const userRoutes = require('./routes/users-auth.js')
 const booksRoutes = require('./routes/books.js')
+const reviewsRoutes = require('./routes/reviews.js')
 const categoryRoutes = require('./routes/categories.js')
 const authorsRoutes = require('./routes/authors.js')
 
 app.use('/', userRoutes)
 app.use('/book', booksRoutes)
+app.use('/review', reviewsRoutes)
 app.use('/category', categoryRoutes)
 app.use('/author', authorsRoutes)
 app.get('/users', Auth, (req, res)=>{

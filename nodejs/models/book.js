@@ -30,14 +30,7 @@ const books = new mongoose.Schema({
         ref: "Category",
         required: true
     },
-    reviews: [{
-        userId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
-        },
-        review: String,
-        rating: Number,
-    }]
+
 })
 
 const Book = mongoose.model('books', books)

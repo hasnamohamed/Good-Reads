@@ -1,13 +1,19 @@
 const Book = require('../models/book.js')
 
-const getBooks = (async (req, res) => {
+async function getBooks(req, res, next) {
     try {
-        const books = await Book.find({});
-        res.status(200).send(books);
+        let page = req.query.page;
+        let limit = 2;
+        let startIndex = (page - 1) * limit || 0;
+        let endIndex = page * limit;
+
+        const books = await Book.find(null,null,{ skip: startIndex, limit: endIndex });
+        res.send(books);
+        next();
     } catch (err) {
-        res.status(200).send("something went wrong" + err);
+        res.send("something went wrong" + err);
     }
-})
+}
 
 const getBook = (async (req, res) => {
     try {
@@ -33,7 +39,9 @@ const createBook = (async function (req, res) {
                 message: 'Missing required fields'
             });
         }
-        let bookInfo={...req.body};
+        let bookInfo = {
+            ...req.body
+        };
         await Book.create(bookInfo);
         res.status(200).send("Book saved successfully")
     } catch (err) {
@@ -53,13 +61,19 @@ const updateBook = (async (req, res) => {
                 message: 'Missing required fields'
             });
         }
-        const bookInfo =req.body;
-        
+        const bookInfo = req.body;
+
         const updatedBook = await Book.findByIdAndUpdate(
-            bookId, {...bookInfo}, {new: true}
+            bookId, {
+                ...bookInfo
+            }, {
+                new: true
+            }
         );
         if (!updatedBook) {
-            return res.status(404).json({message: 'Book not found'});
+            return res.status(404).json({
+                message: 'Book not found'
+            });
         }
         return res.status(200).json("Book updated");
     } catch (err) {

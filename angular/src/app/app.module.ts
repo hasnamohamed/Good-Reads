@@ -2,12 +2,15 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './Components/Login/login/login.component';
-import { NavbarComponent } from './Components/Navbar/navbar/navbar.component';
+import { LoginComponent } from './Components/login/login.component';
+import { NavbarComponent } from './Components/navbar/navbar.component';
 import { NotFoundComponent } from './Components/not-found/not-found.component';
 import { HomePageComponent } from './Components/home-page/home-page.component';
 import { AboutusComponent } from './Components/aboutus/aboutus.component';
 import { TeamsAndConditionComponent } from './Components/teams-and-condition/teams-and-condition.component';
+import { AdminDashBoardComponent } from './Components/admin-dashboard/admin-dash-board/admin-dash-board.component';
+import { BooksComponent } from './Components/books/books.component';
+import { LogoutComponent } from './Components/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import { TeamsAndConditionComponent } from './Components/teams-and-condition/tea
     NotFoundComponent,
     HomePageComponent,
     AboutusComponent,
-    TeamsAndConditionComponent
+    TeamsAndConditionComponent,
+    AdminDashBoardComponent,
+    BooksComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,

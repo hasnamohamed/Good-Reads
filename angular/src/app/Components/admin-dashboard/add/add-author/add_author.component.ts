@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-add_author',
+  selector: 'app-add-author',
   templateUrl: './add_author.component.html',
   styleUrls: ['./add_author.component.css']
 })
-export class Add_authorComponent implements OnInit {
+export class AddAuthorComponent implements OnInit {
 
   constructor() { }
 

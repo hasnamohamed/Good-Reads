@@ -1,0 +1,63 @@
+* {
+    box-sizing: border-box !important;
+}
+
+nav {
+    background-color: #f4f1ea;
+    padding: 0px;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 15%);
+}
+
+
+.navbar-brand, a
+{
+    color: #382110 !important;
+}
+
+
+
+.nav-link, .login-button, .register-button
+{
+    padding: 25px;
+    text-transform: capitalize;
+    font-family: 'Cairo', sans-serif;
+    transition:.5s;
+    text-decoration: none;
+
+}
+
+.nav-link .active
+{
+    background-color: #382110;
+    color: white !important;
+
+}
+
+.nav-link:hover
+{
+    background-color: #382110;
+    color: white !important;
+}
+
+.login-button {
+    padding-right: 0px;
+    padding-left: 9px;
+}
+
+
+.login-button-text,
+.register-button-text
+{
+    border: 1px solid #382110;
+    padding: 9px;
+    border-radius: 6px;
+    transition: all .5s;
+}
+
+.login-button-text:hover,
+.register-button-text:hover
+{
+    background-color: #382110;
+    color: white;
+    border: 1px solid transparent;
+}

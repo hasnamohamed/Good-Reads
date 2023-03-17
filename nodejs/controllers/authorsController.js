@@ -32,7 +32,7 @@ const createAuthor = (async(req, res) => {
           }
         const newAuthor = {...req.body}
         await Author.create(newAuthor)
-        res.json.status(200).json({message: 'Author created successfully'});
+        res.status(200).json({message: 'Author created successfully'});
     } catch (error) {
         res.status(400).json(error.message);
     }

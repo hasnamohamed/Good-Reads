@@ -1,8 +1,15 @@
 const Review = require('../models/review.js')
 
-async function getReviews(req, res, next) {
+async function getReviews(req, res) {
     try {
-        const reviews = await Review.find({});
+        let page = req.query.page;
+        let limit = 2;
+        let startIndex = (page - 1) * limit;
+        let endIndex = page * limit;
+        const reviews = await Review.find(null, null, {
+            skip: startIndex,
+            limit: endIndex
+        });
         res.send(reviews);
     } catch (err) {
         res.send("something went wrong" + err);
@@ -33,11 +40,21 @@ const createReview = (async function (req, res) {
                 message: 'Missing required fields'
             });
         }
+        const ifExist = await Review.findOne({
+            userId: req.body.userId,
+            bookId: req.body.bookId
+        }) ;
+        if (ifExist)
+            res.status(400).json({
+                message: 'Please edit your review'
+            });
+        else{
         let reviewInfo = {
             ...req.body
         };
         await Review.create(reviewInfo);
         res.status(200).send("Review saved successfully")
+    }
     } catch (err) {
         if (err.name === "ParallelSaveError") {
             res.status(400).send("Parallel Save Error" + err);

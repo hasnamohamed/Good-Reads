@@ -10,9 +10,7 @@ import { AboutusComponent } from './Components/aboutus/aboutus.component';
 import { TeamsAndConditionComponent } from './Components/teams-and-condition/teams-and-condition.component';
 import { BooksComponent } from './Components/books/books.component';
 import { LogoutComponent } from './Components/logout/logout.component';
-<<<<<<< HEAD
 import { CardComponent } from './Components/Shared/card/card/card.component';
-=======
 import { AuthorsComponent} from './Components/authors/Authors.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminDashBoardComponent } from './Components/admin-dashboard/admin-dash-board/admin-dash-board.component';
@@ -28,7 +26,10 @@ import { UpdateBookComponent } from './Components/admin-dashboard/admin-actions/
 import { DeleteBookComponent } from './Components/admin-dashboard/admin-actions/delete/delete-book/delete-book.component';
 import { UpdateAuthorComponent } from './Components/admin-dashboard/admin-actions/update/update-author/update-author.component';
 import { DeleteAuthorComponent } from './Components/admin-dashboard/admin-actions/delete/delete-author/delete-author.component';
->>>>>>> 3c434a3e4390aeda23cf06ee8af2328a4a452ea7
+import { Popular_authorsComponent } from './Components/popular-authors/popular_authors.component';
+import { Popular_booksComponent } from './Components/popular-books/popular_books.component';
+import { Popular_categoriesComponent } from './Components/popular-categories/popular_categories.component';
+import { AuthorDetailsComponent } from './Components/author-details/author-details.component';
 
 @NgModule({
   declarations: [
@@ -41,10 +42,7 @@ import { DeleteAuthorComponent } from './Components/admin-dashboard/admin-action
     TeamsAndConditionComponent,
     BooksComponent,
     LogoutComponent,
-<<<<<<< HEAD
     CardComponent,
-    
-=======
     AuthorsComponent,
    AdminDashBoardComponent,
    AdminAuthorsComponent,
@@ -61,14 +59,17 @@ import { DeleteAuthorComponent } from './Components/admin-dashboard/admin-action
    DeleteBookComponent,
    AddAuthorComponent,
    UpdateAuthorComponent,
-   DeleteAuthorComponent
->>>>>>> 3c434a3e4390aeda23cf06ee8af2328a4a452ea7
+   DeleteAuthorComponent,
+   Popular_authorsComponent,
+   Popular_booksComponent,
+   Popular_categoriesComponent,
+   AuthorDetailsComponent,
+   CardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
-    
+    BrowserAnimationsModule,    
    ],
   providers: [],
   bootstrap: [AppComponent]

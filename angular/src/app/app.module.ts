@@ -11,6 +11,7 @@ import { TeamsAndConditionComponent } from './Components/teams-and-condition/tea
 import { AdminDashBoardComponent } from './Components/admin-dashboard/admin-dash-board/admin-dash-board.component';
 import { BooksComponent } from './Components/books/books.component';
 import { LogoutComponent } from './Components/logout/logout.component';
+import { CardComponent } from './Components/Shared/card/card/card.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,9 @@ import { LogoutComponent } from './Components/logout/logout.component';
     TeamsAndConditionComponent,
     AdminDashBoardComponent,
     BooksComponent,
-    LogoutComponent
+    LogoutComponent,
+    CardComponent,
+    
   ],
   imports: [
     BrowserModule,

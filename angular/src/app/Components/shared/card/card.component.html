@@ -1,0 +1,14 @@
+
+<a class="nav-link" routerLink="/books/{{item._id}}">
+  <div class="card my-4 mx-3">
+    <img src="{{item.image}}" class="card-img-top" alt="...">
+    <div class="card-body text-center">
+      <h5 class="card-title">{{item.title}}</h5>
+      <p class="card-title">by {{item.authorName}}</p>
+      <h5 class="card-title">{{item.rating.rate}}</h5>
+      <p class="card-title">{{item.catName}}</p>
+      <p class="card-title">{{item.description}}</p>
+      <button type="submit" class="btn btn-primary">Want to Read</button>
+    </div>
+  </div>
+</a>

@@ -15,7 +15,7 @@
         <a class="nav-link" routerLink="/aboutus" routerLinkActive="active">about us</a>
         <a class="nav-link" routerLink="/team-and-condations" routerLinkActive="active">teams & condations</a>
         
-        <a *ngIf="isLogedIn == true; else logOut " class="login-button" routerLink="/login" routerLinkActive="active">
+        <a *ngIf="isLogedIn == false; else logOut " class="login-button" routerLink="/login" routerLinkActive="active">
           <span  class="login-button-text">login</span>
         </a>
 

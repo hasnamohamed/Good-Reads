@@ -1,0 +1,32 @@
+.site-manageables-sections
+{
+    width: 75%;
+    margin: auto;
+}
+
+.site-manageables-sections .btn-group a
+{
+    border:1px solid #382110
+}
+
+.site-manageables-sections .btn-group a:hover
+{
+    background-color:#382110
+}
+
+.site-manageables-sections .btn-group .active
+{
+    background-color:#382110
+
+}
+
+.btn-group
+{
+    margin-top: 25px;
+}
+
+.btn-group .btn:first-child,
+.btn-group .btn:last-child
+{
+    border-radius: 0;
+}

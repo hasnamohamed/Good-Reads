@@ -1,0 +1,91 @@
+table
+{
+    width: 75%;
+    margin: auto;
+}
+
+table th, table td
+{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: center;
+    vertical-align: middle
+}
+
+table .book-image
+{
+    text-align: center;
+}
+
+table .book-image img
+{
+    width: 30%;
+}
+
+
+table
+{
+    width: 75%;
+    margin: auto;
+}
+
+table th, table td
+{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: center;
+    vertical-align: middle
+}
+
+table .book-image
+{
+    text-align: center;
+}
+
+table .book-image img
+{
+    width: 30%;
+}
+
+
+.action-button  button
+{
+    border-radius: 10px;
+    width: 38px;
+    margin-right: 10px;
+    border: 1px solid #382110;
+    transition: all 0.5s;
+}
+
+.action-button  button:last-child
+{
+    margin-right: 0px;
+}
+
+.action-button button:first-child:hover
+{
+    background-color:#616f55;
+    border:none;
+
+}
+
+.action-button button:last-child:hover
+{
+    background-color:#e74c3c;
+    border:none;
+
+}
+
+.action-button button:nth-child(2):hover
+{
+    background-color:#e87400;
+    border:none;
+
+}
+
+.modal-title
+{
+    text-transform: capitalize;
+}

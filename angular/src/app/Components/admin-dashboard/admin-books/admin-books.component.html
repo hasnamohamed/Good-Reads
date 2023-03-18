@@ -1,0 +1,81 @@
+<section class="site-books">
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr class="table-dark">
+        <th scope="col">#</th>
+        <th scope="col">photo</th>
+        <th scope="col">name</th>
+        <th scope="col">categoryId</th>
+        <th scope="col">authorId</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of bookList; let bookNum = index">
+        <th scope="row">
+          <span>{{bookNum + 1}}</span>
+        </th>
+        <td class="book-image">
+          <img [src]="book.photo">
+        </td>
+        <td>{{book.name}}</td>
+        <td>{{book.CategoryId}}</td>
+        <td>{{book.AuthorId}}</td>
+        <td>
+          <div class="action-button">
+            <button type="button" class="btn btn-outline-dark" (click)="getAdminAction('add')" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <i class="fa-solid fa-plus"></i>
+            </button>
+            <button type="button" class="btn btn-outline-dark" (click)="getAdminAction('edit')" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <i class="fa-solid fa-pen-to-square"></i>
+            </button>
+            <button type="button" class="btn btn-outline-dark" (click)="getAdminAction('remove')" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+
+<!-- Modal -->
+<div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <div [ngSwitch]="adminActions">
+            <div *ngSwitchCase='"add"'>
+              add book
+            </div>
+            <div *ngSwitchCase='"edit"'>
+              edit book
+            </div>
+            <div *ngSwitchCase='"remove"'>
+              remove book
+            </div>
+          </div>        
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div [ngSwitch]="adminActions">
+          <div *ngSwitchCase='"add"'>
+            <add-book ></add-book>
+          </div>
+          <div *ngSwitchCase='"edit"'>
+            <update-book></update-book>
+          </div>
+          <div *ngSwitchCase='"remove"'>
+            <delete-book></delete-book>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Done!</button>
+      </div>
+    </div>
+  </div>
+</div>

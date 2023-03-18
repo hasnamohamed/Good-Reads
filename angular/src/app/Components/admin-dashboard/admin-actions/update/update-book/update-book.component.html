@@ -1,0 +1,39 @@
+<div class="mb-3 row">
+    <label for="bookName" class="col-3 col-form-label">Book Name</label>
+    <div class="col-9">
+      <input type="text"  class="form-control" id="bookName" value="">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="category" class="col-3 col-form-label">Category</label>
+    <div class="col-9">
+      <select class="form-select" id="category" aria-label="Default select example">
+        <option></option>
+        <option *ngFor="let cat of catList">{{cat}}</option>
+      </select>
+    </div>
+  </div>
+  
+  <div class="mb-3 row">
+    <label for="author" class="col-3 col-form-label">Author</label>
+    <div class="col-9">
+      <select class="form-select" id="author" aria-label="Default select example">
+        <option></option>
+        <option *ngFor="let author of autList">{{author}}</option>
+      </select>
+    </div>
+  </div>
+  
+  <div class="mb-3 row">
+    <label for="formFile" class="col-3 col-form-label">Image</label>
+    <div class="col-9">
+      <input class="form-control" type="file" id="formFile">
+    </div>
+  </div>
+  
+  <div class="mb-3 row text-center">
+    <div class="col-12">
+      <button  class="btn btn-primary mb-3" (click)= "updateBook()">Update</button>
+    </div>
+  </div>
+    

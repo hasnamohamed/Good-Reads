@@ -1,0 +1,17 @@
+#container{
+    position: absolute;
+    height: 30px;
+    width: 100%;
+    background-color: #F4F1EA;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    
+}
+
+i{
+    font-family: unset;
+    font-size: 11px;
+    color: #666;
+    margin-left: 500px;
+}

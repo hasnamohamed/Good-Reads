@@ -11,6 +11,10 @@ import { TeamsAndConditionComponent } from './Components/teams-and-condition/tea
 import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
 import { LogoutComponent } from './Components/logout/logout.component';
+import { AdminDashBoardComponent } from './Components/admin-dashboard/admin-dash-board/admin-dash-board.component';
+import { AdminAuthorsComponent } from './Components/admin-dashboard/admin-authors/admin-authors.component';
+import { AdminCategoriesComponent } from './Components/admin-dashboard/admin-categories/admin-categories.component';
+import { AdminBooksComponent } from './Components/admin-dashboard/admin-books/admin-books.component';
 
 const routes: Routes = [
   {path:'', redirectTo:"/home", pathMatch:"full"},
@@ -23,6 +27,11 @@ const routes: Routes = [
   {path:'login', component:LoginComponent},
   {path:'register', component:RegisterComponent},
   {path:'logout', component:LogoutComponent},
+  {path:'admin-dashboard', component:AdminDashBoardComponent, children:[
+    {path:'admin-authors', component:AdminAuthorsComponent},
+    {path:'admin-categories', component:AdminCategoriesComponent},
+    {path:'admin-books', component:AdminBooksComponent}
+  ]},
   {path:'**', component:NotFoundComponent}
 ];
 

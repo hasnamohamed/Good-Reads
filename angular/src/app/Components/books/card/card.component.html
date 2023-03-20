@@ -1,14 +1,17 @@
-
-<a class="nav-link" routerLink="/books/{{item._id}}">
-  <div class="card my-4 mx-3">
-    <img src="{{item.image}}" class="card-img-top" alt="...">
+<div class="card my-4 mx-3">
+    <a class="nav-link" routerLink="/books/{{item._id}}"><img src="{{item.image}}" class="card-img-top" alt="..."></a>
     <div class="card-body text-center">
-      <h5 class="card-title">{{item.title}}</h5>
-      <p class="card-title">by {{item.authorName}}</p>
+      <a class="nav-link" routerLink="/books/{{item._id}}">  <h5 class="card-title">{{item.title}}</h5></a>
+      <a class="nav-link" routerLink="/author/{{item.authorId}}">  <p class="card-title">by {{item.authorId}}</p></a>
       <mat-star-rating [rating]="rating"  [starCount]="starCount" [color]="starColor" (ratingUpdated)="onRatingChanged({rating : $event})"></mat-star-rating>
-      <p class="card-title">{{item.catName}}</p>
+      <a class="nav-link" routerLink="/category/{{item.catId}}">  <p class="card-title">{{item.catId}}</p></a>
       <p class="card-title">{{item.description}}</p>
-      <button type="submit" class="btn btn-primary">Want to Read</button>
+      <select>
+        <option disabled selected>Status</option>
+        <option>Want to Read</option>
+        <option>Reading</option>
+        <option></option>
+      </select>
     </div>
   </div>
-</a>
+

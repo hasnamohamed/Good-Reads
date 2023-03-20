@@ -14,8 +14,8 @@ export class BooksComponent implements OnInit {
     "title":'Book1',
     "image":"https://placar.abril.com.br/wp-content/uploads/2022/09/GettyImages-1242668441.jpg?quality=70&strip=info&w=1280&h=720&crop=1",
     "description":"this is book1",
-    "authorName":"auth1",
-    "catName":"cat1",
+    "authorId":"auth1",
+    "catId":"cat1",
     "rating":{
     "totalVotes":12,
       "totalPoints":12,
@@ -27,7 +27,7 @@ export class BooksComponent implements OnInit {
       "title":'Book2',
       "image":"https://placar.abril.com.br/wp-content/uploads/2022/09/GettyImages-1242668441.jpg?quality=70&strip=info&w=1280&h=720&crop=1",
       "description":"this is book2",
-      "authorName":"auth2",
+      "authorId":"auth2",
       "catName":"cat2",
       "rating":{
         "totalVotes":12,
@@ -40,7 +40,7 @@ export class BooksComponent implements OnInit {
       "title":'Book3',
       "image":"https://placar.abril.com.br/wp-content/uploads/2022/09/GettyImages-1242668441.jpg?quality=70&strip=info&w=1280&h=720&crop=1",
       "description":"this is book3",
-      "authorName":"auth3",
+      "authorId":"auth3",
       "catName":"cat3",
       "rating":{
         "totalVotes":12,
@@ -53,7 +53,7 @@ export class BooksComponent implements OnInit {
       "title":'Book1',
       "image":"https://placar.abril.com.br/wp-content/uploads/2022/09/GettyImages-1242668441.jpg?quality=70&strip=info&w=1280&h=720&crop=1",
       "description":"this is book1",
-      "authorName":"auth1",
+      "authorId":"auth1",
       "catName":"cat1",
       "rating":{
         "totalVotes":12,
@@ -66,7 +66,7 @@ export class BooksComponent implements OnInit {
       "title":'Book2',
       "image":"https://placar.abril.com.br/wp-content/uploads/2022/09/GettyImages-1242668441.jpg?quality=70&strip=info&w=1280&h=720&crop=1",
       "description":"this is book2",
-      "authorName":"auth2",
+      "authorId":"auth2",
       "catName":"cat2",
       "rating":{
         "totalVotes":12,
@@ -79,7 +79,7 @@ export class BooksComponent implements OnInit {
       "title":'Book3',
       "image":"https://placar.abril.com.br/wp-content/uploads/2022/09/GettyImages-1242668441.jpg?quality=70&strip=info&w=1280&h=720&crop=1",
       "description":"this is book3",
-      "authorName":"auth3",
+      "authorId":"auth3",
       "catName":"cat3",
       "rating":{
         "totalVotes":12,
@@ -92,7 +92,7 @@ export class BooksComponent implements OnInit {
       "title":'Book1',
       "image":"https://placar.abril.com.br/wp-content/uploads/2022/09/GettyImages-1242668441.jpg?quality=70&strip=info&w=1280&h=720&crop=1",
       "description":"this is book1",
-      "authorName":"auth1",
+      "authorId":"auth1",
       "catName":"cat1",
       "rating":{
         "totalVotes":12,
@@ -105,7 +105,7 @@ export class BooksComponent implements OnInit {
       "title":'Book2',
       "image":"https://placar.abril.com.br/wp-content/uploads/2022/09/GettyImages-1242668441.jpg?quality=70&strip=info&w=1280&h=720&crop=1",
       "description":"this is book2",
-      "authorName":"auth2",
+      "authorId":"auth2",
       "catName":"cat2",
       "rating":{
         "totalVotes":12,

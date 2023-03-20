@@ -5,7 +5,7 @@
     <div class="card-body text-center">
       <h5 class="card-title">{{item.title}}</h5>
       <p class="card-title">by {{item.authorName}}</p>
-      <h5 class="card-title">{{item.rating.rate}}</h5>
+      <mat-star-rating [rating]="rating"  [starCount]="starCount" [color]="starColor" (ratingUpdated)="onRatingChanged({rating : $event})"></mat-star-rating>
       <p class="card-title">{{item.catName}}</p>
       <p class="card-title">{{item.description}}</p>
       <button type="submit" class="btn btn-primary">Want to Read</button>

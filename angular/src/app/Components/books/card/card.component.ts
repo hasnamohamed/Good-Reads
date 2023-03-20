@@ -1,6 +1,6 @@
 
 import { Component,Input, OnInit } from '@angular/core';
-import {StarRatingColor} from "../star-rating/star-rating.component";
+import {StarRatingColor} from "../../Shared/star-rating/star-rating.component";
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',

@@ -11,8 +11,8 @@ import { TeamsAndConditionComponent } from './Components/teams-and-condition/tea
 import { AdminDashBoardComponent } from './Components/admin-dashboard/admin-dash-board/admin-dash-board.component';
 import { BooksComponent } from './Components/books/books.component';
 import { LogoutComponent } from './Components/logout/logout.component';
-import { CardComponent } from './Components/shared/card/card.component';
-import {StarRatingComponent} from "./Components/shared/star-rating/star-rating.component";
+import { CardComponent } from './Components/books/card/card.component';
+import {StarRatingComponent} from "./Components/Shared/star-rating/star-rating.component";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatSnackBarModule } from "@angular/material/snack-bar";

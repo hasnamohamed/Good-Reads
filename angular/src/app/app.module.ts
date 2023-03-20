@@ -23,6 +23,9 @@ import { MatIcon, MatIconModule } from "@angular/material/icon";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {BookDetailsComponent} from "./Components/book-details/book-details.component";
+import {FormsModule} from "@angular/forms";
+import {ReactiveFormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +53,11 @@ import {BookDetailsComponent} from "./Components/book-details/book-details.compo
     MatTooltipModule,
     MatSnackBarModule,
     MatFormFieldModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    MatIconModule,
    ],
   providers: [],
   bootstrap: [AppComponent]

@@ -12,8 +12,7 @@ import { AdminDashBoardComponent } from './Components/admin-dashboard/admin-dash
 import { BooksComponent } from './Components/books/books.component';
 import { LogoutComponent } from './Components/logout/logout.component';
 import { CardComponent } from './Components/shared/card/card.component';
-import { BookDetailsComponent } from './book-details/book-details.component';
-
+import {StarRatingComponent} from "./Components/shared/star-rating/star-rating.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,11 +26,11 @@ import { BookDetailsComponent } from './book-details/book-details.component';
     BooksComponent,
     LogoutComponent,
     CardComponent,
-    BookDetailsComponent
+    StarRatingComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
    ],
   providers: [],
   bootstrap: [AppComponent]

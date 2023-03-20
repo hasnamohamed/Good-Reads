@@ -22,7 +22,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatIcon, MatIconModule } from "@angular/material/icon";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import {BookDetailsComponent} from "./Components/book-details/book-details.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +36,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BooksComponent,
     LogoutComponent,
     CardComponent,
-    StarRatingComponent
+    StarRatingComponent,
+    BookDetailsComponent
   ],
   imports: [
     BrowserModule,

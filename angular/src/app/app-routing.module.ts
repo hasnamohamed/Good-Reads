@@ -11,11 +11,12 @@ import { TeamsAndConditionComponent } from './Components/teams-and-condition/tea
 import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
 import { LogoutComponent } from './Components/logout/logout.component';
-
+import {BookDetailsComponent} from "./Components/book-details/book-details.component";
 const routes: Routes = [
   {path:'', redirectTo:"/home", pathMatch:"full"},
   {path:'home', component:HomePageComponent},
   {path:'books', component:BooksComponent},
+  {path:'books/:id', component:BookDetailsComponent},
   {path:'authors', component:AuthorsComponent},
   {path:'categories', component:CategoriesComponent},
   {path:'aboutus', component:AboutusComponent},

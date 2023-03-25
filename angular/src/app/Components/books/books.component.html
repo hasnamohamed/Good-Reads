@@ -1,1 +1,4 @@
-<p>books works!</p>
+<div class="container d-flex flex-wrap justify-content-center mt-4">
+
+  <app-book-card class="col-xl-3 col-md-6" *ngFor="let item of books" [item]=item></app-book-card>
+</div>

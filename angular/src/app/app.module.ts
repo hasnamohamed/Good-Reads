@@ -37,8 +37,20 @@ import { Popular_booksComponent } from './Components/popular-books/popular_books
 import { Popular_categoriesComponent } from './Components/popular-categories/popular_categories.component';
 import { AuthorDetailsComponent } from './Components/author-details/author-details.component';
 import { CategoriesComponent } from './Components/categories/Categories.component';
-
-
+import {StarRatingComponent} from "./Components/Shared/star-rating/star-rating.component";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
+import { MatMenuModule } from "@angular/material/menu";
+import { MatButtonModule } from "@angular/material/button";
+import { MatIcon, MatIconModule } from "@angular/material/icon";
+import { MatSidenavModule } from "@angular/material/sidenav";
+import {BookDetailsComponent} from "./Components/book-details/book-details.component";
+import {FormsModule} from "@angular/forms";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatSelectModule} from "@angular/material/select";
+import { BookCardComponent } from './Components/books/book-card/book-card.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,7 +88,10 @@ import { CategoriesComponent } from './Components/categories/Categories.componen
    Popular_categoriesComponent,
    AuthorDetailsComponent,
    CardComponent,
-   CategoriesComponent
+   CategoriesComponent,
+   StarRatingComponent,
+   BookCardComponent,
+   BookDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -84,7 +99,21 @@ import { CategoriesComponent } from './Components/categories/Categories.componen
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    SlickCarouselModule
+    SlickCarouselModule,
+    MatSlideToggleModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatTooltipModule,
+    MatSnackBarModule,
+    MatFormFieldModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    MatIconModule,
+    MatSelectModule
    ],
   providers: [],
   bootstrap: [AppComponent]

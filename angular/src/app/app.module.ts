@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http'
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Components/login/login.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
@@ -10,6 +12,7 @@ import { AboutusComponent } from './Components/aboutus/aboutus.component';
 import { TeamsAndConditionComponent } from './Components/teams-and-condition/teams-and-condition.component';
 import { BooksComponent } from './Components/books/books.component';
 import { LogoutComponent } from './Components/logout/logout.component';
+import { CardComponent } from './Components/Shared/card/card/card.component';
 import { AuthorsComponent} from './Components/authors/Authors.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminDashBoardComponent } from './Components/admin-dashboard/admin-dash-board/admin-dash-board.component';
@@ -25,6 +28,12 @@ import { UpdateBookComponent } from './Components/admin-dashboard/admin-actions/
 import { DeleteBookComponent } from './Components/admin-dashboard/admin-actions/delete/delete-book/delete-book.component';
 import { UpdateAuthorComponent } from './Components/admin-dashboard/admin-actions/update/update-author/update-author.component';
 import { DeleteAuthorComponent } from './Components/admin-dashboard/admin-actions/delete/delete-author/delete-author.component';
+import { Popular_authorsComponent } from './Components/popular-authors/popular_authors.component';
+import { Popular_booksComponent } from './Components/popular-books/popular_books.component';
+import { Popular_categoriesComponent } from './Components/popular-categories/popular_categories.component';
+import { AuthorDetailsComponent } from './Components/author-details/author-details.component';
+import { CategoriesComponent } from './Components/categories/Categories.component';
+
 
 @NgModule({
   declarations: [
@@ -37,6 +46,7 @@ import { DeleteAuthorComponent } from './Components/admin-dashboard/admin-action
     TeamsAndConditionComponent,
     BooksComponent,
     LogoutComponent,
+    CardComponent,
     AuthorsComponent,
    AdminDashBoardComponent,
    AdminAuthorsComponent,
@@ -53,13 +63,20 @@ import { DeleteAuthorComponent } from './Components/admin-dashboard/admin-action
    DeleteBookComponent,
    AddAuthorComponent,
    UpdateAuthorComponent,
-   DeleteAuthorComponent
+   DeleteAuthorComponent,
+   Popular_authorsComponent,
+   Popular_booksComponent,
+   Popular_categoriesComponent,
+   AuthorDetailsComponent,
+   CardComponent,
+   CategoriesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
-    
+    BrowserAnimationsModule, 
+    HttpClientModule,
+    SlickCarouselModule
    ],
   providers: [],
   bootstrap: [AppComponent]

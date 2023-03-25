@@ -18,8 +18,6 @@ const reviewsRoutes = require('./routes/reviews.js')
 const categoryRoutes = require('./routes/categories.js')
 const authorsRoutes = require('./routes/authors.js')
 
-
-const cors = require('cors');
 app.use(cors({ origin: 'http://localhost:4200'}))
 
 app.use('/', userRoutes)

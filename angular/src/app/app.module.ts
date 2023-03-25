@@ -1,6 +1,10 @@
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Components/login/login.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
@@ -9,7 +13,6 @@ import { HomePageComponent } from './Components/home-page/home-page.component';
 import { AboutusComponent } from './Components/aboutus/aboutus.component';
 import { TeamsAndConditionComponent } from './Components/teams-and-condition/teams-and-condition.component';
 import { BooksComponent } from './Components/books/books.component';
-import { LogoutComponent } from './Components/logout/logout.component';
 import { AuthorsComponent} from './Components/authors/Authors.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminDashBoardComponent } from './Components/admin-dashboard/admin-dash-board/admin-dash-board.component';
@@ -25,6 +28,9 @@ import { UpdateBookComponent } from './Components/admin-dashboard/admin-actions/
 import { DeleteBookComponent } from './Components/admin-dashboard/admin-actions/delete/delete-book/delete-book.component';
 import { UpdateAuthorComponent } from './Components/admin-dashboard/admin-actions/update/update-author/update-author.component';
 import { DeleteAuthorComponent } from './Components/admin-dashboard/admin-actions/delete/delete-author/delete-author.component';
+import { RegisterComponent } from './Components/register/register.component';
+import { CheckPasswordDirective } from 'custom-dirictives/passwordMatchChecker';
+import { RestPasswordComponent } from './Components/rest-password/rest-password.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +42,6 @@ import { DeleteAuthorComponent } from './Components/admin-dashboard/admin-action
     AboutusComponent,
     TeamsAndConditionComponent,
     BooksComponent,
-    LogoutComponent,
     AuthorsComponent,
    AdminDashBoardComponent,
    AdminAuthorsComponent,
@@ -53,13 +58,18 @@ import { DeleteAuthorComponent } from './Components/admin-dashboard/admin-action
    DeleteBookComponent,
    AddAuthorComponent,
    UpdateAuthorComponent,
-   DeleteAuthorComponent
+   DeleteAuthorComponent,
+   RegisterComponent,
+   LoginComponent,
+   CheckPasswordDirective,
+   RestPasswordComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    
+    HttpClientModule
    ],
   providers: [],
   bootstrap: [AppComponent]

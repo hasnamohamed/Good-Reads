@@ -10,11 +10,11 @@ import { NotFoundComponent } from './Components/not-found/not-found.component';
 import { TeamsAndConditionComponent } from './Components/teams-and-condition/teams-and-condition.component';
 import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
-import { LogoutComponent } from './Components/logout/logout.component';
 import { AdminDashBoardComponent } from './Components/admin-dashboard/admin-dash-board/admin-dash-board.component';
 import { AdminAuthorsComponent } from './Components/admin-dashboard/admin-authors/admin-authors.component';
 import { AdminCategoriesComponent } from './Components/admin-dashboard/admin-categories/admin-categories.component';
 import { AdminBooksComponent } from './Components/admin-dashboard/admin-books/admin-books.component';
+import { RestPasswordComponent } from './Components/rest-password/rest-password.component';
 
 const routes: Routes = [
   {path:'', redirectTo:"/home", pathMatch:"full"},
@@ -26,7 +26,7 @@ const routes: Routes = [
   {path:'teams-and-condations', component:TeamsAndConditionComponent},
   {path:'login', component:LoginComponent},
   {path:'register', component:RegisterComponent},
-  {path:'logout', component:LogoutComponent},
+  {path:'reset', component:RestPasswordComponent},
   {path:'admin-dashboard', component:AdminDashBoardComponent, children:[
     {path:'admin-authors', component:AdminAuthorsComponent},
     {path:'admin-categories', component:AdminCategoriesComponent},

@@ -18,6 +18,7 @@ import { RestPasswordComponent } from './Components/rest-password/rest-password.
 import { AuthorDetailsComponent } from './Components/author-details/author-details.component';
 import { CategoryDetailsComponent } from './Components/category-details/category-details.component';
 import { BookDetailsComponent } from './Components/book-details/book-details.component';
+
 const routes: Routes = [
   {path:'', redirectTo:"/home", pathMatch:"full"},
   {path:'books/:id', component:BookDetailsComponent},

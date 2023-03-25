@@ -2,7 +2,6 @@
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http'
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { AppComponent } from './app.component';
@@ -51,6 +50,7 @@ import {FormsModule} from "@angular/forms";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
 import { BookCardComponent } from './Components/books/book-card/book-card.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -91,7 +91,8 @@ import { BookCardComponent } from './Components/books/book-card/book-card.compon
    CategoriesComponent,
    StarRatingComponent,
    BookCardComponent,
-   BookDetailsComponent
+   BookDetailsComponent,
+   RestPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -113,7 +114,8 @@ import { BookCardComponent } from './Components/books/book-card/book-card.compon
     ReactiveFormsModule,
     HttpClientModule,
     MatIconModule,
-    MatSelectModule
+    MatSelectModule,
+    HttpClientModule
    ],
   providers: [],
   bootstrap: [AppComponent]

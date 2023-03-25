@@ -1,5 +1,6 @@
 const dotenv = require("dotenv").config();
 const express = require('express');
+const cors = require('cors');
 const db = require('./config/db')
 const Auth = require('./middleware/auth')
 const cookieParser = require("cookie-parser");
@@ -9,6 +10,7 @@ const config = process.env
 app.use(cookieParser());
 
 app.use(express.json())
+app.use(cors())
 
 const userRoutes = require('./routes/users-auth.js')
 const booksRoutes = require('./routes/books.js')

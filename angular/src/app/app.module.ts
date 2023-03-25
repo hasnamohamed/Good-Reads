@@ -1,10 +1,10 @@
 
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http'
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
-
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Components/login/login.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
@@ -13,6 +13,7 @@ import { HomePageComponent } from './Components/home-page/home-page.component';
 import { AboutusComponent } from './Components/aboutus/aboutus.component';
 import { TeamsAndConditionComponent } from './Components/teams-and-condition/teams-and-condition.component';
 import { BooksComponent } from './Components/books/books.component';
+import { CardComponent } from './Components/Shared/card/card/card.component';
 import { AuthorsComponent} from './Components/authors/Authors.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminDashBoardComponent } from './Components/admin-dashboard/admin-dash-board/admin-dash-board.component';
@@ -31,6 +32,12 @@ import { DeleteAuthorComponent } from './Components/admin-dashboard/admin-action
 import { RegisterComponent } from './Components/register/register.component';
 import { CheckPasswordDirective } from 'custom-dirictives/passwordMatchChecker';
 import { RestPasswordComponent } from './Components/rest-password/rest-password.component';
+import { Popular_authorsComponent } from './Components/popular-authors/popular_authors.component';
+import { Popular_booksComponent } from './Components/popular-books/popular_books.component';
+import { Popular_categoriesComponent } from './Components/popular-categories/popular_categories.component';
+import { AuthorDetailsComponent } from './Components/author-details/author-details.component';
+import { CategoriesComponent } from './Components/categories/Categories.component';
+
 
 @NgModule({
   declarations: [
@@ -42,6 +49,7 @@ import { RestPasswordComponent } from './Components/rest-password/rest-password.
     AboutusComponent,
     TeamsAndConditionComponent,
     BooksComponent,
+    CardComponent,
     AuthorsComponent,
    AdminDashBoardComponent,
    AdminAuthorsComponent,
@@ -62,14 +70,21 @@ import { RestPasswordComponent } from './Components/rest-password/rest-password.
    RegisterComponent,
    LoginComponent,
    CheckPasswordDirective,
-   RestPasswordComponent
+   RestPasswordComponent,
+   Popular_authorsComponent,
+   Popular_booksComponent,
+   Popular_categoriesComponent,
+   AuthorDetailsComponent,
+   CardComponent,
+   CategoriesComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    SlickCarouselModule
    ],
   providers: [],
   bootstrap: [AppComponent]

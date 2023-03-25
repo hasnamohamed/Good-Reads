@@ -3,8 +3,18 @@ const Author = require('../models/author.js')
 // 1-get all authors from database
 const getAuthors = (async(req, res) => {
     try {
+        const pageSize = parseInt(req.query.pageSize) || 8;
+        const pageNumber = parseInt(req.query.pageNumber) || 1;
+
+        const totalRecords = await Author.countDocuments();
+
+        const totalPages =Math.ceil(totalRecords/pageSize)
+
         const authors = await Author.find({})
-        res.json(authors)
+        .skip((pageNumber-1)*pageSize)
+        .limit(pageSize);
+
+        res.json({authors,totalPages})
     } catch (error) {
         res.status(400).json(error.message);
     }
@@ -27,12 +37,12 @@ const getAuthor = (async(req, res) => {
 //3-insert new author
 const createAuthor = (async(req, res) => {
     try {
-        if (!req.body.name || !req.body.birth || !req.body.background) {
+        if (!req.body.name || !req.body.birth || !req.body.bio) {
             return res.status(400).json({ message: 'Missing required fields' });
           }
         const newAuthor = {...req.body}
         await Author.create(newAuthor)
-        res.json.status(200).json({message: 'Author created successfully'});
+        res.status(200).json({message: 'Author created successfully'});
     } catch (error) {
         res.status(400).json(error.message);
     }
@@ -43,15 +53,15 @@ const createAuthor = (async(req, res) => {
 const updateAuthor = (async(req, res) => {
     try {
         const authorId = req.params.id;
-        const { name, birth, background } = req.body;
+        const { name, birth, bio } = req.body;
     
-        if (!name || !birth || !background) {
+        if (!name || !birth || !bio) {
           return res.status(400).json({ message: 'Missing required fields' });
         }
     
         const updatedAuthor = await Author.findByIdAndUpdate(
           authorId,
-          { name, birth, background },
+          { name, birth, bio },
           { new: true }
         );
     

@@ -15,6 +15,8 @@ import { AdminAuthorsComponent } from './Components/admin-dashboard/admin-author
 import { AdminCategoriesComponent } from './Components/admin-dashboard/admin-categories/admin-categories.component';
 import { AdminBooksComponent } from './Components/admin-dashboard/admin-books/admin-books.component';
 import { RestPasswordComponent } from './Components/rest-password/rest-password.component';
+import { AuthorDetailsComponent } from './Components/author-details/author-details.component';
+import { CategoryDetailsComponent } from './Components/category-details/category-details.component';
 
 const routes: Routes = [
   {path:'', redirectTo:"/home", pathMatch:"full"},
@@ -27,10 +29,13 @@ const routes: Routes = [
   {path:'login', component:LoginComponent},
   {path:'register', component:RegisterComponent},
   {path:'reset', component:RestPasswordComponent},
+  {path:'author/:id', component:AuthorDetailsComponent},
+  {path:'categories/:id', component:CategoryDetailsComponent},
   {path:'admin-dashboard', component:AdminDashBoardComponent, children:[
     {path:'admin-authors', component:AdminAuthorsComponent},
     {path:'admin-categories', component:AdminCategoriesComponent},
-    {path:'admin-books', component:AdminBooksComponent}
+    {path:'admin-books', component:AdminBooksComponent},
+
   ]},
   {path:'**', component:NotFoundComponent}
 ];

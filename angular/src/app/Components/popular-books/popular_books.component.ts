@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthorServiceService } from 'src/Services/author-service.service';
 
 @Component({
   selector: 'app-popular_books',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Popular_booksComponent implements OnInit {
 
+  
   constructor() { }
 
   ngOnInit() {

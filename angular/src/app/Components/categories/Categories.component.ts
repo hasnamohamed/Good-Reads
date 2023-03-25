@@ -6,7 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./Categories.component.css']
 })
 export class CategoriesComponent implements OnInit {
-
+  cats = [
+    {"name":"sport"},
+    {"name":"science"},
+    {"name":"history"},
+    {"name":"Loe"},
+    {"name":"travel"},
+    {"name":"suspense"},
+    {"name":"love"},
+    {"name":"animals"}
+  ]
   constructor() { }
 
   ngOnInit() {

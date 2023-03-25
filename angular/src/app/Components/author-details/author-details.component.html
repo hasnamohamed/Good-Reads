@@ -1,10 +1,11 @@
 <div class="container mt-5">
+    <button type="button" class="btn btn-primary" (click)="deleteAuthor()">Button</button>
     <div class="row mb-5">
         <img src="https://placar.abril.com.br/wp-content/uploads/2022/09/GettyImages-1242668441.jpg?quality=70&strip=info&w=1280&h=720&crop=1" class="img-fluid col-md-6 col-lg-4" alt="...">
         <div class="col-md-6 col-lg-4">
-            <h2>Author Name</h2>
-            <p>01/10/2000</p>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit, consectetur nisi! Incidunt maxime dolore assumenda eum nesciunt possimus quae deserunt sed. Saepe ab minima placeat possimus sed maiores quo ullam?</p>
+            <h1>{{author?.name}}</h1>
+            <p>{{author?.birth}}</p>
+            <p>{{author?.bio}}</p>
         </div>
     </div>
     <h1>Author Books</h1>

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http'
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Components/login/login.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
@@ -30,6 +32,8 @@ import { Popular_authorsComponent } from './Components/popular-authors/popular_a
 import { Popular_booksComponent } from './Components/popular-books/popular_books.component';
 import { Popular_categoriesComponent } from './Components/popular-categories/popular_categories.component';
 import { AuthorDetailsComponent } from './Components/author-details/author-details.component';
+import { CategoriesComponent } from './Components/categories/Categories.component';
+
 
 @NgModule({
   declarations: [
@@ -64,12 +68,15 @@ import { AuthorDetailsComponent } from './Components/author-details/author-detai
    Popular_booksComponent,
    Popular_categoriesComponent,
    AuthorDetailsComponent,
-   CardComponent
+   CardComponent,
+   CategoriesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,    
+    BrowserAnimationsModule, 
+    HttpClientModule,
+    SlickCarouselModule
    ],
   providers: [],
   bootstrap: [AppComponent]

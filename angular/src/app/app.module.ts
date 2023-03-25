@@ -26,6 +26,7 @@ import {BookDetailsComponent} from "./Components/book-details/book-details.compo
 import {FormsModule} from "@angular/forms";
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import {MatSelectModule} from "@angular/material/select";
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,23 +43,24 @@ import {HttpClientModule} from "@angular/common/http";
     StarRatingComponent,
     BookDetailsComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MatSlideToggleModule,
-    MatMenuModule,
-    MatButtonModule,
-    MatIconModule,
-    MatSidenavModule,
-    MatTooltipModule,
-    MatSnackBarModule,
-    MatFormFieldModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    MatIconModule,
-   ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MatSlideToggleModule,
+        MatMenuModule,
+        MatButtonModule,
+        MatIconModule,
+        MatSidenavModule,
+        MatTooltipModule,
+        MatSnackBarModule,
+        MatFormFieldModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        MatIconModule,
+        MatSelectModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

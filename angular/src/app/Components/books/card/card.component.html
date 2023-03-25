@@ -1,17 +1,21 @@
-<div class="card my-4 mx-3">
+<div class="card ">
     <a class="nav-link" routerLink="/books/{{item._id}}"><img src="{{item.image}}" class="card-img-top" alt="..."></a>
     <div class="card-body text-center">
       <a class="nav-link" routerLink="/books/{{item._id}}">  <h5 class="card-title">{{item.title}}</h5></a>
       <a class="nav-link" routerLink="/author/{{item.authorId}}">  <p class="card-title">by {{item.authorId}}</p></a>
-      <mat-star-rating [rating]="rating"  [starCount]="starCount" [color]="starColor" (ratingUpdated)="onRatingChanged({rating : $event})"></mat-star-rating>
+      <p>Book Rating</p>
+      <mat-star-rating class="nav-link" [rating]="item.rating.rate" [starCount]="starCount" [color]="starColor" ></mat-star-rating>
+<!--      <p>Your Rating</p>-->
+<!--      <mat-star-rating [rating]="item.rating.rate" [starCount]="starCount" [color]="starColor" (ratingUpdated)="onRatingChanged({rating : $event})"></mat-star-rating>-->
       <a class="nav-link" routerLink="/category/{{item.catId}}">  <p class="card-title">{{item.catId}}</p></a>
       <p class="card-title">{{item.description}}</p>
-      <select>
-        <option disabled selected>Status</option>
-        <option>Want to Read</option>
-        <option>Reading</option>
-        <option></option>
+      <select  [(ngModel)]="selectedStatus" class="form-select">
+        <option value="0" disabled selected>Status</option>
+        <option *ngIf="selectedStatus==1" value="1">Want to Read</option>
+        <option *ngIf="selectedStatus==2" value="2">Reading</option>
+        <option *ngIf="selectedStatus==3" value="3">Done</option>
       </select>
+      <a class="nav-link link-primary" routerLink="/books/{{item._id}}">See More Details</a>
     </div>
   </div>
 

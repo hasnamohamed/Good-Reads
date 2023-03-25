@@ -1,9 +1,25 @@
+const corsOpts = {
+    origin: '*',
+
+    methods: [
+        'GET',
+        'POST',
+    ],
+
+    allowedHeaders: [
+        'Content-Type',
+    ],
+};
+var cors = require('cors');
 const dotenv = require("dotenv").config();
 const express = require('express');
 const db = require('./config/db')
 const Auth = require('./middleware/auth')
 
 const app = express();
+app.use(cors());
+app.use(cors(corsOpts));
+
 const config = process.env
 
 app.use(express.json())

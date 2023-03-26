@@ -14,20 +14,20 @@
         <a class="nav-link" routerLink="/categories" routerLinkActive="active">categories</a>
         <a class="nav-link" routerLink="/aboutus" routerLinkActive="active">about us</a>
         <a class="nav-link" routerLink="/team-and-condations" routerLinkActive="active">teams & condations</a>
-        
+
         <a *ngIf="isLogedIn == false; else logOut " class="login-button" routerLink="/login" routerLinkActive="active">
           <span  class="login-button-text">login</span>
         </a>
 
         <ng-template #logOut class="login-button" >
-          <a class="login-button" routerLink="/login" routerLinkActive="active">
+          <a class="login-button" routerLink="/logout" routerLinkActive="active" (click)="logoutUser()">
             <span  class="login-button-text">logout</span>
           </a>
         </ng-template>
 
 
         <a [hidden]="isLogedIn == true" class="register-button" routerLink="/register" routerLinkActive="active">
-          <span class="register-button-text">register</span> 
+          <span class="register-button-text">register</span>
         </a>
       </div>
     </div>

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BooksComponent } from './books.component';
+import { RestPasswordComponent } from './rest-password.component';
 
-describe('BooksComponent', () => {
-  let component: BooksComponent;
-  let fixture: ComponentFixture<BooksComponent>;
+describe('RestPasswordComponent', () => {
+  let component: RestPasswordComponent;
+  let fixture: ComponentFixture<RestPasswordComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BooksComponent ]
+      declarations: [ RestPasswordComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(BooksComponent);
+    fixture = TestBed.createComponent(RestPasswordComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

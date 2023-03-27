@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http'
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Components/login/login.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
@@ -20,10 +19,7 @@ import { AddAuthorComponent } from './Components/admin-dashboard/admin-actions/c
 import { AdminBooksComponent } from './Components/admin-dashboard/admin-books/admin-books.component';
 import { AdminCategoriesComponent } from './Components/admin-dashboard/admin-categories/admin-categories.component';
 import { addBookComponent } from './Components/admin-dashboard/admin-actions/create/add-book/add-book.component';
-import { addCategoryComponent } from './Components/admin-dashboard/admin-actions/create/add-category/add-category.component';
 import { AdminAuthorsComponent } from './Components/admin-dashboard/admin-authors/admin-authors.component';
-import { UpdateCategoryComponent } from './Components/admin-dashboard/admin-actions/update/update-category/update-category.component';
-import { DeleteCategoryComponent } from './Components/admin-dashboard/admin-actions/delete/delete-category/delete-category.component';
 import { UpdateBookComponent } from './Components/admin-dashboard/admin-actions/update/update-book/update-book.component';
 import { DeleteBookComponent } from './Components/admin-dashboard/admin-actions/delete/delete-book/delete-book.component';
 import { UpdateAuthorComponent } from './Components/admin-dashboard/admin-actions/update/update-author/update-author.component';
@@ -70,9 +66,6 @@ import { BookCardComponent } from './Components/books/book-card/book-card.compon
    AdminCategoriesComponent,
    AddAuthorComponent,
    addBookComponent,
-   addCategoryComponent,
-   UpdateCategoryComponent,
-   DeleteCategoryComponent,
    addBookComponent,
    UpdateBookComponent,
    DeleteBookComponent,
@@ -100,7 +93,6 @@ import { BookCardComponent } from './Components/books/book-card/book-card.compon
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    SlickCarouselModule,
     MatSlideToggleModule,
     MatMenuModule,
     MatButtonModule,

@@ -17,6 +17,7 @@ const booksRoutes = require('./routes/books.js')
 const reviewsRoutes = require('./routes/reviews.js')
 const categoryRoutes = require('./routes/categories.js')
 const authorsRoutes = require('./routes/authors.js')
+const auth = require('./middleware/auth')
 
 app.use(cors({ origin: 'http://localhost:4200'}))
 

@@ -36,6 +36,7 @@ const routes: Routes = [
   {path:'admin-dashboard', component:AdminDashBoardComponent, children:[
     {path:'admin-authors', component:AdminAuthorsComponent},
     {path:'admin-categories', component:AdminCategoriesComponent},
+    {path:'admin-categories/:id', component:AdminCategoriesComponent},
     {path:'admin-books', component:AdminBooksComponent},
 
   ]},

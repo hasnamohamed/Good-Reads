@@ -1,6 +1,13 @@
-export interface IAuthor {
-    _id?:string;
-    name:string;
-    birth:Date;
-    bio:string;
+export interface IBook {
+  _id?:string;
+  rating?:{
+    rate:number,
+    totalVotes: number,
+    totalPoints: number,
+  }
+  title:string;
+  description:string;
+  image:string;
+  authorId:string
+  catId:string
 }

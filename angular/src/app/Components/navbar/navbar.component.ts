@@ -33,6 +33,7 @@ export class NavbarComponent implements OnInit {
 
           setTimeout(() => {
 
+            // @ts-ignore
             swal.close()
 
           }, 4000)

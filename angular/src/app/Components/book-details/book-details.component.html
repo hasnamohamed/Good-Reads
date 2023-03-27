@@ -1,3 +1,10 @@
 <div class="container d-flex flex-wrap justify-content-center mt-4">
-  <app-book-card class="col-xl-3 col-md-6" [item]=item ></app-book-card>
+  <app-book-card class="col-xl-3 col-md-6" [book]=book ></app-book-card>
+
+</div>
+<div class="container d-flex justify-content-center mt-4">
+<p class="mr-4">Your Rating</p>
+<div>
+  <mat-star-rating  [rating]="book.rating.rate" [starCount]="starCount" [color]="starColor" (ratingUpdated)="onRatingChanged({rating : $event})"></mat-star-rating>
+</div>
 </div>

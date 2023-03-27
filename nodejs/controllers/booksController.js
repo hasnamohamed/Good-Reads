@@ -1,17 +1,20 @@
 const Book = require('../models/book.js')
-
-async function getBooks(req, res) {
+const getBooks  = (async(req, res) => {
     try {
-        let page = req.query.page;
-        let limit = 2;
-        let startIndex = (page - 1) * limit ;
-        let endIndex = page * limit;
+        let limit = 6;
+        const pageNumber = parseInt(req.query.pageNumber) || 1;
+
+        const totalRecords = await Book.countDocuments();
+        const totalPages =Math.ceil(totalRecords/limit)
+
+        let startIndex = (pageNumber - 1) * limit ;
+        let endIndex = pageNumber * limit;
         const books = await Book.find(null,null,{ skip: startIndex, limit: endIndex });
-        res.send(books);
+        res.status(200).json({books,totalPages});
     } catch (err) {
         res.send("something went wrong" + err);
     }
-}
+})
 
 const getBook = (async (req, res) => {
     try {

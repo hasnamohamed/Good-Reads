@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { restInfo } from 'src/app/db-models/userInfo';
 import { UsersService } from 'src/app/services/users.service';
-
+import swal from "sweetalert";
 @Component({
   selector: 'app-rest-password',
   templateUrl: './rest-password.component.html',
@@ -41,6 +41,7 @@ export class RestPasswordComponent {
 
         setTimeout(() => {
 
+          // @ts-ignore
           swal.close()
 
         }, 4500)

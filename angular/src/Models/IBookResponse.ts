@@ -1,6 +1,6 @@
-import { IAuthor } from "./iauthor";
+import { IBook } from "./ibook";
 
-export interface IAuthorResponse {
-    authors: IAuthor[],
+export interface IBookResponse {
+    books: IBook[],
     totalPages: number
   }

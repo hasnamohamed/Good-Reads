@@ -52,6 +52,7 @@ registerNewUser()
 
           setTimeout(() => {
 
+            // @ts-ignore
             swal.close()
 
           }, 4000)

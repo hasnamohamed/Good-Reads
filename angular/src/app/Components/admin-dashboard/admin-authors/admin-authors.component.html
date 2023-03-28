@@ -7,11 +7,22 @@
         <th scope="col">Full Name</th>
         <th scope="col">Date of Birth</th>
         <th>
+          <div class="pagenation-container">
+            <div>
+              <i class="fa-solid fa-chevron-left"  (click)="prevPage()"></i>
+              <input #pageNumber type="number" class="page-number" min="0" [max]="totalPageNumber" [(ngModel)]="currentPageNumber">
+              <input type="number" class="total-pages" [(ngModel)]="totalPageNumber" disabled>
+              <i class="fa-solid fa-chevron-right" (click)="nextPage()"></i>
+            </div>
+          </div>
+        </th>
+        <th>
           <button type="button" class="btn btn-outline-dark add-button" (click)="getAdminAction('add')" data-bs-toggle="modal" data-bs-target="#exampleModal">
             <i class="fa-solid fa-plus"></i>
           </button>
         </th>
       </tr>
+
     </thead>
     <tbody>
       <tr *ngFor="let author of authorsList; let authorNum = index">
@@ -23,6 +34,7 @@
         </td>
         <td>{{author.name}}</td>
         <td>{{author.birthDate}}</td>
+        <td></td>
         <td>
           <div class="action-button">
             <button type="button" class="btn btn-outline-dark" (click)="getAdminAction('edit')" data-bs-toggle="modal" data-bs-target="#exampleModal">

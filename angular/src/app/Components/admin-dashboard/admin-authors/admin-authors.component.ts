@@ -1,5 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { Form } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
 import { IAuthor } from 'src/Models/iauthor';
 import { AuthorServiceService } from 'src/Services/author-service.service';
 
@@ -22,13 +23,16 @@ export class AdminAuthorsComponent implements OnInit {
     authorImage:"",
   }
 
+  totalPageNumber:number = 0;
+  currentPageNumber:number = 1;
+
   authorsList:IAuthor[] = []
   constructor(private authorService:AuthorServiceService)
   {
     this.authorService.getAllAuthorsis(1).subscribe(
       authorsList => {
         let authros = JSON.parse(authorsList.body || "")
-
+        this.totalPageNumber = authros.totalPages
         authros.authors.forEach((author:any) => {
           let localDate = new Date(author.birthDate).toLocaleDateString("en-US")
           author.birthDate = localDate
@@ -41,6 +45,11 @@ export class AdminAuthorsComponent implements OnInit {
       },
       err => console.log(err));
   }
+
+
+  // private currentPageObs = new BehaviorSubject(false);
+  // currentPageO = this.currentPageObs.asObservable();
+
 
   ngOnInit() {
   }
@@ -128,5 +137,17 @@ export class AdminAuthorsComponent implements OnInit {
     )
   }
 
+
+  prevPage()
+  {
+    if(this.currentPageNumber != 0)
+      this.currentPageNumber--
+  }
+
+  nextPage()
+  {
+    if(this.currentPageNumber < this.totalPageNumber)
+      this.currentPageNumber++
+  }
 
 }

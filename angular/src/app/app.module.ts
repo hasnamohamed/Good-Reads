@@ -15,7 +15,6 @@ import { CardComponent } from './Components/Shared/card/card/card.component';
 import { AuthorsComponent} from './Components/authors/Authors.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminDashBoardComponent } from './Components/admin-dashboard/admin-dash-board/admin-dash-board.component';
-import { AddAuthorComponent } from './Components/admin-dashboard/admin-actions/create/add-author/add-author.component';
 import { AdminBooksComponent } from './Components/admin-dashboard/admin-books/admin-books.component';
 import { AdminCategoriesComponent } from './Components/admin-dashboard/admin-categories/admin-categories.component';
 import { addBookComponent } from './Components/admin-dashboard/admin-actions/create/add-book/add-book.component';
@@ -61,15 +60,12 @@ import { BookCardComponent } from './Components/books/book-card/book-card.compon
     AuthorsComponent,
    AdminDashBoardComponent,
    AdminAuthorsComponent,
-   AddAuthorComponent,
    AdminBooksComponent,
    AdminCategoriesComponent,
-   AddAuthorComponent,
    addBookComponent,
    addBookComponent,
    UpdateBookComponent,
    DeleteBookComponent,
-   AddAuthorComponent,
    UpdateAuthorComponent,
    DeleteAuthorComponent,
    RegisterComponent,

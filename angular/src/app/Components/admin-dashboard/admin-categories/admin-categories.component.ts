@@ -39,7 +39,6 @@ export class AdminCategoriesComponent implements OnInit, OnChanges{
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.newCat.name)
   }
 
   setAdminAction(adminAction:string , id?:string )

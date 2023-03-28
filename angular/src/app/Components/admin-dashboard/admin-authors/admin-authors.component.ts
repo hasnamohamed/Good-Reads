@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Form } from '@angular/forms';
+import { IAuthor } from 'src/Models/iauthor';
+import { AuthorServiceService } from 'src/Services/author-service.service';
 
 @Component({
   selector: 'admin-authors',
@@ -6,22 +9,38 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-authors.component.css']
 })
 export class AdminAuthorsComponent implements OnInit {
-  adminActions:string = ""
 
-  authorList:any[] = [
-    {id:"6408c182bf5eeb7125c7f255", photo:"https://picsum.photos/200", firstName:"Islam", lastName:"saman", dateOfBirth:"12-12-2022"},
-    {id:"6408c182bf5eeb7125c7f255", photo:"https://picsum.photos/200", firstName:"Islam", lastName:"saman", dateOfBirth:"12-12-2022"},
-    {id:"6408c182bf5eeb7125c7f255", photo:"https://picsum.photos/200", firstName:"Islam", lastName:"saman", dateOfBirth:"12-12-2022"},
-    {id:"6408c182bf5eeb7125c7f255", photo:"https://picsum.photos/200", firstName:"Islam", lastName:"saman", dateOfBirth:"12-12-2022"},
-    {id:"6408c182bf5eeb7125c7f255", photo:"https://picsum.photos/200", firstName:"Islam", lastName:"saman", dateOfBirth:"12-12-2022"},
-    {id:"6408c182bf5eeb7125c7f255", photo:"https://picsum.photos/200", firstName:"Islam", lastName:"saman", dateOfBirth:"12-12-2022"},
-    {id:"6408c182bf5eeb7125c7f255", photo:"https://picsum.photos/200", firstName:"Islam", lastName:"saman", dateOfBirth:"12-12-2022"},
-    {id:"6408c182bf5eeb7125c7f255", photo:"https://picsum.photos/200", firstName:"Islam", lastName:"saman", dateOfBirth:"12-12-2022"},
-    {id:"6408c182bf5eeb7125c7f255", photo:"https://picsum.photos/200", firstName:"Islam", lastName:"saman", dateOfBirth:"12-12-2022"}
-  ]
-  constructor() {
-    console.log(this.authorList)
-   }
+@ViewChild('authorImage') authorImage!:ElementRef;
+@ViewChild('closeButton') closeButton!:ElementRef;
+
+  adminActions:string = ""
+  authorInfo:IAuthor =
+  {
+    name:"",
+    bio:"",
+    birthDate:"",
+    authorImage:"",
+  }
+
+  authorsList:IAuthor[] = []
+  constructor(private authorService:AuthorServiceService)
+  {
+    this.authorService.getAllAuthorsis(1).subscribe(
+      authorsList => {
+        let authros = JSON.parse(authorsList.body || "")
+
+        authros.authors.forEach((author:any) => {
+          let localDate = new Date(author.birthDate).toLocaleDateString("en-US")
+          author.birthDate = localDate
+
+          author.authorImage = "http://localhost:9000/" + author.authorImage
+        });
+
+        this.authorsList = authros.authors
+
+      },
+      err => console.log(err));
+  }
 
   ngOnInit() {
   }
@@ -31,5 +50,83 @@ export class AdminAuthorsComponent implements OnInit {
   {
     this.adminActions = adminAction;
   }
+
+
+  addAuthor(addAuthorForm:any)
+  {
+
+    const formData = new FormData();
+    formData.append("name", this.authorInfo.name);
+    formData.append("bio", this.authorInfo.bio);
+    formData.append("birthDate", this.authorInfo.birthDate.toString());
+
+    if(this.authorImage.nativeElement.files[0])
+    {
+      let fileSize:number = this.authorImage.nativeElement.files[0].size / 1000
+
+      if(fileSize > 2000)
+      {
+        swal({
+          title: "file maximum size is 2M",
+          icon : "error"
+        });
+
+        setTimeout(() => {
+
+          swal.close()
+          this.closeButton.nativeElement.click();
+        }, 2000)
+
+        return;
+      }
+      else
+      {
+        formData.append("file", this.authorImage.nativeElement.files[0]);
+      }
+    }
+
+    this.authorService.addAuthor(formData).subscribe(
+
+      successRes =>
+      {
+        if(successRes.status == 200)
+        {
+          // if the category added successfully then update the category list by adding the newly added one
+          let newAuthor = JSON.parse(successRes.body!)
+          newAuthor.authorImage = "http://localhost:9000/" + newAuthor.authorImage
+          this.authorsList.push(newAuthor)
+          console.log(newAuthor)
+          addAuthorForm.resetForm();
+
+          swal({
+            title: "Author has been added successfully!",
+            icon : "success"
+          });
+
+
+          setTimeout(() => {
+
+            swal.close()
+          }, 2000)
+        }
+      },
+
+      serverError =>
+      {
+        swal({
+          title: "Something went wrong, try again later",
+          icon : "error"
+        });
+        console.log(serverError)
+        setTimeout(() => {
+
+          swal.close()
+        }, 2000)
+      }
+
+
+    )
+  }
+
 
 }

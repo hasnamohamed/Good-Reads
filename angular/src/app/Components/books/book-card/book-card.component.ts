@@ -16,7 +16,7 @@ export class BookCardComponent implements OnInit {
   starColorW: StarRatingColor = StarRatingColor.warn;
   author:IAuthor={
     "name":"auth1",
-    "birth":new Date,
+    "birthDate":"",
     "bio":"new bio "
   };
   authorId:any;

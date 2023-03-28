@@ -14,7 +14,7 @@ export class BookDetailsComponent {
   @Input('book') book: any = {};
   author:IAuthor={
     "name":"auth1",
-    "birth":new Date,
+    "birthDate":"",
     "bio":"new bio "
   };
   authorId:any;

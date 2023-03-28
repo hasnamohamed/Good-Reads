@@ -18,20 +18,31 @@ httpOptions = {
       'Content-Type':  'application/json',
     })
   };
-    
+
   constructor(private http:HttpClient) { }
 
+  getAllAuthorsis(pageNumber:number)
+  {
+    const headers = new HttpHeaders()
+          .set('Content-Type', 'application/json');
+
+    return this.http.get(`http://localhost:9000/author/?pageNumber=${pageNumber}`,
+    {headers: headers, responseType:"text", observe: 'response'})
+  }
+
+
+
   //get all authors
-  getAllAuthors(pageNumber:number,pageSize:number) : Observable<IAuthorResponse>
+  getAllAuthors(pageNumber:number,pageSize?:number) : Observable<IAuthorResponse>
   {
     const params = new HttpParams()
 
     .set('pageNumber',pageNumber.toString())
-    .set('pageSize',pageSize.toString())
+    .set('pageSize',pageSize!.toString())
 
     return this.http.get <IAuthorResponse> ('http://localhost:9000/author',{params})
   }
-  
+
 
   //get one author by id
   getAuthorById(author_id:string) : Observable<IAuthor>
@@ -39,14 +50,20 @@ httpOptions = {
     return this.http.get<IAuthor>(`http://localhost:9000/author/${author_id}`)
   }
 
-  //add author 
-  addAuthor(author:IAuthor) : Observable<IAuthor>
+  //add author
+  addAuthor(author:FormData)
   {
-   return this.http.post <IAuthor> ('http://localhost:9000/author',author,this.httpOptions)
+      const headers = new HttpHeaders()
+      .set('Content-Type', 'multipart/form-data');
+
+
+    return this.http.post('http://localhost:9000/author', author,
+    {responseType:"text", observe: 'response'})
+
   }
 
   //delete author
-  deleteAuthor(author_id:string) : Observable<IAuthor> 
+  deleteAuthor(author_id:string) : Observable<IAuthor>
   {
     return this.http.delete <IAuthor> (`http://localhost:9000/author/${author_id}`,this.httpOptions)
   }

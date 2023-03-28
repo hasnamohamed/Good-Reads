@@ -20,7 +20,9 @@ table .author-image
 
 table .author-image img
 {
-    width: 30%;
+  width: 65px;
+  height: 65px;
+  border-radius: 12px;
 }
 
 
@@ -69,4 +71,14 @@ table .author-image img
 .modal-title
 {
     text-transform: capitalize;
+}
+
+.form-label
+{
+    text-transform: capitalize;
+}
+
+.author-bio
+{
+  max-height: 100px;
 }

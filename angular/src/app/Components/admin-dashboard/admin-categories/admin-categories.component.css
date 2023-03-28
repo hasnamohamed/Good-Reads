@@ -33,6 +33,12 @@ table .book-image img
     transition: all 0.5s;
 }
 
+.add-button
+{
+  border: 2px solid #fff;
+  color: white;
+}
+
 .action-button  button:last-child
 {
     margin-right: 0px;
@@ -67,4 +73,19 @@ table .book-image img
 .modal-body
 {
     margin: auto;
+}
+
+.delete-alert-message
+{
+  margin: 15px auto;
+}
+
+.button-container
+{
+  margin: auto;
+}
+
+table th, td
+{
+  text-transform: capitalize;
 }

@@ -23,8 +23,13 @@ nav {
     font-family: 'Cairo', sans-serif;
     transition:.5s;
     text-decoration: none;
-
 }
+
+.login-button span, .register-button span
+{
+  box-shadow: 0 4px 9px -4px #a9a59a;
+}
+
 
 .nav-link .active
 {

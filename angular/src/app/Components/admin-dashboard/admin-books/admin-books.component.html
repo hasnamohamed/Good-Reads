@@ -7,7 +7,12 @@
         <th scope="col">name</th>
         <th scope="col">categoryId</th>
         <th scope="col">authorId</th>
-        <th scope="col">Actions</th>
+        <th scope="col"></th>
+        <th>
+          <button type="button" class="btn btn-outline-dark add-button" (click)="getAdminAction('add')" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -21,11 +26,11 @@
         <td>{{book.name}}</td>
         <td>{{book.CategoryId}}</td>
         <td>{{book.AuthorId}}</td>
+
+        <td></td>
+
         <td>
           <div class="action-button">
-            <button type="button" class="btn btn-outline-dark" (click)="getAdminAction('add')" data-bs-toggle="modal" data-bs-target="#exampleModal">
-              <i class="fa-solid fa-plus"></i>
-            </button>
             <button type="button" class="btn btn-outline-dark" (click)="getAdminAction('edit')" data-bs-toggle="modal" data-bs-target="#exampleModal">
               <i class="fa-solid fa-pen-to-square"></i>
             </button>
@@ -56,7 +61,7 @@
             <div *ngSwitchCase='"remove"'>
               remove book
             </div>
-          </div>        
+          </div>
         </h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>

@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
 
         setTimeout(() => {
 
+          // @ts-ignore
           swal.close()
 
         }, 4000)

@@ -6,7 +6,7 @@ import {StarRatingColor} from "../../Shared/star-rating/star-rating.component";
   styleUrls: ['./book-card.component.css']
 })
 export class BookCardComponent implements OnInit {
-  @Input('item') item: any = {};
+  @Input('book') book: any = {};
   starCount: number = 5;
   starColor: StarRatingColor = StarRatingColor.accent;
   starColorP: StarRatingColor = StarRatingColor.primary;
@@ -15,14 +15,14 @@ export class BookCardComponent implements OnInit {
   ngOnInit() {
   }
 
-  @ViewChild('teams') teams!: ElementRef;
+  @ViewChild('status') status!: ElementRef;
   selectedStatus = 0;
 
   onSelected(): void {
-    this.selectedStatus = this.teams.nativeElement.value;
+    this.selectedStatus = this.status.nativeElement.value;
   }
 
   onRatingChanged(rating: any) {
-    this.item.rating.rate = rating.rating;
+    this.book.rating.rate = rating.rating;
   }
 }

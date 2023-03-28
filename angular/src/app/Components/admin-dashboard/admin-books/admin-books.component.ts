@@ -9,6 +9,15 @@ import { Component, OnInit } from '@angular/core';
 export class AdminBooksComponent implements OnInit {
   adminActions:string = ""
 
+
+  bookDetiles:any =
+  {
+    bookName:"",
+    catID:"",
+    authorID:"",
+
+  }
+
   bookList:any[] = [
     {id:"6408c182bf5eeb7125c7f255", photo:"https://picsum.photos/200", name:"C++ for begniners", CategoryId:"1235", AuthorId:"15894"},
     {id:"6408c182bf5eeb7125c7f255", photo:"https://picsum.photos/200", name:"C++ for begniners", CategoryId:"1235", AuthorId:"15894"},

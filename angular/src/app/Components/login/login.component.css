@@ -1,0 +1,24 @@
+section
+{
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.login-form
+{
+    width: 30%;
+    padding: 40px;
+    box-shadow: rgb(0 0 0 / 10%) 0px 4px 12px;
+}
+
+.login-form button
+{
+    margin: auto;
+    display: block;
+}
+
+label
+{
+    text-transform: capitalize;
+}

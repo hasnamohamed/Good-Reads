@@ -1,1 +1,9 @@
-<p>books works!</p>
+<div class="container d-flex flex-wrap justify-content-center mt-4">
+  <app-book-card  class="nav-link ms-2 mb-2 col-xxl-3 col-md-4" *ngFor="let book of books_list" [book]=book></app-book-card>
+
+  <div class="col-12 p-3 fs-2 text-center d-flex justify-content-center align-items-center">
+    <i class="icon fa-solid fa-circle-chevron-left mx-3" (click)="previous()"></i>
+    <button type="button" class="btn btn-secondary mx-1 small" *ngFor="let item of numberPages" (click)="getPage(item)">{{item}}</button>
+    <i class="icon fa-solid fa-circle-chevron-right mx-3" (click)="next()"></i>
+  </div>
+</div>

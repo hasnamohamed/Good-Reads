@@ -82,27 +82,44 @@ const createBook = (async function (req, res) {
 
 const updateBook = (async (req, res) => {
     try {
-        const bookId = req.params.id;
-        if (!req.body.title || !req.body.image || !req.body.description || !req.body.authorId || !req.body.catId) {
-            return res.status(400).json({
-                message: 'Missing required fields'
-            });
-        }
-        const bookInfo = req.body;
+
+        if (Object.keys(req.body).length == 0) {
+            return res.status(400).json({ message: 'At least one filed must be provided' });
+          }
+        
+
+          const bookId = req.params.id;
+          let image;
+
+          let bookInfo = {
+            ...req.body
+          }
+
+          if(req.file != undefined)
+          {
+            image =  `images/${req.file.filename}`
+            bookInfo.image = image
+          }
+
+          console.log(bookInfo)
+
 
         const updatedBook = await Book.findByIdAndUpdate(
-            bookId, {
-                ...bookInfo
-            }, {
+            bookId, {...bookInfo} , {
                 new: true
             }
         );
+
         if (!updatedBook) {
             return res.status(404).json({
                 message: 'Book not found'
             });
         }
-        return res.status(200).json("Book updated");
+
+        let popluatedBook =  await updatedBook.populate('cateId authorId')
+
+        res.status(200).send(popluatedBook)
+
     } catch (err) {
         res.status(400).send(err);
     }

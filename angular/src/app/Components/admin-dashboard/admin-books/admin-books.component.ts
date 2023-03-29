@@ -17,6 +17,7 @@ import { AdminCategoriesComponent } from '../admin-categories/admin-categories.c
 export class AdminBooksComponent {
 
   @ViewChild('bookImage') bookImage!:ElementRef;
+  @ViewChild('closeButton') closeButton!:ElementRef;
 
 
   adminActions:string = ""
@@ -68,10 +69,10 @@ export class AdminBooksComponent {
         let authros = JSON.parse(authorsList.body || "")
         this.totalPageNumber = authros.totalPages
         authros.authors.forEach((author:any) => {
-          let localDate = new Date(author.birthDate).toLocaleDateString("en-US")
-          author.birthDate = localDate
+          let localDate = new Date(author.cateId).toLocaleDateString("en-US")
+          author.cateId = localDate
 
-          author.authorImage = "http://localhost:9000/" + author.authorImage
+          author.image = "http://localhost:9000/" + author.image
         });
 
        this.authorsList = authros.authors
@@ -179,98 +180,99 @@ export class AdminBooksComponent {
   }
 
 
-//   // updateAuthor(updateAuthorForm:any)
-//   // {
-//   //   const formData = new FormData();
+  updateBook(updateBookForm:any)
+  {
+    const formData = new FormData();
 
-//   //   // this is not an effieient soluation ... what if we have 15 proprty?
-//   //   if(this.authorInfo.name != '')
-//   //     formData.append("name", this.authorInfo.name);
+    // this is not an effieient soluation ... what if we have 15 proprty?
+    if(this.bookInfo.title)
+      formData.append("title", this.bookInfo.title);
 
+    if(this.bookInfo.description)
+      formData.append("description", this.bookInfo.description);
 
-//   //   if(this.authorInfo.bio != '')
-//   //     formData.append("bio", this.authorInfo.bio);
+    if(this.bookInfo.cateId)
+      formData.append("cateId", this.bookInfo.cateId);
 
-//   //   if(this.authorInfo.birthDate != '')
-//   //     formData.append("birthDate", this.authorInfo.birthDate.toString());
-
-
-//   //   if(this.authorImage.nativeElement.files[0])
-//   //   {
-//   //     let fileSize:number = this.authorImage.nativeElement.files[0].size / 1000
-
-//   //     if(fileSize > 2000)
-//   //     {
-//   //       swal({
-//   //         title: "Maximum image size is 2M",
-//   //         icon : "error"
-//   //       });
-
-//   //       setTimeout(() => {
-
-//   //         swal.close()
-//   //       }, 2000)
-
-//   //       return;
-//   //     }
-//   //     else
-//   //     {
-//   //       formData.append("file", this.authorImage.nativeElement.files[0]);
-//   //     }
-//   //   }
-
-//   //   this.authorService.updateAuthor(this.authorID, formData).subscribe(
-
-//   //     successRes =>
-//   //     {
-//   //       if(successRes.status == 200)
-//   //       {
-//   //         // if the author updated successfully then update the authors list
-//   //         let updatedAuthor = JSON.parse(successRes.body!)
-//   //         updatedAuthor.authorImage = "http://localhost:9000/" + updatedAuthor.authorImage
-
-//   //         let oldAuthorDetiles = this.authorsList.find(author => {return author._id == this.authorID})
-
-//   //         if(oldAuthorDetiles != null)
-//   //           {
-//   //             oldAuthorDetiles.name = updatedAuthor.name
-//   //             oldAuthorDetiles.bio = updatedAuthor.bio
-//   //             oldAuthorDetiles.birthDate = updatedAuthor.birthDate
-//   //             oldAuthorDetiles.authorImage = updatedAuthor.authorImage
-//   //           }
-
-//   //         updateAuthorForm.resetForm();
-
-//   //         swal({
-//   //           title: "Author has been updated successfully!",
-//   //           icon : "success"
-//   //         });
+    if(this.bookInfo.authorId)
+      formData.append("authorId", this.bookInfo.authorId);
 
 
-//   //         setTimeout(() => {
+    if(this.bookImage.nativeElement.files[0])
+    {
+      let fileSize:number = this.bookImage.nativeElement.files[0].size / 1000
 
-//   //           swal.close()
-//   //           this.closeButton.nativeElement.click();
-//   //         }, 2000)
-//   //       }
-//   //     },
+      if(fileSize > 2000)
+      {
+        swal({
+          title: "Maximum image size is 2M",
+          icon : "error"
+        });
 
-//   //     serverError =>
-//   //     {
-//   //       swal({
-//   //         title: "Something went wrong, try again later",
-//   //         icon : "error"
-//   //       });
-//   //       console.log(serverError)
-//   //       setTimeout(() => {
+        setTimeout(() => {
 
-//   //         swal.close()
-//   //       }, 2000)
-//   //     }
+          swal.close()
+        }, 2000)
+
+        return;
+      }
+      else
+      {
+        formData.append("file", this.bookImage.nativeElement.files[0]);
+      }
+    }
+
+    this.booksService.updateBook(this.bookID, formData).subscribe(
+
+      successRes =>
+      {
+        if(successRes.status == 200)
+        {
+          // if the author updated successfully then update the authors list
+          let updatedBook = JSON.parse(successRes.body!)
+          updatedBook.image = "http://localhost:9000/" + updatedBook.image
+
+          let oldBookDetiles = this.booksList.find(author => {return author._id == this.bookID})
+
+          if(oldBookDetiles != null)
+            {
+              oldBookDetiles.title = updatedBook.title
+              oldBookDetiles.description = updatedBook.description
+              oldBookDetiles.cateId = updatedBook.cateId
+              oldBookDetiles.authorId = updatedBook.authorId
+              oldBookDetiles.image = updatedBook.image
+            }
+
+          updateBookForm.resetForm();
+
+          swal({
+            title: "Author has been updated successfully!",
+            icon : "success"
+          });
 
 
-//   //   )
-//   // }
+          setTimeout(() => {
+
+            swal.close()
+            this.closeButton.nativeElement.click();
+          }, 2000)
+        }
+      },
+
+      serverError =>
+      {
+        swal({
+          title: "Something went wrong, try again later",
+          icon : "error"
+        });
+        console.log(serverError)
+        setTimeout(() => {
+
+          swal.close()
+        }, 2000)
+      }
+    )
+  }
 
 
 //   // deleteAuthor()

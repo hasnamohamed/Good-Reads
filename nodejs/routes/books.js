@@ -17,7 +17,7 @@ Route.get('/:id',getBook);
 
 Route.post('/',uploadFile().single('file'), createBook);
 
-Route.put('/:id',updateBook);
+Route.put('/:id', uploadFile().single('file'),updateBook);
 
 Route.delete('/:id',deleteBook);
 

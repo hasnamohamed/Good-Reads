@@ -54,12 +54,17 @@ export class BookService {
     return this.http.post('http://localhost:9000/book', book,
     {responseType:"text", observe: 'response'})
   }
+
+  updateBook(book_id:string,book:FormData)
+  {
+    return this.http.put(`http://localhost:9000/book/${book_id}`, book,
+    {responseType:"text", observe: 'response'})
+
+  }
+
   deleteBook(book_id:string) : Observable<IBook>
   {
     return this.http.delete <IBook> (`http://localhost:9000/book/${book_id}`,this.httpOptions)
   }
-  updateBook(book_id:string,book:IBook) : Observable<IBook>
-  {
-    return this.http.put <IBook> (`http://localhost:9000/author/${book_id}`,book)
-  }
+
 }

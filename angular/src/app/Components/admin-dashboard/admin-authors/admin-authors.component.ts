@@ -155,14 +155,14 @@ export class AdminAuthorsComponent implements OnInit {
     const formData = new FormData();
 
     // this is not an effieient soluation ... what if we have 15 proprty?
-    if(this.authorInfo.name != '')
+    if(this.authorInfo.name)
       formData.append("name", this.authorInfo.name);
 
 
-    if(this.authorInfo.bio != '')
+    if(this.authorInfo.bio)
       formData.append("bio", this.authorInfo.bio);
 
-    if(this.authorInfo.birthDate != '')
+    if(this.authorInfo.birthDate)
       formData.append("birthDate", this.authorInfo.birthDate.toString());
 
 

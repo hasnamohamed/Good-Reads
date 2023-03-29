@@ -144,37 +144,52 @@
                     <button  class="btn btn-primary mb-3" (click)="addBook(addbookForm)"  [disabled]="addbookForm.invalid">Add</button>
                   </div>
                 </div>
-
               </form>
             </section>
           </div>
           <div *ngSwitchCase='"edit"'>
-            <!-- <section>
+            <section>
               <form #updatebookForm='ngForm' enctype="multipart/form-data">
 
                 <div class="mb-3 row">
                   <label for="bookName" class="col-3 col-form-label">Name</label>
                   <div class="col-6">
-                    <input  type="text"  class="form-control" id="bookName" value="" name="bookName" [(ngModel)]="bookInfo.name">
+                    <input #bookName="ngModel" required="true" type="text"  class="form-control" id="bookName" value="" name="bookName" [(ngModel)]="bookInfo.title">
                   </div>
                 </div>
 
                 <div class="mb-3 row">
-                  <label for="bookBio" class="col-3 col-form-label">About You</label>
+                  <label for="bookBio" class="col-3 col-form-label">Description</label>
                   <div class="col-6">
-                    <textarea #bookBio ="ngModel" (resize)="false" id="bookBio"  class="form-control book-bio" name="bookBio" [(ngModel)]="bookInfo.bio"></textarea>
+                    <textarea #bookDescription ="ngModel" required="true"  (resize)="false" id="bookBio"  class="form-control book-dec" name="bookBio" [(ngModel)]="bookInfo.description"></textarea>
                   </div>
                 </div>
 
                 <div class="mb-3 row">
-                  <label for="bookDate" class="col-3 col-form-label">Birth Date</label>
+                  <label for="bookName" class="col-3 col-form-label">Category</label>
                   <div class="col-6">
-                    <input #bookBirthDate = "ngModel"  id="bookDate" class="form-control" type="date" name="bookDate" [(ngModel)]="bookInfo.birthDate"/>
+
+                    <select #bookCate="ngModel" required [(ngModel)]="bookInfo.cateId" class="form-select" name="bookCategory" aria-label="Default select example">
+                      <option  *ngFor="let cate of cateList" [ngValue]="cate._id">{{cate.name}}</option>
+                    </select>
+
                   </div>
                 </div>
 
                 <div class="mb-3 row">
-                  <label for="formFile" class="col-3 col-form-label">Photo</label>
+                  <label for="bookName" class="col-3 col-form-label">Author</label>
+                  <div class="col-6">
+
+                    <select #bookAuthor="ngModel" required [(ngModel)]="bookInfo.authorId" class="form-select" name="bookAuthor" aria-label="Default select example">
+                      <option  *ngFor="let author of authorsList" [ngValue]="author._id">{{author.name}}</option>
+                    </select>
+                  </div>
+                </div>
+
+
+
+                <div class="mb-3 row">
+                  <label for="formFile" class="col-3 col-form-label">Cover</label>
                   <div class="col-6">
                     <input #bookImage class="form-control" type="file" accept=".jpg, .png, .jpeg" id="formFile" name="bookImage">
                   </div>
@@ -183,12 +198,12 @@
 
                 <div class="mb-3 row text-center">
                   <div class="col-12">
-                    <button  class="btn btn-primary mb-3" (click)= "updatebook(updatebookForm)" [disabled]="!updatebookForm.dirty">update</button>
+                    <button  class="btn btn-primary mb-3" (click)="updateBook(updatebookForm)"  [disabled]="!updatebookForm.dirty">Update</button>
                   </div>
                 </div>
 
               </form>
-            </section> -->
+            </section>
           </div>
           <div *ngSwitchCase='"remove"'>
             <div class="row g-3">

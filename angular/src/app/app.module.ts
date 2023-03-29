@@ -21,7 +21,6 @@ import { addBookComponent } from './Components/admin-dashboard/admin-actions/cre
 import { AdminAuthorsComponent } from './Components/admin-dashboard/admin-authors/admin-authors.component';
 import { UpdateBookComponent } from './Components/admin-dashboard/admin-actions/update/update-book/update-book.component';
 import { DeleteBookComponent } from './Components/admin-dashboard/admin-actions/delete/delete-book/delete-book.component';
-import { UpdateAuthorComponent } from './Components/admin-dashboard/admin-actions/update/update-author/update-author.component';
 import { DeleteAuthorComponent } from './Components/admin-dashboard/admin-actions/delete/delete-author/delete-author.component';
 import { RegisterComponent } from './Components/register/register.component';
 import { CheckPasswordDirective } from 'custom-dirictives/passwordMatchChecker';
@@ -66,7 +65,6 @@ import { BookCardComponent } from './Components/books/book-card/book-card.compon
    addBookComponent,
    UpdateBookComponent,
    DeleteBookComponent,
-   UpdateAuthorComponent,
    DeleteAuthorComponent,
    RegisterComponent,
    LoginComponent,

@@ -10,7 +10,7 @@
           <div class="pagenation-container">
             <div>
               <i class="fa-solid fa-chevron-left"  (click)="prevPage()"></i>
-              <input #pageNumber type="number" class="page-number" min="0" [max]="totalPageNumber" [(ngModel)]="currentPageNumber">
+              <input #pageNumber type="number" class="page-number" min="0" [max]="totalPageNumber" [(ngModel)]="currentPageNumber" (change)="getAuthors()">
               <input type="number" class="total-pages" [(ngModel)]="totalPageNumber" disabled>
               <i class="fa-solid fa-chevron-right" (click)="nextPage()"></i>
             </div>
@@ -33,14 +33,14 @@
           <img [src]="author.authorImage">
         </td>
         <td>{{author.name}}</td>
-        <td>{{author.birthDate}}</td>
+        <td>{{author.birthDate | date}}</td>
         <td></td>
         <td>
           <div class="action-button">
-            <button type="button" class="btn btn-outline-dark" (click)="getAdminAction('edit')" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-outline-dark" (click)="getAdminAction('edit', author._id)" data-bs-toggle="modal" data-bs-target="#exampleModal">
               <i class="fa-solid fa-pen-to-square"></i>
             </button>
-            <button type="button" class="btn btn-outline-dark" (click)="getAdminAction('remove')" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-outline-dark" (click)="getAdminAction('remove', author._id)" data-bs-toggle="modal" data-bs-target="#exampleModal">
               <i class="fa-solid fa-trash"></i>
             </button>
           </div>
@@ -126,15 +126,61 @@
             </section>
           </div>
           <div *ngSwitchCase='"edit"'>
-            <update-author></update-author>
+            <section>
+              <form #updateAuthorForm='ngForm' enctype="multipart/form-data">
+
+                <div class="mb-3 row">
+                  <label for="authorName" class="col-3 col-form-label">Name</label>
+                  <div class="col-6">
+                    <input  type="text"  class="form-control" id="authorName" value="" name="authorName" [(ngModel)]="authorInfo.name">
+                  </div>
+                </div>
+
+                <div class="mb-3 row">
+                  <label for="authorBio" class="col-3 col-form-label">About You</label>
+                  <div class="col-6">
+                    <textarea #authorBio ="ngModel" (resize)="false" id="authorBio"  class="form-control author-bio" name="authorBio" [(ngModel)]="authorInfo.bio"></textarea>
+                  </div>
+                </div>
+
+                <div class="mb-3 row">
+                  <label for="authorDate" class="col-3 col-form-label">Birth Date</label>
+                  <div class="col-6">
+                    <input #authorBirthDate = "ngModel"  id="authorDate" class="form-control" type="date" name="authorDate" [(ngModel)]="authorInfo.birthDate"/>
+                  </div>
+                </div>
+
+                <div class="mb-3 row">
+                  <label for="formFile" class="col-3 col-form-label">Photo</label>
+                  <div class="col-6">
+                    <input #authorImage class="form-control" type="file" accept=".jpg, .png, .jpeg" id="formFile" name="authorImage">
+                  </div>
+                </div>
+
+
+                <div class="mb-3 row text-center">
+                  <div class="col-12">
+                    <button  class="btn btn-primary mb-3" (click)= "updateAuthor(updateAuthorForm)" [disabled]="!updateAuthorForm.dirty">update</button>
+                  </div>
+                </div>
+
+              </form>
+            </section>
           </div>
           <div *ngSwitchCase='"remove"'>
-            <delete-author></delete-author>
+            <div class="row g-3">
+              <div class="col-auto delete-alert-message">
+                <p>If you are sure you want to delete this author click delete button</p>
+              </div>
+              <div class="col-auto button-container">
+                  <button class="btn btn-danger mb-auto" (click)="deleteAuthor()">Delete</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Done!</button>
+        <button #closeButton type="button" class="btn btn-secondary" data-bs-dismiss="modal">Done!</button>
       </div>
     </div>
   </div>

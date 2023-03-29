@@ -23,11 +23,9 @@ httpOptions = {
 
   getAllAuthorsis(pageNumber:number)
   {
-    const headers = new HttpHeaders()
-          .set('Content-Type', 'application/json');
 
     return this.http.get(`http://localhost:9000/author/?pageNumber=${pageNumber}`,
-    {headers: headers, responseType:"text", observe: 'response'})
+    {headers: this.httpOptions.headers, responseType:"text", observe: 'response'})
   }
 
 
@@ -62,15 +60,21 @@ httpOptions = {
 
   }
 
-  //delete author
-  deleteAuthor(author_id:string) : Observable<IAuthor>
+  // update author
+  updateAuthor(author_id:string, author:FormData)
   {
-    return this.http.delete <IAuthor> (`http://localhost:9000/author/${author_id}`,this.httpOptions)
+
+    return this.http.put(`http://localhost:9000/author/${author_id}`, author,
+    { responseType:"text", observe: 'response'})
   }
 
-  updateAuthor(author_id:string,author:IAuthor) : Observable<IAuthor>
+  // delete author
+  deleteAuthor(author_id:string)
   {
-    return this.http.put <IAuthor> (`http://localhost:9000/author/${author_id}`,author)
+    return this.http.delete(`http://localhost:9000/author/${author_id}`,
+    { responseType:"text", observe: 'response'})
   }
+
+
 
 }

@@ -16,7 +16,7 @@ Route.get('/:id',getAuthor);
 
 Route.post('/', uploadFile().single('file') ,createAuthor);
 
-Route.put('/:id',updateAuthor);
+Route.put('/:id',uploadFile().single('file'),updateAuthor);
 
 Route.delete('/:id',deleteAuthor);
 

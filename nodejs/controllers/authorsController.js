@@ -38,13 +38,13 @@ const getAuthor = (async(req, res) => {
 const createAuthor = (async(req, res) => {
     try 
     {
-        if (!req.body.name || !req.body.birthDate || !req.body.bio)
-            return res.status(400).json({ message: 'Missing required fields' });
-        
-        
         const {name, bio, birthDate} = {...req.body}
         let authorImage;
 
+        if (!name || !birthDate || !bio)
+            return res.status(400).json({ message: 'Missing required fields' });
+        
+        
         if(req.file != undefined)
         {
             authorImage =  `images/${req.file.filename}`
@@ -72,23 +72,30 @@ const createAuthor = (async(req, res) => {
 const updateAuthor = (async(req, res) => {
     try {
         const authorId = req.params.id;
-        const { name, birth, bio } = req.body;
-    
-        if (!name || !birth || !bio) {
-          return res.status(400).json({ message: 'Missing required fields' });
+        const { name, birthDate, bio } = {...req.body};
+        let authorImage;
+
+        if (Object.keys(req.body).length == 0) {
+          return res.status(400).json({ message: 'At least one filed must be provided' });
         }
-    
+
+        if(req.file != undefined)
+        {
+            authorImage =  `images/${req.file.filename}`
+        }
+       
         const updatedAuthor = await Author.findByIdAndUpdate(
           authorId,
-          { name, birth, bio },
+          { name, birthDate, bio, authorImage },
           { new: true }
         );
+
     
         if (!updatedAuthor) {
           return res.status(404).json({ message: 'Author not found' });
         }
     
-        return res.status(200).json({message: 'Author updated successfully'});
+        return res.status(200).send(updatedAuthor);
       } catch (error) {
         res.status(400).json(error.message);
       }

@@ -26,8 +26,7 @@ table .author-image
 
 table .author-image img
 {
-  width: 65px;
-  height: 65px;
+  height: 11em;
   border-radius: 12px;
 }
 

@@ -63,10 +63,12 @@ export class AdminAuthorsComponent implements OnInit {
           author.authorImage = "http://localhost:9000/" + author.authorImage
         });
 
-        this.authorsList = authros.authors
+       this.authorsList = authros.authors
 
       },
       err => console.log(err));
+
+      return  this.authorsList
   }
 
   addAuthor(addAuthorForm:any)

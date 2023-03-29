@@ -1,6 +1,7 @@
 const express = require('express');
 const Route = express.Router();
 const Auth = require('../middleware/auth')
+const uploadFile = require('../middleware/uploadFile')
 
 const  { 
     getBooks,
@@ -14,7 +15,7 @@ Route.get('/',getBooks);
 
 Route.get('/:id',getBook);
 
-Route.post('/',createBook);
+Route.post('/',uploadFile().single('file'), createBook);
 
 Route.put('/:id',updateBook);
 

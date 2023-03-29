@@ -1,7 +1,7 @@
 const Book = require('../models/book.js')
 const getBooks  = (async(req, res) => {
     try {
-        let limit = 6;
+        let limit = 8;
         const pageNumber = parseInt(req.query.pageNumber) || 1;
 
         const totalRecords = await Book.countDocuments();
@@ -9,7 +9,8 @@ const getBooks  = (async(req, res) => {
 
         let startIndex = (pageNumber - 1) * limit ;
         let endIndex = pageNumber * limit;
-        const books = await Book.find(null,null,{ skip: startIndex, limit: endIndex });
+        const books = await Book.find(null,null,{ skip: startIndex, limit: endIndex, populate: 'cateId authorId' });
+
         res.status(200).json({books,totalPages});
     } catch (err) {
         res.send("something went wrong" + err);
@@ -27,7 +28,10 @@ const getBook = (async (req, res) => {
                 message: 'Book not found'
             })
         }
-        res.status(200).json(book)
+
+        let popluatedBook =  await book.populate('cateId authorId')
+
+        res.status(200).json(popluatedBook)
     } catch (err) {
         res.status(400).send('something went wrong : ' + err)
     }
@@ -35,16 +39,38 @@ const getBook = (async (req, res) => {
 
 const createBook = (async function (req, res) {
     try {
-        if (!req.body.title || !req.body.image || !req.body.description || !req.body.authorId || !req.body.catId) {
+
+        const {title, description, authorId, cateId} = {...req.body}
+        let bookCover;
+
+        if (!title || !description || !authorId || !cateId) {
             return res.status(400).json({
                 message: 'Missing required fields'
             });
         }
+
+
+        if(req.file != undefined)
+        {
+            bookCover =  `images/${req.file.filename}`
+        }
+        else
+        {
+            bookCover = `images/no-cover.png`
+        }
+
         let bookInfo = {
-            ...req.body
+            title:title,
+            description:description,
+            authorId:authorId,
+            cateId:cateId,
+            image:bookCover
         };
-        await Book.create(bookInfo);
-        res.status(200).send("Book saved successfully")
+        let newBook = await Book.create(bookInfo);
+        let popluatedBook =  await newBook.populate('cateId authorId')
+
+
+        res.status(200).send(popluatedBook)
     } catch (err) {
         if (err.name === "ParallelSaveError") {
             res.status(400).send("Parallel Save Error" + err);

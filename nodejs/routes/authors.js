@@ -1,6 +1,5 @@
 const express = require('express');
 const Route = express.Router();
-const multer = require("multer");
 const uploadFile = require('../middleware/uploadFile')
 
 const  { 

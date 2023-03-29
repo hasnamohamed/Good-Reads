@@ -2,47 +2,57 @@
   <table class="table table-striped table-hover">
     <thead>
       <tr class="table-dark">
-        <th scope="col">#</th>
-        <th scope="col">photo</th>
+        <th>ID</th>
+        <th scope="col">cover</th>
         <th scope="col">name</th>
-        <th scope="col">categoryId</th>
-        <th scope="col">authorId</th>
-        <th scope="col"></th>
+        <th scope="col">category</th>
+        <th scope="col">book</th>
+        <th>
+          <div class="pagenation-container">
+            <div>
+              <i class="fa-solid fa-chevron-left"  (click)="prevPage()"></i>
+              <input #pageNumber type="number" class="page-number" min="0" [max]="totalPageNumber" [(ngModel)]="currentPageNumber" (change)="getBooks()">
+              <input type="number" class="total-pages" [(ngModel)]="totalPageNumber" disabled>
+              <i class="fa-solid fa-chevron-right" (click)="nextPage()"></i>
+            </div>
+          </div>
+        </th>
         <th>
           <button type="button" class="btn btn-outline-dark add-button" (click)="getAdminAction('add')" data-bs-toggle="modal" data-bs-target="#exampleModal">
             <i class="fa-solid fa-plus"></i>
           </button>
         </th>
       </tr>
+
     </thead>
     <tbody>
-      <tr *ngFor="let book of bookList; let bookNum = index">
-        <th scope="row">
-          <span>{{bookNum + 1}}</span>
-        </th>
-        <td class="book-image">
-          <img [src]="book.photo">
+      <tr *ngFor="let book of booksList; let bookNum = index">
+        <td scope="row">
+          {{book._id}}
         </td>
-        <td>{{book.name}}</td>
-        <td>{{book.CategoryId}}</td>
-        <td>{{book.AuthorId}}</td>
-
+        <td class="book-image">
+          <img [src]="book.image">
+        </td>
+        <td>{{book.title}}</td>
+        <td>{{book.cateId.name}}</td>
+        <td>{{book.authorId.name}}</td>
         <td></td>
-
         <td>
           <div class="action-button">
-            <button type="button" class="btn btn-outline-dark" (click)="getAdminAction('edit')" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-outline-dark" (click)="getAdminAction('edit', book._id)" data-bs-toggle="modal" data-bs-target="#exampleModal">
               <i class="fa-solid fa-pen-to-square"></i>
             </button>
-            <button type="button" class="btn btn-outline-dark" (click)="getAdminAction('remove')" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-outline-dark" (click)="getAdminAction('remove', book._id)" data-bs-toggle="modal" data-bs-target="#exampleModal">
               <i class="fa-solid fa-trash"></i>
             </button>
           </div>
         </td>
+
       </tr>
     </tbody>
   </table>
 </section>
+
 
 
 <!-- Modal -->
@@ -68,18 +78,132 @@
       <div class="modal-body">
         <div [ngSwitch]="adminActions">
           <div *ngSwitchCase='"add"'>
-            <add-book ></add-book>
+            <section>
+              <form #addbookForm='ngForm' enctype="multipart/form-data">
+
+                <div class="mb-3 row">
+                  <label for="bookName" class="col-3 col-form-label">Name</label>
+                  <div class="col-6">
+                    <input #bookName="ngModel" required="true" type="text"  class="form-control" id="bookName" value="" name="bookName" [(ngModel)]="bookInfo.title">
+                    <div *ngIf="bookName.errors?.['required'] && (bookName.touched)"  class="alert alert-danger">
+                      book Name is required.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mb-3 row">
+                  <label for="bookBio" class="col-3 col-form-label">Description</label>
+                  <div class="col-6">
+                    <textarea #bookDescription ="ngModel" required="true"  (resize)="false" id="bookBio"  class="form-control book-dec" name="bookBio" [(ngModel)]="bookInfo.description"></textarea>
+                    <div *ngIf="bookDescription.errors?.['required'] && (bookDescription.touched)"  class="alert alert-danger">
+                      book Bio is required.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mb-3 row">
+                  <label for="bookName" class="col-3 col-form-label">Category</label>
+                  <div class="col-6">
+
+                    <select #bookCate="ngModel" required [(ngModel)]="bookInfo.cateId" class="form-select" name="bookCategory" aria-label="Default select example">
+                      <option  *ngFor="let cate of cateList" [ngValue]="cate._id">{{cate.name}}</option>
+                    </select>
+
+                    <div *ngIf="bookCate.errors?.['required'] && (bookCate.touched)"  class="alert alert-danger">
+                      Book Category is required.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mb-3 row">
+                  <label for="bookName" class="col-3 col-form-label">Author</label>
+                  <div class="col-6">
+
+                    <select #bookAuthor="ngModel" required [(ngModel)]="bookInfo.authorId" class="form-select" name="bookAuthor" aria-label="Default select example">
+                      <option  *ngFor="let author of authorsList" [ngValue]="author._id">{{author.name}}</option>
+                    </select>
+
+                    <div *ngIf="bookCate.errors?.['required'] && (bookCate.touched)"  class="alert alert-danger">
+                      Book Author is required.
+                    </div>
+                  </div>
+                </div>
+
+
+
+                <div class="mb-3 row">
+                  <label for="formFile" class="col-3 col-form-label">Cover</label>
+                  <div class="col-6">
+                    <input #bookImage class="form-control" type="file" accept=".jpg, .png, .jpeg" id="formFile" name="bookImage">
+                  </div>
+                </div>
+
+
+                <div class="mb-3 row text-center">
+                  <div class="col-12">
+                    <button  class="btn btn-primary mb-3" (click)="addBook(addbookForm)"  [disabled]="addbookForm.invalid">Add</button>
+                  </div>
+                </div>
+
+              </form>
+            </section>
           </div>
           <div *ngSwitchCase='"edit"'>
-            <update-book></update-book>
+            <!-- <section>
+              <form #updatebookForm='ngForm' enctype="multipart/form-data">
+
+                <div class="mb-3 row">
+                  <label for="bookName" class="col-3 col-form-label">Name</label>
+                  <div class="col-6">
+                    <input  type="text"  class="form-control" id="bookName" value="" name="bookName" [(ngModel)]="bookInfo.name">
+                  </div>
+                </div>
+
+                <div class="mb-3 row">
+                  <label for="bookBio" class="col-3 col-form-label">About You</label>
+                  <div class="col-6">
+                    <textarea #bookBio ="ngModel" (resize)="false" id="bookBio"  class="form-control book-bio" name="bookBio" [(ngModel)]="bookInfo.bio"></textarea>
+                  </div>
+                </div>
+
+                <div class="mb-3 row">
+                  <label for="bookDate" class="col-3 col-form-label">Birth Date</label>
+                  <div class="col-6">
+                    <input #bookBirthDate = "ngModel"  id="bookDate" class="form-control" type="date" name="bookDate" [(ngModel)]="bookInfo.birthDate"/>
+                  </div>
+                </div>
+
+                <div class="mb-3 row">
+                  <label for="formFile" class="col-3 col-form-label">Photo</label>
+                  <div class="col-6">
+                    <input #bookImage class="form-control" type="file" accept=".jpg, .png, .jpeg" id="formFile" name="bookImage">
+                  </div>
+                </div>
+
+
+                <div class="mb-3 row text-center">
+                  <div class="col-12">
+                    <button  class="btn btn-primary mb-3" (click)= "updatebook(updatebookForm)" [disabled]="!updatebookForm.dirty">update</button>
+                  </div>
+                </div>
+
+              </form>
+            </section> -->
           </div>
           <div *ngSwitchCase='"remove"'>
-            <delete-book></delete-book>
+            <div class="row g-3">
+              <!-- <div class="col-auto delete-alert-message">
+                <p>If you are sure you want to delete this book click delete button</p>
+              </div>
+              <div class="col-auto button-container">
+                  <button class="btn btn-danger mb-auto" (click)="deletebook()">Delete</button>
+              </div>
+            </div> -->
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Done!</button>
+        <button #closeButton type="button" class="btn btn-secondary" data-bs-dismiss="modal">Done!</button>
       </div>
     </div>
   </div>

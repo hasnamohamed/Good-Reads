@@ -61,6 +61,19 @@
       </div>
 
       <div class="mb-3">
+        <label for="gender" class="form-label col-12 col-md-2"> gender</label>
+        <div class="form-check form-check-inline">
+          <input (change)="setUserDefualtImage()" [(ngModel)]="userInfo.gender" value="male" class="form-check-input" type="radio" name="genderMale" id="genderMale">
+          <label class="form-check-label" for="genderMale">male</label>
+        </div>
+
+        <div class="form-check form-check-inline">
+          <input (change)="setUserDefualtImage()" [(ngModel)]="userInfo.gender"  value="female" class="form-check-input" type="radio" name="genderFemale" id="genderFemale">
+          <label class="form-check-label" for="genderFemale">female</label>
+        </div>
+      </div>
+
+      <div class="mb-3">
         <label for="secretQuestion" class="form-label">secret question</label>
         <input type="text" class="form-control" id="secretQuestion" aria-describedby="secretQuestion" name="secretQuestion"
             required #secretQuestion="ngModel"  [(ngModel)]="userInfo.secretQuestion" >
@@ -73,7 +86,6 @@
           secret question is required.
         </div>
       </div>
-
 
       <div class="mb-3">
         <label for="secretAnswer" class="form-label">secret answer</label>
@@ -92,7 +104,7 @@
       </div>
       <div class="mb-3 row image-preview-container">
         <label for="formFile" class="col-sm-12 col-form-label">Image Preview</label>
-        <img [src]="newUserImage">
+        <img [src]="previewImage">
       </div>
 
     </div>

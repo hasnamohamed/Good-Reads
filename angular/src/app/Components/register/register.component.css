@@ -19,6 +19,7 @@ section
 {
     margin: auto;
     display: block;
+    min-width: 7em;
 }
 
 label

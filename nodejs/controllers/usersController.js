@@ -7,16 +7,17 @@ async function register(req, res)
 {
     try 
     {
-        const {firstName, lastName, image, email, password, secretQuestion, secretAnswer} = req.body
+        const {firstName, lastName, gender, email, password, secretQuestion, secretAnswer} = {...req.body}
 
         let existedUser = await User.findOne({email:email.toLowerCase()})
         let encryptedPassword = await bcrypt.hash(password, 10);
         let emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+        let userImage;
 
         if(existedUser != null)
             return res.status(409).json("The user is already exist, please login")
 
-        if(!(firstName && lastName && email && password && secretQuestion && secretAnswer))
+        if(!(firstName && lastName && email && password && gender && secretQuestion && secretAnswer))
             return res.status(400).send("All filed are required")
 
         if(emailPattern.test(email) == false)
@@ -27,20 +28,31 @@ async function register(req, res)
                 Must have a domain like gmail or hotmail
                 Must have .com or .net ...etc`)
         
-        
+
+        if(req.file != undefined)
+        {
+            userImage =  `images/${req.file.filename}`
+        }
+        else
+        {
+            userImage = `images/user-defualt-profile.jpeg`
+        }
+
         let userInfo = 
         {
             firstName,
             lastName,
-            image,
             email:email.toLowerCase(),
             password:encryptedPassword,
+            gender:gender,
             secretQuestion,
-            secretAnswer
+            secretAnswer,
+            image:userImage,
+
         }
 
         let newUser = await User.create(userInfo)
-        
+        console.log(newUser)
         return res.sendStatus(200).send("user has been created successfully")
     
 

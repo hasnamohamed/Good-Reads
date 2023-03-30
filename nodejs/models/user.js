@@ -11,11 +11,14 @@ const user = new mongoose.Schema({
     image: {
         type: String,
     },
+    gender: {
+        type: String,
+        required:true
+    },
     email: {
         type: String,
         required: true,
         unique: true,
-        
     },
     password: {
         type: String,

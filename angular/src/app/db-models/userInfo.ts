@@ -1,4 +1,3 @@
-
 export interface RegistrationInfo
 {
     firstName:string
@@ -6,6 +5,7 @@ export interface RegistrationInfo
     email:string
     password:string
     passwordConform:string
+    gender:"female" | "male" | "no selection"
     secretQuestion:string
     secretAnswer:string
 }

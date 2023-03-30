@@ -27,13 +27,13 @@ export class UsersService {
 
   constructor(private http: HttpClient) { }
 
-  register(userInfo:RegistrationInfo)
+  register(userInfo:FormData)
   {
     const headers = new HttpHeaders()
           .set('Content-Type', 'application/json');
 
     return this.http.post(this.regUrl, userInfo,
-    {headers: headers, responseType:"text", observe: 'response'})
+    {responseType:"text", observe: 'response'})
 
   }
 

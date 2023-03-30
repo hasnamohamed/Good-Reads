@@ -8,7 +8,7 @@
     <a class="nav-link" routerLink="/books/{{book._id}}"><img style="height: 12rem" src="{{book.image}}" class="card-img-top" alt="..."></a>
     <div class="card-body text-center">
       <a class="nav-link" routerLink="/books/{{book._id}}">  <h5 class="card-title">{{book.title}}</h5></a>
-      <a class="nav-link" [(ngModel)]="authorId" routerLink="/author/{{book.authorId}}">  <p class="card-title">by {{book.authorId}}</p></a>
+      <a class="nav-link" [(ngModel)]="authorId" routerLink="/author/{{book.authorId}}">  <p class="card-title">by {{author.name}}</p></a>
       <mat-star-rating class="nav-link" [rating]="book.rating.rate" [color]="starColor" ></mat-star-rating>
       <!--      <p>Your Rating</p>-->
       <!--      <mat-star-rating [rating]="book.rating.rate" [starCount]="starCount" [color]="starColor" (ratingUpdated)="onRatingChanged({rating : $event})"></mat-star-rating>-->
@@ -56,44 +56,9 @@
 <!--  <mat-star-rating  [rating]="book.rating.rate" [starCount]="starCount" [color]="starColor" (ratingUpdated)="onRatingChanged({rating : $event})"></mat-star-rating>-->
 <!--</div>-->
   <div class="container border">
-    <div class="row my-4">
-      <img style="height: 4rem; width: 9rem" src="https://placar.abril.com.br/wp-content/uploads/2022/09/GettyImages-1242668441.jpg?quality=70&strip=info&w=1280&h=720&crop=1" class="img-fluid col-md-4 col-lg-2" alt="...">
-      <div class="col-6 col-md-5 mt-sm-2">
-        <h3 class="text-sm-md">user Name</h3>
-        <h5 class="text-muted">this is reviews of users</h5>
-        <h6>rating 3-5 ***** </h6>
-      </div>
-    </div>
+    <div *ngFor="let review of reviews">
+    <app-review  [review]=review></app-review>
     <hr>
-    <div class="row my-4">
-      <img style="height: 4rem; width: 9rem" src="https://placar.abril.com.br/wp-content/uploads/2022/09/GettyImages-1242668441.jpg?quality=70&strip=info&w=1280&h=720&crop=1" class="img-fluid col-md-4 col-lg-2" alt="...">
-      <div class="col-6 col-md-5 mt-sm-2">
-        <h3 class="text-sm-md">Book Name</h3>
-        <h5 class="text-muted">this is reviews of users</h5>
-        <h6>rating 3-5 *****</h6>
-      </div>
-
-    </div>
-    <hr>
-    <div class="row my-4">
-      <img  style="height: 4rem; width: 9rem" src="https://placar.abril.com.br/wp-content/uploads/2022/09/GettyImages-1242668441.jpg?quality=70&strip=info&w=1280&h=720&crop=1" class="img-fluid col-md-4 col-lg-2" alt="...">
-      <div class="col-6 col-md-5 mt-sm-2">
-        <h3 class="text-sm-md">Book Name</h3>
-        <h5 class="text-muted">this is reviews of users</h5>
-        <h6>rating 3-5 *****</h6>
-      </div>
-<!--      <div class="col-5 col-md-2 mt-sm-2 ms-auto my-auto">-->
-<!--        <p>*****</p>-->
-<!--      </div>-->
-    </div>
-    <hr>
-    <div class="row my-4">
-      <img  style="height: 4rem; width: 9rem" src="https://placar.abril.com.br/wp-content/uploads/2022/09/GettyImages-1242668441.jpg?quality=70&strip=info&w=1280&h=720&crop=1" class="img-fluid col-md-4 col-lg-2" alt="...">
-      <div class="col-6 col-md-5 mt-sm-2">
-        <h3 class="text-sm-md">Book Name</h3>
-        <h5 class="text-muted">this is reviews of users</h5>
-        <h6>rating 3-5 ***** </h6>
-      </div>
     </div>
   </div>
 </div>

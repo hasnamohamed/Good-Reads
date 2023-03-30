@@ -2,14 +2,8 @@ const Review = require('../models/review.js')
 
 async function getReviews(req, res) {
     try {
-        let page = req.query.page;
-        let limit = 2;
-        let startIndex = (page - 1) * limit;
-        let endIndex = page * limit;
-        const reviews = await Review.find(null, null, {
-            skip: startIndex,
-            limit: endIndex
-        });
+        let book = req.query.bookId;
+        const reviews = await Review.find({bookId: book});
         res.send(reviews);
     } catch (err) {
         res.send("something went wrong" + err);

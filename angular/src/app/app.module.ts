@@ -44,6 +44,7 @@ import {FormsModule} from "@angular/forms";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
 import { BookCardComponent } from './Components/books/book-card/book-card.component';
+import { ReviewComponent } from './Components/review/review.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { BookCardComponent } from './Components/books/book-card/book-card.compon
    StarRatingComponent,
    BookCardComponent,
    BookDetailsComponent,
-   RestPasswordComponent
+   RestPasswordComponent,
+   ReviewComponent
   ],
   imports: [
     BrowserModule,

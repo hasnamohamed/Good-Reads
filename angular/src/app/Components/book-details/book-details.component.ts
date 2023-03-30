@@ -40,11 +40,18 @@ export class BookDetailsComponent {
     this.book_service.getBookById(this.book_id).subscribe(book=>{
       this.book = book
     })
+    this.fetchAuthorsData()
   }
   @ViewChild('status') status!: ElementRef;
   selectedStatus = 0;
   onSelected(): void {
     this.selectedStatus = this.status.nativeElement.value;
+  }
+  fetchAuthorsData(){
+    this.author_service.getAuthorById(this.book.authorId).subscribe(response=>{
+      this.author=response;
+      console.log(this.author.name)
+    })
   }
   deleteBook(){
     this.book_service.deleteBook(this.book_id).subscribe(book=>{

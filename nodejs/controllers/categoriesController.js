@@ -1,8 +1,12 @@
 const Category = require('../models/category.js')
+const Book = require('../models/book.js')
 
 const getCategories = (async function (req, res) {
     try {
-        const Cats = await Category.find({})
+        
+        // remove Anonymous Author from the resualt so Adimns cannot remove it
+
+        const Cats = await Category.find({"_id":{$ne:"64255372e01179a4a3fabfe9"}})
         res.json(Cats)
     } catch (error) {
         res.status(400).json(error.message);
@@ -50,13 +54,19 @@ const updateCategory = (async (req, res) => {
 })
 const deleteCategory = (async (req, res) => {
     try{
-        const count = await Category.deleteOne({_id:req.params.id});
+        const cateId = req.params.id;
+        const count = await Category.deleteOne({_id:cateId});
         if(count === 0){
-            res.status(400).send("Category Not Found")
+           return res.status(400).send("Category Not Found")
         }
-        else{
-            res.status(200).send("Category Deleted Successfully")
-        }
+        
+
+        // look up for books written by this author and replaced with anoyminus author
+        const updateBooksWithoutCategory = await Book.updateMany({"cateId":cateId} , {"$set":{"cateId":"64255372e01179a4a3fabfe9"}})
+        console.log(cateId)
+        console.log(updateBooksWithoutCategory)
+        res.status(200).send("Category Deleted Successfully")
+    
 
     }catch(err){
         res.status(400).send(err.message);

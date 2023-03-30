@@ -53,7 +53,6 @@ export class AdminBooksComponent {
   ngOnInit() {
     this.getAuthors()
     this.getBooks()
-
     this.categoryService.getAllCate().subscribe(
       cateList => this.cateList = JSON.parse(cateList.body || ""),
       err => console.log(err));
@@ -76,7 +75,6 @@ export class AdminBooksComponent {
         });
 
        this.authorsList = authros.authors
-       console.log(this.authorsList)
 
       },
       err => console.log(err));
@@ -94,7 +92,7 @@ export class AdminBooksComponent {
 
   getBooks()
   {
-    this.booksService.getAllBookss(this.currentPageNumber).subscribe(
+    this.booksService.getAllBooks(this.currentPageNumber).subscribe(
       successRes => {
         let books = JSON.parse(successRes.body || "")
         this.totalPageNumber = books.totalPages
@@ -103,8 +101,6 @@ export class AdminBooksComponent {
         });
 
         this.booksList = books.books
-        console.log(this.booksList)
-
 
       },
       err => console.log(err));
@@ -156,7 +152,7 @@ export class AdminBooksComponent {
           addBookForm.resetForm();
 
           swal({
-            title: "Author has been added successfully!",
+            title: "Book has been added successfully!",
             icon : "success"
           });
 
@@ -246,7 +242,7 @@ export class AdminBooksComponent {
           updateBookForm.resetForm();
 
           swal({
-            title: "Author has been updated successfully!",
+            title: "Book has been updated successfully!",
             icon : "success"
           });
 
@@ -275,31 +271,30 @@ export class AdminBooksComponent {
   }
 
 
-//   // deleteAuthor()
-//   // {
-//   //   this.authorService.deleteAuthor(this.authorID).subscribe(
-//   //     (successRes) =>
-//   //     {
+  deleteBook()
+  {
+    this.booksService.deleteBook(this.bookID).subscribe(
+      (successRes) =>
+      {
+        if(successRes.status == 200)
+        {
+          let filteredbooksList = this.booksList.filter((el) => { return el._id != this.bookID });
+          this.booksList = filteredbooksList
 
-//   //       if(successRes.status == 200)
-//   //       {
-//   //         var filteredAuthorsList = this.authorsList.filter((el) => { return el._id != this.authorID });
-//   //         this.authorsList = filteredAuthorsList
+          swal({
+            title: "Book has been removed successfully!",
+            icon : "success"
+          });
 
-//   //         swal({
-//   //           title: "Author has been removed successfully!",
-//   //           icon : "success"
-//   //         });
+          setTimeout(() => {
 
-//   //         setTimeout(() => {
+            swal.close()
+            this.closeButton.nativeElement.click();
+          }, 2000)
 
-//   //           swal.close()
-//   //           this.closeButton.nativeElement.click();
-//   //         }, 2000)
-
-//   //       }
-//   //     })
-//   // }
+        }
+      })
+  }
 
   prevPage()
   {

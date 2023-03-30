@@ -9,6 +9,7 @@ const getBooks  = (async(req, res) => {
 
         let startIndex = (pageNumber - 1) * limit ;
         let endIndex = pageNumber * limit;
+        
         const books = await Book.find(null,null,{ skip: startIndex, limit: endIndex, populate: 'cateId authorId' });
 
         res.status(200).json({books,totalPages});

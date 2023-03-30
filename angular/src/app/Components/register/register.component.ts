@@ -14,15 +14,21 @@ import { BehaviorSubject } from 'rxjs';
 })
 
 export class RegisterComponent implements OnInit, OnChanges {
-  userInfo:RegistrationInfo = {
-    firstName:"",
-    lastName:"",
-    email:"",
-    password:"",
-    passwordConform:"",
-    secretQuestion:"",
-    secretAnswer:""
+
+  newUserImage:any = 'http://localhost:9000/images/user-defualt-profile.jpeg'
+
+  readURL(event: any): void
+  {
+    if (event.target.files && event.target.files[0]) {
+        const image = event.target.files[0];
+
+        const reader = new FileReader();
+        reader.onload = e => this.newUserImage = reader.result;
+
+        reader.readAsDataURL(image);
+    }
   }
+
 
   constructor(
     private userService:UsersService,
@@ -35,7 +41,19 @@ export class RegisterComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
   }
 
-registerNewUser()
+
+  userInfo:RegistrationInfo =
+  {
+    firstName:"",
+    lastName:"",
+    email:"",
+    password:"",
+    passwordConform:"",
+    secretQuestion:"",
+    secretAnswer:""
+  }
+
+  registerNewUser()
   {
     this.userService.register(this.userInfo)
     .subscribe
@@ -50,12 +68,7 @@ registerNewUser()
             icon : "success"
           });
 
-          setTimeout(() => {
-
-            // @ts-ignore
-            swal.close()
-
-          }, 4000)
+          setTimeout(() => {swal.close()}, 2000)
 
           setTimeout(() => {
             this.routerService.navigate(["/login"]);

@@ -27,7 +27,7 @@ export class BookService {
     IBookResponse
 
   */
-  getAllBookss(pageNumber:number)
+  getAllBooks(pageNumber:number)
   {
 
     return this.http.get(`http://localhost:9000/book/?pageNumber=${pageNumber}`,
@@ -35,14 +35,14 @@ export class BookService {
 
   }
 
-  getAllBooks(pageNumber:number) : Observable<IBookResponse>
-  {
-    const params = new HttpParams()
-      .set('pageNumber',pageNumber.toString())
+  // getAllBooks(pageNumber:number) : Observable<IBookResponse>
+  // {
+  //   const params = new HttpParams()
+  //     .set('pageNumber',pageNumber.toString())
 
-    return this.http.get<IBookResponse>('http://localhost:9000/book',{params})
+  //   return this.http.get<IBookResponse>('http://localhost:9000/book',{params})
 
-  }
+  // }
 
 
   getBookById(book_id:string) : Observable<IBook>
@@ -62,9 +62,9 @@ export class BookService {
 
   }
 
-  deleteBook(book_id:string) : Observable<IBook>
+  deleteBook(book_id:string)
   {
-    return this.http.delete <IBook> (`http://localhost:9000/book/${book_id}`,this.httpOptions)
-  }
+    return this.http.delete(`http://localhost:9000/book/${book_id}`,
+    {responseType:"text", observe: 'response'})  }
 
 }

@@ -19,15 +19,37 @@ export class BooksComponent implements OnInit {
   ngOnInit():void {
     this.fetchData()
   };
+
+
+  // better one that handel both success response and errors
+  // and of course adding the images to the books
   fetchData()
   {
-    this.book_service.getAllBooks(this.pageNumber).subscribe(response=>{
-      this.books_list = response.books
-      this.totalPages = response.totalPages
-      this.numberPages = []
-      this.numberPages = Array.from({length: this.totalPages}, (_, i) => i + 1);
-    })
+    this.book_service.getAllBooks(this.pageNumber).subscribe(
+      successRes => {
+        let books = JSON.parse(successRes.body || "")
+        this.totalPages = books.totalPages
+        books.books.forEach((book:any) => {
+          book.image = "http://localhost:9000/" + book.image
+        });
+
+        this.books_list = books.books
+        this.numberPages = []
+        this.numberPages = Array.from({length: this.totalPages}, (_, i) => i + 1);
+
+      },
+      err => console.log(err));
   }
+
+  // fetchData()
+  // {
+  //   this.book_service.getAllBooks(this.pageNumber).subscribe(response=>{
+  //     this.books_list = response.body.books
+  //     this.totalPages = response.totalPages
+  //     this.numberPages = []
+  //     this.numberPages = Array.from({length: this.totalPages}, (_, i) => i + 1);
+  //   })
+  // }
 
   fetchCategoriesData(){}
   getPage(pageNumber:number){

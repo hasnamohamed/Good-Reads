@@ -2,7 +2,7 @@
 
   <form class="register-form" #regForm='ngForm'>
     <div ngModelGroup="passwords" #passwords="ngModelGroup" passwordMatchChecker class="row">
-      <div class="mb-3 form-group col-6" >
+      <div class="mb-3 form-group col-sm-12 col-md-6" >
         <label for="firstName" class="form-label">first name</label>
         <input type="text" class="form-control" id="firstName" aria-describedby="firstName" name="first"
               required #firstName="ngModel" [(ngModel)]="userInfo.firstName" >
@@ -12,7 +12,7 @@
         </div>
       </div>
 
-      <div class="mb-3 col-6">
+      <div class="mb-3 col-sm-12 col-md-6">
         <label for="lastName" class="form-label">last name</label>
         <input type="text" class="form-control" id="lastName"  name="lastName"
               required #lastName="ngModel"  [(ngModel)]="userInfo.lastName " >
@@ -33,14 +33,14 @@
         </div>
       </div>
 
-      <div class="mb-3 form-group col-6">
+      <div class="mb-3 form-group col-sm-12 col-md-6">
         <label for="userPassword" class="form-label">password</label>
         <input type="password" class="form-control" id="userPassword" name="userPass"
             required #userPass="ngModel" [(ngModel)]="userInfo.password" >
 
       </div>
 
-      <div class="mb-3 form-group col-6">
+      <div class="mb-3 form-group col-sm-12 col-md-6">
         <label for="userPassConfiorm" class="form-label">retype password</label>
         <input type="password" class="form-control" id="userPassConfiorm" name="userPassConfiorm"
             required #passConfiorm="ngModel" [(ngModel)]="userInfo.passwordConform" >
@@ -84,6 +84,17 @@
           secret answer is required.
         </div>
       </div>
+      <div class="mb-3 row ">
+        <label for="formFile" class="col-sm-12 col-md-4 col-form-label">profile Image</label>
+        <div class="col-sm-12 col-md-8">
+          <input (change)="readURL($event)" #userImage class="form-control" type="file" accept=".jpg, .png, .jpeg" id="formFile" name="userImage" alt="user Image">
+        </div>
+      </div>
+      <div class="mb-3 row image-preview-container">
+        <label for="formFile" class="col-sm-12 col-form-label">Image Preview</label>
+        <img [src]="newUserImage">
+      </div>
+
     </div>
     <div>
       <p>

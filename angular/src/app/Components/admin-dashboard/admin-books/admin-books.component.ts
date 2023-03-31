@@ -53,8 +53,9 @@ export class AdminBooksComponent {
   ngOnInit() {
     this.getAuthors()
     this.getBooks()
-    this.categoryService.getAllCate().subscribe(
-      cateList => this.cateList = JSON.parse(cateList.body || ""),
+    this.categoryService.getAllCate("infinity").subscribe(
+      cateList =>
+      this.cateList = JSON.parse(cateList.body || "").cats,
       err => console.log(err));
 
   }

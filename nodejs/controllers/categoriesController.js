@@ -2,17 +2,28 @@ const Category = require('../models/category.js')
 const Book = require('../models/book.js')
 const getCategories = (async function (req, res) {
     try {
-        const pageSize = parseInt(req.query.pageSize) || 8;
-        const pageNumber = parseInt(req.query.pageNumber) || 1;
 
-        const totalRecords = await Category.countDocuments();
+        
+        if(req.query.pageNumber == "infinity")
+        {
+            const cats =  await Category.find({"_id":{$ne:"64255372e01179a4a3fabfe9"}})
+            res.json({cats})
+        }
+        else
+        {
+            const pageSize = parseInt(req.query.pageSize) || 8;
+            const pageNumber = parseInt(req.query.pageNumber) || 1;
+    
+            const totalRecords = await Category.countDocuments();
+            const totalPages =Math.ceil(totalRecords/pageSize)
 
-        const totalPages =Math.ceil(totalRecords/pageSize)
-        const Cats =  await Category.find({"_id":{$ne:"64255372e01179a4a3fabfe9"}})
-        .skip((pageNumber-1)*pageSize)
-        .limit(pageSize);
+    
+            const cats = await Category.find({"_id":{$ne:"64255372e01179a4a3fabfe9"}})
+            .skip((pageNumber-1)*pageSize)
+            .limit(pageSize);
+            res.json({cats,totalPages})
+        }
 
-        res.json({Cats,totalPages})
     } catch (error) {
         res.status(400).json(error.message);
     }

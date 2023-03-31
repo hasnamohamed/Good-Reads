@@ -25,6 +25,7 @@ export class NavbarComponent implements OnInit {
       userTokenInfo =>
       {
         this.userImage = `http://localhost:9000/${userTokenInfo.userImage}`
+        console.log(userTokenInfo.email)
       })
   }
 

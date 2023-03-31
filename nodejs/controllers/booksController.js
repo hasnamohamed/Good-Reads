@@ -11,7 +11,6 @@ const getBooks  = (async(req, res) => {
         let endIndex = pageNumber * limit;
         
         const books = await Book.find(null,null,{ skip: startIndex, limit: endIndex, populate: 'cateId authorId' });
-
         res.status(200).json({books,totalPages});
     } catch (err) {
         res.send("something went wrong" + err);

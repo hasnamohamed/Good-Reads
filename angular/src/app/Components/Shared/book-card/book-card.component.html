@@ -6,7 +6,9 @@
     <mat-star-rating class="nav-link" [rating]="book.rating.rate" [color]="starColor" ></mat-star-rating>
     <!--      <p>Your Rating</p>-->
     <!--      <mat-star-rating [rating]="book.rating.rate" [starCount]="starCount" [color]="starColor" (ratingUpdated)="onRatingChanged({rating : $event})"></mat-star-rating>-->
-    <a class="nav-link" routerLink="/category/{{book.catId._id}}">  <p class="card-title">{{book.cateId.name}}</p></a>
+    <a class="nav-link" routerLink="/category/{{book.cateId._id}}">
+      <p class="card-title">{{book.cateId.name}}</p>
+    </a>
     <p class="card-title">{{ book.description | slice:0:20 }}...</p>
     <select #status  [(ngModel)]="selectedStatus" class="form-select">
       <option value="0" disabled selected>Status</option>

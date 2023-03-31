@@ -44,9 +44,11 @@ import {FormsModule} from "@angular/forms";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
 import { BookCardComponent } from './Components/Shared/book-card/book-card.component';
-import { ReviewComponent } from './Components/review/review.component';
-import { CategoryDetailsComponent } from './Components/category-details/category-details.component';
 import { FooterComponent } from './Components/footer/footer.component';
+import { CategoryDetailsComponent } from './Components/category-details/category-details.component';
+import { ReviewComponent } from './Components/review/review.component';
+
+
 
 @NgModule({
   declarations: [
@@ -85,7 +87,9 @@ import { FooterComponent } from './Components/footer/footer.component';
    RestPasswordComponent,
    ReviewComponent,
    CategoryDetailsComponent,
-   FooterComponent
+   FooterComponent,
+   BookCardComponent,
+   CategoryDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -107,7 +111,8 @@ import { FooterComponent } from './Components/footer/footer.component';
     HttpClientModule,
     MatIconModule,
     MatSelectModule,
-    HttpClientModule
+    HttpClientModule,
+    
    ],
   providers: [],
   bootstrap: [AppComponent]

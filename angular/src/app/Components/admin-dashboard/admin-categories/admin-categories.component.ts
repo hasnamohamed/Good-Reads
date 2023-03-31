@@ -111,7 +111,8 @@ export class AdminCategoriesComponent implements OnInit, OnChanges{
 
           if(oldCat != null)
             oldCat.name = cateName
-          // @ts-ignore
+
+            // @ts-ignore
           swal({
             title: "Category has been updated successfully!",
             icon : "success"

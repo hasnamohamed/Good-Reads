@@ -1,4 +1,4 @@
-import { IBook } from "./ibook";
+import { IBook } from "./iBook";
 
 export interface IBookResponse {
     books: IBook[],

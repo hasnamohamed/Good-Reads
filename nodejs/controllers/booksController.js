@@ -1,20 +1,21 @@
 const Book = require('../models/book.js')
 const getBooks  = (async(req, res) => {
     try {
-        let limit = 6;
-        const pageNumber = parseInt(req.query.pageNumber) || 1;
-
         const totalRecords = await Book.countDocuments();
+        const limit = parseInt(req.query.pageSize) || 6;
+        const pageNumber = parseInt(req.query.pageNumber) || 1;
         const totalPages =Math.ceil(totalRecords/limit)
 
-        let startIndex = (pageNumber - 1) * limit ;
-        let endIndex = pageNumber * limit;
-        const books = await Book.find(null,null,{ skip: startIndex, limit: endIndex });
+        const books = await Book.find({})
+        .skip((pageNumber-1)*limit)
+        .limit(limit);
+
         res.status(200).json({books,totalPages});
     } catch (err) {
         res.send("something went wrong" + err);
     }
 })
+
 
 const getBook = (async (req, res) => {
     try {

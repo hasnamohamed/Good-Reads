@@ -46,6 +46,8 @@ import {FormsModule} from "@angular/forms";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
 import { BookCardComponent } from './Components/books/book-card/book-card.component';
+import { SpinnerComponent } from './Components/spinner/spinner.component';
+import { FooterComponent } from './Components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +87,9 @@ import { BookCardComponent } from './Components/books/book-card/book-card.compon
    StarRatingComponent,
    BookCardComponent,
    BookDetailsComponent,
-   RestPasswordComponent
+   RestPasswordComponent,
+   SpinnerComponent,
+   FooterComponent
   ],
   imports: [
     BrowserModule,

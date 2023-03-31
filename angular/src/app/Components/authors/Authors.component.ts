@@ -14,6 +14,7 @@ export class AuthorsComponent implements OnInit {
   pageSize:number = 8;
   pageNumber:number = 1;
   totalPages:number = 1;
+  isLoading = true;
 
   constructor(private author_service:AuthorServiceService) { }
 
@@ -35,6 +36,7 @@ export class AuthorsComponent implements OnInit {
         this.totalPages = response.totalPages
         this.numberPages = []
         this.numberPages = Array.from({length: this.totalPages}, (_, i) => i + 1);
+        this.isLoading=false;
     })
   }
 

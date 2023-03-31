@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { BookService } from 'src/Services/books.service';
-import {IBook} from 'src/Models/ibook';
+import {IBook} from 'src/Models/iBook';
 @Component({
   selector: 'app-books',
   templateUrl: './books.component.html',
@@ -11,6 +11,8 @@ export class BooksComponent implements OnInit {
   numberPages : number[] = []
   pageNumber:number = 1;
   totalPages:number = 1;
+  pageSize:number=6;
+  isLoading=true;
   constructor(private book_service:BookService ) {
   }
   ngOnInit():void {
@@ -18,11 +20,12 @@ export class BooksComponent implements OnInit {
   };
   fetchData()
   {
-    this.book_service.getAllBooks(this.pageNumber).subscribe(response=>{
+    this.book_service.getAllBooks(this.pageNumber,this.pageSize).subscribe(response=>{
       this.books_list = response.books
       this.totalPages = response.totalPages
       this.numberPages = []
       this.numberPages = Array.from({length: this.totalPages}, (_, i) => i + 1);
+      this.isLoading=false;
     })
   }
   getPage(pageNumber:number){

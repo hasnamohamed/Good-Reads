@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IBook } from 'src/Models/ibook';
+import { IBook } from 'src/Models/iBook';
 import { HttpHeaders } from '@angular/common/http';
 import {IBookResponse} from "../Models/IBookResponse";
 import {tap} from "rxjs/operators";
@@ -15,12 +15,14 @@ export class BookService {
     })
   };
   constructor(private http: HttpClient) { }
-  getAllBooks(pageNumber:number) : Observable<IBookResponse>
+  getAllBooks(pageNumber:number,pageSize:number) : Observable<IBookResponse>
   {
     const params = new HttpParams()
       .set('pageNumber',pageNumber.toString())
+      .set('pageSize',pageSize.toString())
     return this.http.get<IBookResponse>('http://localhost:9000/book',{params})
   }
+
 
   getBookById(book_id:string) : Observable<IBook>
   {

@@ -42,7 +42,7 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import {BookDetailsComponent} from "./Components/book-details/book-details.component";
 import {FormsModule} from "@angular/forms";
 import {ReactiveFormsModule} from "@angular/forms";
-import {MatSelectModule} from "@angular/material/select";
+import { MatSelectModule } from '@angular/material/select';
 import { SpinnerComponent } from './Components/spinner/spinner.component';
 import { FooterComponent } from './Components/footer/footer.component';
 import { CategoryDetailsComponent } from './Components/category-details/category-details.component';
@@ -108,8 +108,9 @@ import { BookCardComponent } from './Components/Shared/book-card/book-card.compo
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatIconModule,
     MatSelectModule,
+    MatIconModule,
+    
     HttpClientModule,
     
    ],

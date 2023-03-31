@@ -1,5 +1,19 @@
 const Book = require('../models/book.js')
-const getBooks  = (async(req, res) => {
+
+
+const popular_books = (async (req,res)=>{
+    try{
+        const popularBooks = await Book.find().sort({ 'rating.rate': -1 }).limit(4);
+           return res.json(popularBooks);
+        
+    }catch(err)
+    {
+        res.status(400).send("Something went wrong" + err);
+    }
+})
+
+
+const getBooks = (async(req, res) => {
     try {
         let limit = 6;
         const pageNumber = parseInt(req.query.pageNumber) || 1;
@@ -105,5 +119,6 @@ module.exports = {
     getBook,
     createBook,
     updateBook,
-    deleteBook
+    deleteBook,
+    popular_books
 }

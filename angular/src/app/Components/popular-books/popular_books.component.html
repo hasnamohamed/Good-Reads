@@ -1,19 +1,8 @@
 <div class="border rounded my-3">
 <h2 class="fw-bold text-danger m-0 px-4">Popular Books</h2>
 <div class="d-flex justify-content-center">
-  <i class="icon fa-solid fs-2 my-auto fa-circle-chevron-left mx-3"></i>
-  <a class="nav-link col-xl-3 col-md-6" [routerLink]="'/books/10'">
-    <app-card></app-card>
-  </a>
-  <a class="nav-link col-xl-3 col-md-6" [routerLink]="'/books/10'">
-    <app-card></app-card>
-  </a>
-  <a class="nav-link col-xl-3 col-md-6" [routerLink]="'/books/10'">
-    <app-card></app-card>
-  </a>
-  <a class="nav-link col-xl-3 col-md-6" [routerLink]="'/books/10'">
-    <app-card></app-card>
-  </a>
-  <i class="icon fa-solid fs-2 my-auto fa-circle-chevron-right mx-3"></i>
+  <a class="nav-link col-xl-3 col-md-6" *ngFor="let book of popular_books" [routerLink]="'/books/'+book._id">
+    <app-card [name]="book.title"></app-card>
+  </a>  
 </div>
 </div>

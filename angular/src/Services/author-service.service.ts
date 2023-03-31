@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { IAuthor } from 'src/Models/iauthor';
 import { HttpHeaders } from '@angular/common/http';
 import { IAuthorResponse } from 'src/Models/IAuthorResponse';
+import { AuthorDetails } from 'src/app/view-models/author-details';
 
 
 @Injectable({
@@ -43,9 +44,9 @@ httpOptions = {
 
 
   //get one author by id
-  getAuthorById(author_id:string) : Observable<IAuthor>
+  getAuthorById(author_id:string) : Observable<AuthorDetails>
   {
-    return this.http.get<IAuthor>(`http://localhost:9000/author/${author_id}`)
+    return this.http.get<AuthorDetails>(`http://localhost:9000/author/${author_id}`)
   }
 
   //add author

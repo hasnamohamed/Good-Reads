@@ -11,27 +11,30 @@
     </div>
 <h1>Author Books</h1>
 
-    <div *ngFor="let book of author_books" class="container border fs-5">
-        <div class="row row-book my-4">
+
+    <div class="text-center fs-2 mt-5 p-5 fw-bold" *ngIf="author_books.length==0">No Books Yet!</div>
+    <div *ngFor="let book of author_books" class="container book border fs-5">
+        <div class="row row-book my-3">
             <img src={{book.image}} class="img-fluid col-md-4 col-lg-2" alt="...">
             <div class="col-6 col-md-5 mt-sm-2">
                 <p class="my-4">{{book.title}}</p>
-                <p>***** 3.2 - 365 ratings<p>
+                <p>***** {{book.rating?.rate}} - {{book.rating?.totalVotes}} ratings<p>
             </div>
             <div class="col-5 col-md-2 mt-sm-2 ms-auto my-auto">
-                <select class="form-select form-select-sm my-4">
+                <select class="form-select form-select-sm my-3">
                     <option value="">Currently read</option>
                     <option value="">Want to read</option>
                     <option value="">Read</option>
                 </select>
                 <p>*****</p>
+                <a class="nav-link link-primary fs-6 " routerLink="/books/{{book._id}}">See More Details</a>
             </div>
         </div>
 </div>
 
-<div class="col-12 p-3 fs-2 mt-1 text-center d-flex justify-content-center align-items-center" *ngIf="!isLoading">
+<!-- <div class="col-12 p-3 fs-2 mt-1 text-center d-flex justify-content-center align-items-center" *ngIf="!isLoading">
     <i class="icon fa-solid fa-circle-chevron-left mx-3" (click)="previous()"></i>
     <button type="button" class="btn btn-secondary mx-1 btn-small" *ngFor="let item of numberPages" (click)="getPage(item)">{{item}}</button>
     <i class="icon fa-solid fa-circle-chevron-right mx-3" (click)="next()"></i>
-  </div>
+  </div> -->
 </div>

@@ -15,10 +15,10 @@ export class AuthorDetailsComponent implements OnInit{
   author_id:string
   author: IAuthor | null = null
   author_books : IBook[] = []
-  numberPages : number[] = []
-  pageSize:number =20 ;
-  pageNumber:number = 1;
-  totalPages:number = 1;
+  // numberPages : number[] = []
+  // pageSize:number =20 ;
+  // pageNumber:number = 1;
+  // totalPages:number = 1;
   isLoading=true;
   
   constructor(
@@ -32,51 +32,52 @@ export class AuthorDetailsComponent implements OnInit{
 
   ngOnInit(): void {
     this.getAuhtorData()
-    this.getAuthorBooks()
+    // this.getAuthorBooks()
     console.log(this.author_books.length); 
   }
 
   getAuhtorData()
   {
-    this.author_service.getAuthorById(this.author_id).subscribe(author=>{
-      this.author = author
+    this.author_service.getAuthorById(this.author_id).subscribe(response=>{
+      this.author = response.author
+      this.author_books = response.books
       this.isLoading=false
   })
   }
 
-  getAuthorBooks()
-  {
-    this.books_service.getAllBooks(this.pageNumber).subscribe(response=>{
-       this.author_books = response.books.filter(book=>{
-          return book.authorId == this.author_id
-      })
-      this.totalPages = response.totalPages
-      this.numberPages = []
-      this.numberPages = Array.from({length: this.totalPages}, (_, i) => i + 1);
-    })
-  }
+  // getAuthorBooks()
+  // {
+  //   this.books_service.getAllBooks(this.pageNumber).subscribe(response=>{
+  //      this.author_books = response.books.filter(book=>{
+  //         return book.authorId == this.author_id
+  //     })
+  //     this.totalPages = response.totalPages
+  //     this.numberPages = []
+  //     this.numberPages = Array.from({length: this.totalPages}, (_, i) => i + 1);
+  //   })
+  // }
 
-  getPage(pageNumber:number){
-    this.pageNumber = pageNumber;
-    this.getAuthorBooks()
-  }
-  previous()
-  {
-    if(this.pageNumber>1)
-    {
-      this.pageNumber--;
-      this.getAuthorBooks()
-    }
-  }
-  next()
-  {
-    if(this.pageNumber<this.totalPages)
-    {
-      this.pageNumber++;
+  // getPage(pageNumber:number){
+  //   this.pageNumber = pageNumber;
+  //   this.getAuthorBooks()
+  // }
+  // previous()
+  // {
+  //   if(this.pageNumber>1)
+  //   {
+  //     this.pageNumber--;
+  //     this.getAuthorBooks()
+  //   }
+  // }
+  // next()
+  // {
+  //   if(this.pageNumber<this.totalPages)
+  //   {
+  //     this.pageNumber++;
       
-    }
+  //   }
 
-  }
+  // }
 
  
 }

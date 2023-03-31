@@ -1,15 +1,5 @@
 const Category = require('../models/category.js')
 const Book = require('../models/book.js')
-<<<<<<< HEAD
-
-const getCategories = (async function (req, res) {
-    try {
-        
-        // remove Anonymous Author from the resualt so Adimns cannot remove it
-
-        const Cats = await Category.find({"_id":{$ne:"64255372e01179a4a3fabfe9"}})
-        res.json(Cats)
-=======
 const getCategories = (async function (req, res) {
     try {
         const pageSize = parseInt(req.query.pageSize) || 8;
@@ -18,12 +8,11 @@ const getCategories = (async function (req, res) {
         const totalRecords = await Category.countDocuments();
 
         const totalPages =Math.ceil(totalRecords/pageSize)
-        const Cats = await Category.find({})
+        const Cats =  await Category.find({"_id":{$ne:"64255372e01179a4a3fabfe9"}})
         .skip((pageNumber-1)*pageSize)
         .limit(pageSize);
 
         res.json({Cats,totalPages})
->>>>>>> 28046a2ad72e185a375fe89844cc87c1d146f581
     } catch (error) {
         res.status(400).json(error.message);
     }

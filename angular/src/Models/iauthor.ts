@@ -1,6 +1,7 @@
 export interface IAuthor {
     _id?:string;
     name:string;
-    birth:Date;
+    birthDate:string;
     bio:string;
+    authorImage?:string;
 }

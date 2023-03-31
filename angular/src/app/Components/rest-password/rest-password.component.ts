@@ -33,6 +33,7 @@ export class RestPasswordComponent {
   {
     this.userService.resetPass(this.claimAccount).subscribe(userData => {
     if(userData.status == 201 || 200){
+      //@ts-ignore
         swal({
           title: "You password has updated successfully!",
           text:"You will be dircted to the login page after 5 sec",

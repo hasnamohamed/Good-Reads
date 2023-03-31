@@ -26,6 +26,7 @@ export class NavbarComponent implements OnInit {
     this.userService.logout().subscribe(userData => {
       if(userData.status == 201 || 200){
         this.userService.updateUserStatus(false)
+        //@ts-ignore
           swal({
             title: "You have loged out successfully!",
             icon : "success"

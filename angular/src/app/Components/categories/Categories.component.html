@@ -1,7 +1,12 @@
-<div class="container d-flex flex-wrap justify-content-center mt-5">
-  <a *ngFor="let item of cats" class="nav-link col-xl-3 col-md-6" [routerLink]="'/categories/10'">
-    <app-card [name]="item.name"></app-card>
+<div class="container d-flex flex-wrap justify-content-center mt-4">
+  <a *ngFor="let category of cats_list" class="nav-link col-xxl-3 col-md-6" [routerLink]="'/categories/'+category._id">
+    <app-card [name]="category.name"></app-card>
   </a>
-  
- 
+
+  <div class="col-12 p-3 fs-2 text-center d-flex justify-content-center align-items-center">
+    <i class="icon fa-solid fa-circle-chevron-left mx-3" (click)="previous()"></i>
+    <button type="button" class="btn btn-secondary mx-1 small" *ngFor="let item of numberPages" (click)="getPage(item)">{{item}}</button>
+    <i class="icon fa-solid fa-circle-chevron-right mx-3" (click)="next()"></i>
+  </div>
+
 </div>

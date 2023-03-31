@@ -12,7 +12,7 @@ import { BookService } from 'src/Services/books.service';
   styleUrls: ['./author-details.component.css']
 })
 export class AuthorDetailsComponent implements OnInit{
-  author_id:string 
+  author_id:string
   author: IAuthor | null = null
   author_books : IBook[] = []
   numberPages : number[] = []
@@ -29,7 +29,7 @@ export class AuthorDetailsComponent implements OnInit{
     ){
     this.author_id = this.active_route.snapshot.paramMap.get('id') ?? ''
   }
-  
+
   ngOnInit(): void {
     this.getAuhtorData()
     this.getAuthorBooks()
@@ -46,7 +46,7 @@ export class AuthorDetailsComponent implements OnInit{
 
   getAuthorBooks()
   {
-    this.books_service.getAllBooks(this.pageNumber,this.pageSize).subscribe(response=>{
+    this.books_service.getAllBooks(this.pageNumber).subscribe(response=>{
        this.author_books = response.books.filter(book=>{
           return book.authorId == this.author_id
       })

@@ -39,7 +39,6 @@ export class AdminCategoriesComponent implements OnInit, OnChanges{
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.newCat.name)
   }
 
   setAdminAction(adminAction:string , id?:string )
@@ -57,14 +56,16 @@ export class AdminCategoriesComponent implements OnInit, OnChanges{
     let claimCate = this.catList.findIndex(cate => cateName == cate.name)
     if(claimCate != -1)
     {
+      // @ts-ignore
       swal({
         title: "Category is Already existed!",
-        icon : "error"
-      });
+        icon: "error"
+      }).then((r: any) =>{}) ;
 
       setTimeout(() => {
 
-        swal.close()
+        // @ts-ignore
+        swal.close?.()
         this.closeButton.nativeElement.click();
       }, 2000)
 
@@ -80,14 +81,14 @@ export class AdminCategoriesComponent implements OnInit, OnChanges{
           // if the category added successfully then update the category list by adding the newly added one
           let newCat = JSON.parse(data.body!);
           this.catList.push(newCat)
-
+          // @ts-ignore
           swal({
             title: "Category has been created successfully!",
             icon : "success"
           });
 
           setTimeout(() => {
-
+            // @ts-ignore
             swal.close()
             this.cateInput.nativeElement.value = ""
             this.closeButton.nativeElement.click();
@@ -111,13 +112,14 @@ export class AdminCategoriesComponent implements OnInit, OnChanges{
           if(oldCat != null)
             oldCat.name = cateName
 
+            // @ts-ignore
           swal({
             title: "Category has been updated successfully!",
             icon : "success"
           });
 
           setTimeout(() => {
-
+            // @ts-ignore
             swal.close()
             this.closeButton.nativeElement.click();
             this.updatedCategory.nativeElement.value = ""
@@ -138,14 +140,14 @@ export class AdminCategoriesComponent implements OnInit, OnChanges{
 
           var filteredCatList = this.catList.filter((el) => { return el._id != this.catID });
           this.catList = filteredCatList
-
+          // @ts-ignore
           swal({
             title: "Category has been removed successfully!",
             icon : "success"
           });
 
           setTimeout(() => {
-
+            // @ts-ignore
             swal.close()
             this.closeButton.nativeElement.click();
           }, 2000)

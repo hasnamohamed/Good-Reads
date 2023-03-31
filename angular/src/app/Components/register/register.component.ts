@@ -44,6 +44,7 @@ registerNewUser()
       {
         if(data.status == 200)
         {
+          //@ts-ignore
           swal({
             title: "Account has been created successfully!",
             text : "You will be automatically directed to the login page in  5 sec",

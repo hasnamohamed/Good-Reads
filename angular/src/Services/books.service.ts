@@ -15,11 +15,10 @@ export class BookService {
     })
   };
   constructor(private http: HttpClient) { }
-  getAllBooks(pageNumber:number,pageSize:number) : Observable<IBookResponse>
+  getAllBooks(pageNumber:number) : Observable<IBookResponse>
   {
     const params = new HttpParams()
       .set('pageNumber',pageNumber.toString())
-      .set('pageSize',pageSize.toString())
     return this.http.get<IBookResponse>('http://localhost:9000/book',{params})
   }
 
@@ -38,6 +37,6 @@ export class BookService {
   }
   updateBook(book_id:string,book:IBook) : Observable<IBook>
   {
-    return this.http.put <IBook> (`http://localhost:9000/author/${book_id}`,book)
+    return this.http.put <IBook> (`http://localhost:9000/book/${book_id}`,book)
   }
 }

@@ -6,11 +6,17 @@ table
 
 table th, table td
 {
+    text-transform: capitalize;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
     text-align: center;
     vertical-align: middle
+}
+
+table tr:hover
+{
+  box-shadow: 0 4px 9px -4px #b8b5ac;
 }
 
 table .author-image
@@ -20,7 +26,9 @@ table .author-image
 
 table .author-image img
 {
-    width: 30%;
+  width: 65px;
+  height: 65px;
+  border-radius: 12px;
 }
 
 
@@ -69,4 +77,52 @@ table .author-image img
 .modal-title
 {
     text-transform: capitalize;
+}
+
+.form-label
+{
+    text-transform: capitalize;
+}
+
+.author-bio
+{
+  max-height: 100px;
+}
+
+.page-number
+{
+  width: 3em;
+  margin-left: 4px;
+  text-align: center;
+  border-radius: 2px 0px 0px 2px;
+  border: none;
+  border-right: 1px solid #e7e7e7;
+}
+
+.total-pages
+{
+  max-width: 2em;
+  border-radius: 0px 2px 2px 0px;
+  background: white;
+  border: none;
+  margin-right: 4px;
+  text-align: center;
+}
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+.fa-chevron-right, .fa-chevron-left
+{
+  cursor: pointer;
+}
+
+.button-container
+{
+  margin: auto;
 }

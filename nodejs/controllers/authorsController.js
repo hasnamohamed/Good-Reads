@@ -14,7 +14,7 @@ const getAuthors = (async(req, res) => {
         .skip((pageNumber-1)*pageSize)
         .limit(pageSize);
 
-        res.json({authors,totalPages})
+        res.status(200).json({authors,totalPages})
     } catch (error) {
         res.status(400).json(error.message);
     }
@@ -36,15 +36,34 @@ const getAuthor = (async(req, res) => {
 
 //3-insert new author
 const createAuthor = (async(req, res) => {
-    try {
-        if (!req.body.name || !req.body.birth || !req.body.bio) {
+    try 
+    {
+        const {name, bio, birthDate} = {...req.body}
+        let authorImage;
+
+        if (!name || !birthDate || !bio)
             return res.status(400).json({ message: 'Missing required fields' });
-          }
-        const newAuthor = {...req.body}
-        await Author.create(newAuthor)
-        res.status(200).json({message: 'Author created successfully'});
+        
+        
+        if(req.file != undefined)
+        {
+            authorImage =  `images/${req.file.filename}`
+        }
+        else
+        {
+            authorImage = `images/author-defualt-profile.jpeg`
+        }
+
+        const newAuthor = {
+            name:name,
+            bio:bio,
+            birthDate:birthDate,
+            authorImage: authorImage
+        }
+        let addAuthor = await Author.create(newAuthor)
+        res.status(200).send(addAuthor);
     } catch (error) {
-        res.status(400).json(error.message);
+        res.status(502).json(error.message);
     }
 })
 
@@ -53,23 +72,30 @@ const createAuthor = (async(req, res) => {
 const updateAuthor = (async(req, res) => {
     try {
         const authorId = req.params.id;
-        const { name, birth, bio } = req.body;
-    
-        if (!name || !birth || !bio) {
-          return res.status(400).json({ message: 'Missing required fields' });
+        const { name, birthDate, bio } = {...req.body};
+        let authorImage;
+
+        if (Object.keys(req.body).length == 0) {
+          return res.status(400).json({ message: 'At least one filed must be provided' });
         }
-    
+
+        if(req.file != undefined)
+        {
+            authorImage =  `images/${req.file.filename}`
+        }
+       
         const updatedAuthor = await Author.findByIdAndUpdate(
           authorId,
-          { name, birth, bio },
+          { name, birthDate, bio, authorImage },
           { new: true }
         );
+
     
         if (!updatedAuthor) {
           return res.status(404).json({ message: 'Author not found' });
         }
     
-        return res.status(200).json({message: 'Author updated successfully'});
+        return res.status(200).send(updatedAuthor);
       } catch (error) {
         res.status(400).json(error.message);
       }

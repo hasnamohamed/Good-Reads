@@ -2,38 +2,45 @@
   <table class="table table-striped table-hover">
     <thead>
       <tr class="table-dark">
-        <th scope="col">#</th>
+        <th>ID</th>
         <th scope="col">photo</th>
-        <th scope="col">First Name</th>
-        <th scope="col">Last Name</th>
+        <th scope="col">Full Name</th>
         <th scope="col">Date of Birth</th>
-        <th scope="col"></th>
+        <th>
+          <div class="pagenation-container">
+            <div>
+              <i class="fa-solid fa-chevron-left"  (click)="prevPage()"></i>
+              <input #pageNumber type="number" class="page-number" min="0" [max]="totalPageNumber" [(ngModel)]="currentPageNumber" (change)="getAuthors()">
+              <input type="number" class="total-pages" [(ngModel)]="totalPageNumber" disabled>
+              <i class="fa-solid fa-chevron-right" (click)="nextPage()"></i>
+            </div>
+          </div>
+        </th>
         <th>
           <button type="button" class="btn btn-outline-dark add-button" (click)="getAdminAction('add')" data-bs-toggle="modal" data-bs-target="#exampleModal">
             <i class="fa-solid fa-plus"></i>
           </button>
         </th>
       </tr>
+
     </thead>
     <tbody>
-      <tr *ngFor="let author of authorList; let authorNum = index">
-        <th scope="row">
-          <span>{{authorNum + 1}}</span>
-        </th>
-        <td class="author-image">
-          <img [src]="author.photo">
+      <tr *ngFor="let author of authorsList; let authorNum = index">
+        <td scope="row">
+          {{author._id}}
         </td>
-        <td>{{author.firstName}}</td>
-        <td>{{author.lastName}}</td>
-        <td>{{author.dateOfBirth}}</td>
+        <td class="author-image">
+          <img [src]="author.authorImage">
+        </td>
+        <td>{{author.name}}</td>
+        <td>{{author.birthDate | date}}</td>
         <td></td>
-
         <td>
           <div class="action-button">
-            <button type="button" class="btn btn-outline-dark" (click)="getAdminAction('edit')" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-outline-dark" (click)="getAdminAction('edit', author._id)" data-bs-toggle="modal" data-bs-target="#exampleModal">
               <i class="fa-solid fa-pen-to-square"></i>
             </button>
-            <button type="button" class="btn btn-outline-dark" (click)="getAdminAction('remove')" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-outline-dark" (click)="getAdminAction('remove', author._id)" data-bs-toggle="modal" data-bs-target="#exampleModal">
               <i class="fa-solid fa-trash"></i>
             </button>
           </div>
@@ -44,47 +51,6 @@
 </section>
 
 
-<!-- Modal -->
-<div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">
-          <div [ngSwitch]="adminActions">
-            <div *ngSwitchCase='"add"'>
-              add author
-            </div>
-            <div *ngSwitchCase='"edit"'>
-              edit author
-            </div>
-            <div *ngSwitchCase='"remove"'>
-              remove author
-            </div>
-          </div>
-        </h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div [ngSwitch]="adminActions">
-          <div *ngSwitchCase='"add"'>
-            <add-author ></add-author>
-          </div>
-          <div *ngSwitchCase='"edit"'>
-            <update-author></update-author>
-          </div>
-          <div *ngSwitchCase='"remove"'>
-            <delete-author></delete-author>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Done!</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
 
 <!-- Modal -->
 <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -109,18 +75,112 @@
       <div class="modal-body">
         <div [ngSwitch]="adminActions">
           <div *ngSwitchCase='"add"'>
-            <add-author ></add-author>
+            <section>
+              <form #addAuthorForm='ngForm' enctype="multipart/form-data">
+
+                <div class="mb-3 row">
+                  <label for="authorName" class="col-3 col-form-label">Name</label>
+                  <div class="col-6">
+                    <input #authorName="ngModel" required="true" type="text"  class="form-control" id="authorName" value="" name="authorName" [(ngModel)]="authorInfo.name">
+                    <div *ngIf="authorName.errors?.['required'] && (authorName.touched)"  class="alert alert-danger">
+                      Author Name is required.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mb-3 row">
+                  <label for="authorBio" class="col-3 col-form-label">About You</label>
+                  <div class="col-6">
+                    <textarea #authorBio ="ngModel" required="true"  (resize)="false" id="authorBio"  class="form-control author-bio" name="authorBio" [(ngModel)]="authorInfo.bio"></textarea>
+                    <div *ngIf="authorBio.errors?.['required'] && (authorBio.touched)"  class="alert alert-danger">
+                      Author Bio is required.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mb-3 row">
+                  <label for="authorDate" class="col-3 col-form-label">Birth Date</label>
+                  <div class="col-6">
+                    <input #authorBirthDate = "ngModel" required="true" id="authorDate" class="form-control" type="date" name="authorDate" [(ngModel)]="authorInfo.birthDate"/>
+                    <div *ngIf="authorBirthDate.errors?.['required'] && (authorBirthDate.touched)"  class="alert alert-danger">
+                      Author Birth Date is required.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mb-3 row">
+                  <label for="formFile" class="col-3 col-form-label">Photo</label>
+                  <div class="col-6">
+                    <input #authorImage class="form-control" type="file" accept=".jpg, .png, .jpeg" id="formFile" name="authorImage">
+                  </div>
+                </div>
+
+
+                <div class="mb-3 row text-center">
+                  <div class="col-12">
+                    <button  class="btn btn-primary mb-3" (click)= "addAuthor(addAuthorForm)" [disabled]="addAuthorForm.invalid">Add</button>
+                  </div>
+                </div>
+
+              </form>
+            </section>
           </div>
           <div *ngSwitchCase='"edit"'>
-            <update-author></update-author>
+            <section>
+              <form #updateAuthorForm='ngForm' enctype="multipart/form-data">
+
+                <div class="mb-3 row">
+                  <label for="authorName" class="col-3 col-form-label">Name</label>
+                  <div class="col-6">
+                    <input  type="text"  class="form-control" id="authorName" value="" name="authorName" [(ngModel)]="authorInfo.name">
+                  </div>
+                </div>
+
+                <div class="mb-3 row">
+                  <label for="authorBio" class="col-3 col-form-label">About You</label>
+                  <div class="col-6">
+                    <textarea #authorBio ="ngModel" (resize)="false" id="authorBio"  class="form-control author-bio" name="authorBio" [(ngModel)]="authorInfo.bio"></textarea>
+                  </div>
+                </div>
+
+                <div class="mb-3 row">
+                  <label for="authorDate" class="col-3 col-form-label">Birth Date</label>
+                  <div class="col-6">
+                    <input #authorBirthDate = "ngModel"  id="authorDate" class="form-control" type="date" name="authorDate" [(ngModel)]="authorInfo.birthDate"/>
+                  </div>
+                </div>
+
+                <div class="mb-3 row">
+                  <label for="formFile" class="col-3 col-form-label">Photo</label>
+                  <div class="col-6">
+                    <input #authorImage class="form-control" type="file" accept=".jpg, .png, .jpeg" id="formFile" name="authorImage">
+                  </div>
+                </div>
+
+
+                <div class="mb-3 row text-center">
+                  <div class="col-12">
+                    <button  class="btn btn-primary mb-3" (click)= "updateAuthor(updateAuthorForm)" [disabled]="!updateAuthorForm.dirty">update</button>
+                  </div>
+                </div>
+
+              </form>
+            </section>
           </div>
           <div *ngSwitchCase='"remove"'>
-            <delete-author></delete-author>
+            <div class="row g-3">
+              <div class="col-auto delete-alert-message">
+                <p>If you are sure you want to delete this author click delete button</p>
+              </div>
+              <div class="col-auto button-container">
+                  <button class="btn btn-danger mb-auto" (click)="deleteAuthor()">Delete</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Done!</button>
+        <button #closeButton type="button" class="btn btn-secondary" data-bs-dismiss="modal">Done!</button>
       </div>
     </div>
   </div>

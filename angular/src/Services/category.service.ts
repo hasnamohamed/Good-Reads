@@ -43,7 +43,7 @@ httpOptions = {
 
   getCategory(category_id:string) : Observable<ICategory>
   {
-    return this.http.get<ICategory>(`http://localhost:9000/category/${category_id}`)
+    return this.http.get<ICategory>(`http://localhost:9000/category/one/${category_id}`)
   }
 
   addCategory(category:ICategory) : Observable<ICategory>

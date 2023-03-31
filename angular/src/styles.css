@@ -1,8 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 *{
   transition: all 0.5s;
+}
+body{
+  position: relative;
+  min-height: 100%;
+  margin: 0;
+  padding-bottom: 3rem;
+  box-sizing: inherit;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+html
+{
+  box-sizing: border-box;
+  height: 100%;
 }

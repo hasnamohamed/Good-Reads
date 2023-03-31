@@ -46,6 +46,7 @@ import {MatSelectModule} from "@angular/material/select";
 import { BookCardComponent } from './Components/Shared/book-card/book-card.component';
 import { ReviewComponent } from './Components/review/review.component';
 import { CategoryDetailsComponent } from './Components/category-details/category-details.component';
+import { FooterComponent } from './Components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import { CategoryDetailsComponent } from './Components/category-details/category
    BookDetailsComponent,
    RestPasswordComponent,
    ReviewComponent,
-   CategoryDetailsComponent
+   CategoryDetailsComponent,
+   FooterComponent
   ],
   imports: [
     BrowserModule,

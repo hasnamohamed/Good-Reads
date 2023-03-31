@@ -43,7 +43,6 @@ export class CategoriesService {
 
     return this.http.put(updateCateURL, {name:cateName},
     {responseType:"text", observe: 'response'})
-
   }
 
   deleteCate(id:string)

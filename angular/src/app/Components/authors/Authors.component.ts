@@ -19,14 +19,14 @@ export class AuthorsComponent implements OnInit {
 
   newAuthor :IAuthor = {
     "name":"Mohamed Sabry",
-    "birth":new Date,
+    "birthDate":"",
     "bio":"new bio for mohamed sabry"
   }
-  
+
   ngOnInit():void {
       this.fetchData()
   };
-  
+
 
   fetchData()
   {
@@ -60,7 +60,7 @@ export class AuthorsComponent implements OnInit {
       this.pageNumber++;
       this.fetchData()
     }
-  
+
   }
 
 //  addAuthor(){

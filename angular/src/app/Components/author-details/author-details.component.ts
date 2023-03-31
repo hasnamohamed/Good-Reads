@@ -9,7 +9,7 @@ import { AuthorServiceService } from 'src/Services/author-service.service';
   styleUrls: ['./author-details.component.css']
 })
 export class AuthorDetailsComponent implements OnInit{
-  author_id:string 
+  author_id:string
   author: IAuthor | null = null
   constructor(
     private active_route:ActivatedRoute,
@@ -18,7 +18,7 @@ export class AuthorDetailsComponent implements OnInit{
     ){
     this.author_id = this.active_route.snapshot.paramMap.get('id') ?? ''
   }
-  
+
   ngOnInit(): void {
     this.author_service.getAuthorById(this.author_id).subscribe(author=>{
       this.author = author

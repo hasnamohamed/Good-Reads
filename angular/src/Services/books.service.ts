@@ -36,6 +36,6 @@ export class BookService {
   }
   updateBook(book_id:string,book:IBook) : Observable<IBook>
   {
-    return this.http.put <IBook> (`http://localhost:9000/author/${book_id}`,book)
+    return this.http.put <IBook> (`http://localhost:9000/book/${book_id}`,book)
   }
 }

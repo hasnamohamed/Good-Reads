@@ -15,14 +15,12 @@ import { CardComponent } from './Components/Shared/card/card/card.component';
 import { AuthorsComponent} from './Components/authors/Authors.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminDashBoardComponent } from './Components/admin-dashboard/admin-dash-board/admin-dash-board.component';
-import { AddAuthorComponent } from './Components/admin-dashboard/admin-actions/create/add-author/add-author.component';
 import { AdminBooksComponent } from './Components/admin-dashboard/admin-books/admin-books.component';
 import { AdminCategoriesComponent } from './Components/admin-dashboard/admin-categories/admin-categories.component';
 import { addBookComponent } from './Components/admin-dashboard/admin-actions/create/add-book/add-book.component';
 import { AdminAuthorsComponent } from './Components/admin-dashboard/admin-authors/admin-authors.component';
 import { UpdateBookComponent } from './Components/admin-dashboard/admin-actions/update/update-book/update-book.component';
 import { DeleteBookComponent } from './Components/admin-dashboard/admin-actions/delete/delete-book/delete-book.component';
-import { UpdateAuthorComponent } from './Components/admin-dashboard/admin-actions/update/update-author/update-author.component';
 import { DeleteAuthorComponent } from './Components/admin-dashboard/admin-actions/delete/delete-author/delete-author.component';
 import { RegisterComponent } from './Components/register/register.component';
 import { CheckPasswordDirective } from 'custom-dirictives/passwordMatchChecker';
@@ -49,6 +47,7 @@ import { BookCardComponent } from './Components/books/book-card/book-card.compon
 import { FooterComponent } from './Components/footer/footer.component';
 import { CategoryDetailsComponent } from './Components/category-details/category-details.component';
 
+import { ReviewComponent } from './Components/review/review.component';
 
 @NgModule({
   declarations: [
@@ -64,16 +63,12 @@ import { CategoryDetailsComponent } from './Components/category-details/category
     AuthorsComponent,
    AdminDashBoardComponent,
    AdminAuthorsComponent,
-   AddAuthorComponent,
    AdminBooksComponent,
    AdminCategoriesComponent,
-   AddAuthorComponent,
    addBookComponent,
    addBookComponent,
    UpdateBookComponent,
    DeleteBookComponent,
-   AddAuthorComponent,
-   UpdateAuthorComponent,
    DeleteAuthorComponent,
    RegisterComponent,
    LoginComponent,
@@ -89,6 +84,7 @@ import { CategoryDetailsComponent } from './Components/category-details/category
    BookCardComponent,
    BookDetailsComponent,
    RestPasswordComponent,
+   ReviewComponent,
    FooterComponent,
    BookCardComponent,
    CategoryDetailsComponent

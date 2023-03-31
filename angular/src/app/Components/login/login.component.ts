@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
     this.userService.tokenIntoLocal(JSON.parse(userData.body!).token)
     if(userData.status == 201 || 200){
       this.userService.updateUserStatus(true)
+      //@ts-ignore
         swal({
           title: "You have loged successfully!",
           icon : "success"

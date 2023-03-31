@@ -43,7 +43,12 @@ import {BookDetailsComponent} from "./Components/book-details/book-details.compo
 import {FormsModule} from "@angular/forms";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
-import { BookCardComponent } from './Components/books/book-card/book-card.component';
+import { BookCardComponent } from './Components/Shared/book-card/book-card.component';
+import { FooterComponent } from './Components/footer/footer.component';
+import { CategoryDetailsComponent } from './Components/category-details/category-details.component';
+import { ReviewComponent } from './Components/review/review.component';
+
+
 
 @NgModule({
   declarations: [
@@ -79,7 +84,12 @@ import { BookCardComponent } from './Components/books/book-card/book-card.compon
    StarRatingComponent,
    BookCardComponent,
    BookDetailsComponent,
-   RestPasswordComponent
+   RestPasswordComponent,
+   ReviewComponent,
+   CategoryDetailsComponent,
+   FooterComponent,
+   BookCardComponent,
+   CategoryDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -101,7 +111,8 @@ import { BookCardComponent } from './Components/books/book-card/book-card.compon
     HttpClientModule,
     MatIconModule,
     MatSelectModule,
-    HttpClientModule
+    HttpClientModule,
+    
    ],
   providers: [],
   bootstrap: [AppComponent]

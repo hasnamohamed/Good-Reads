@@ -37,6 +37,7 @@ export class AuthorsComponent implements OnInit {
         this.totalPages = response.totalPages
         this.numberPages = []
         this.numberPages = Array.from({length: this.totalPages}, (_, i) => i + 1);
+        console.log(this.authors_list)
     })
   }
 

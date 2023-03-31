@@ -4,6 +4,7 @@ const categories = new mongoose.Schema({
         type: String,
         required: true
     },
+    
 })
 
 const Category = mongoose.model('categories', categories)

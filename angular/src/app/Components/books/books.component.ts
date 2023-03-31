@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { BookService } from 'src/Services/books.service';
 import {IBook} from 'src/Models/ibook';
+import { populatedBook } from 'src/Models/books-populated';
 import {AuthorServiceService} from "../../../Services/author-service.service";
 import {IAuthor} from "../../../Models/iauthor";
 @Component({
@@ -9,7 +10,7 @@ import {IAuthor} from "../../../Models/iauthor";
   styleUrls: ['./books.component.css']
 })
 export class BooksComponent implements OnInit {
-  books_list:IBook[]=[];
+  books_list:populatedBook[]=[];
   authors_list : IAuthor[] = []
   numberPages : number[] = []
   pageNumber:number = 1;
@@ -18,6 +19,7 @@ export class BooksComponent implements OnInit {
   }
   ngOnInit():void {
     this.fetchData()
+    console.log(this.books_list)
   };
 
 

@@ -1,3 +1,4 @@
+
 export interface IBook {
   _id?:string;
   rating?:{
@@ -8,6 +9,6 @@ export interface IBook {
   title:string;
   description:string;
   image?:string;
-  authorId:string
-  cateId:string
+  authorId:string;
+  cateId:string;
 }

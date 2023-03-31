@@ -1,5 +1,5 @@
 import { IAuthor } from "src/Models/iauthor";
-import { categoryInfo } from "./category";
+import { categoryInfo } from "../app/db-models/category";
 
 export interface populatedBook
 {

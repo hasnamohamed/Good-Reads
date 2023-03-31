@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
-import { populatedBook } from 'src/app/db-models/books-populated';
+import { populatedBook } from 'src/Models/books-populated';
 import { categoryInfo } from 'src/app/db-models/category';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { IAuthor } from 'src/Models/iauthor';

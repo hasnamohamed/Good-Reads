@@ -2,21 +2,12 @@
   <a class="nav-link" routerLink="/books/{{book._id}}"><img style="height: 12rem" src="{{book.image}}" class="card-img-top" alt="..."></a>
   <div class="card-body text-center">
     <a class="nav-link" routerLink="/books/{{book._id}}">  <h5 class="card-title">{{book.title}}</h5></a>
-<<<<<<< HEAD:angular/src/app/Components/books/book-card/book-card.component.html
-    <a class="nav-link" [(ngModel)]="authorId" routerLink="/author/{{book.authorId}}">  <p class="card-title">by {{book.authorId.name}}</p></a>
+    <a class="nav-link" [(ngModel)]="book.authorId._id" routerLink="/author/{{book.authorId._id}}">  <p class="card-title">by {{book.authorId.name}}</p></a>
     <mat-star-rating class="nav-link" [rating]="book.rating.rate" [color]="starColor" ></mat-star-rating>
     <!--      <p>Your Rating</p>-->
     <!--      <mat-star-rating [rating]="book.rating.rate" [starCount]="starCount" [color]="starColor" (ratingUpdated)="onRatingChanged({rating : $event})"></mat-star-rating>-->
-    <a class="nav-link" routerLink="/category/{{book.catId}}">  <p class="card-title">{{book.cateId.name}}</p></a>
+    <a class="nav-link" routerLink="/category/{{book.catId._id}}">  <p class="card-title">{{book.cateId.name}}</p></a>
     <p class="card-title">{{ book.description | slice:0:20 }}...</p>
-=======
-    <a class="nav-link" routerLink="/author/{{book.authorId}}">  <p class="card-title">by {{book.authorId}}</p></a>
-    <mat-star-rating class="nav-link" [rating]="book.rating.rate" [color]="starColor" ></mat-star-rating>
-    <!--      <p>Your Rating</p>-->
-    <!--      <mat-star-rating [rating]="book.rating.rate" [starCount]="starCount" [color]="starColor" (ratingUpdated)="onRatingChanged({rating : $event})"></mat-star-rating>-->
-    <a class="nav-link" routerLink="/category/{{book.catId}}">  <p class="card-title">{{book.catId}}</p></a>
-    <p class="card-title">{{book.description}}</p>
->>>>>>> 28046a2ad72e185a375fe89844cc87c1d146f581:angular/src/app/Components/Shared/book-card/book-card.component.html
     <select #status  [(ngModel)]="selectedStatus" class="form-select">
       <option value="0" disabled selected>Status</option>
       <option [attr.selected]="selectedStatus == 1 ? true : null"  value="1">Want to Read</option>

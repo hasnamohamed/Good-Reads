@@ -17,13 +17,16 @@ export class UsersService {
   tokenInfo:tokenInfo = {
     email:"",
     token:"",
-    expiresIn:""
+    expiresIn:"",
+    userImage:""
   };
 
   private isLogedStatus = new BehaviorSubject(false);
   currentUserStatus = this.isLogedStatus.asObservable();
 
 
+  private usertokenInfo = new BehaviorSubject(this.tokenInfo)
+  currentTokenInfo= this.usertokenInfo.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -47,9 +50,9 @@ export class UsersService {
 
   }
 
-  tokenIntoLocal()
+  tokenIntoLocal(userToken:string)
   {
-    localStorage.setItem('token', this.tokenInfo.token!)
+    localStorage.setItem('token', userToken)
   }
 
   logout()
@@ -76,6 +79,10 @@ export class UsersService {
     this.isLogedStatus.next(userStatus)
   }
 
+  updateTokenInfo(tokenInfo:tokenInfo)
+  {
+    this.usertokenInfo.next(tokenInfo)
+  }
 
 }
 

@@ -29,18 +29,16 @@ export class RegisterComponent implements OnInit, OnChanges {
     secretAnswer:""
   }
 
-  readURL(event: any): void
+
+  passMatchInf:any =
   {
-    if (event.target.files && event.target.files[0]) {
-        const image = event.target.files[0];
-
-        const reader = new FileReader();
-        reader.onload = e => this.previewImage = reader.result;
-
-        reader.readAsDataURL(image);
-    }
+    oneUpperCase:false,
+    oneLowerCase:false,
+    oneDigit:false,
+    oneSpecialCharacter:false,
+    minimumEightLength:false,
+    passwordPassed:false
   }
-
 
   constructor(
     private userService:UsersService,
@@ -122,9 +120,74 @@ export class RegisterComponent implements OnInit, OnChanges {
       },
       err =>
       {
+        if(err.status == 409)
+        {
+          swal({
+            title: "The eamil is already found!",
+            text : "Try to login instad",
+            icon : "error"
+          });
+
+          setTimeout(() => {swal.close()}, 2000)
+        }
+
+        if(err.status == 400)
+        {
+          swal({
+            title: "All fileds are required!",
+            icon : "error"
+          });
+
+          setTimeout(() => {swal.close()}, 2000)
+        }
+
+        if(err.status == 403)
+        {
+          swal({
+            title: "Please write a proper email",
+            icon : "error"
+          });
+
+          setTimeout(() => {swal.close()}, 2000)
+        }
+
         console.log(err)
       }
     )
 
   }
+
+  readURL(event: any): void
+  {
+    if (event.target.files && event.target.files[0]) {
+        const image = event.target.files[0];
+
+        const reader = new FileReader();
+        reader.onload = e => this.previewImage = reader.result;
+
+        reader.readAsDataURL(image);
+    }
+  }
+
+
+passwordChecker()
+{
+  let userPass = this.userInfo.password
+  let passRegx =
+  {
+    oneUpperCase:/^(?=.*?[A-Z])/,
+    oneLowerCase:/^(?=.*?[a-z])/,
+    oneDigit:/^(?=.*?[0-9])/,
+    oneSpecialCharacter:/^(?=.*?[#?!@$%^&*-])/,
+    minimumEightLength:/^.{8,}/,
+  }
+
+  this.passMatchInf.oneUpperCase          = ((passRegx.oneUpperCase.test(userPass) ? true : false))
+  this.passMatchInf.oneLowerCase          = ((passRegx.oneLowerCase.test(userPass) ? true : false))
+  this.passMatchInf.oneDigit              = ((passRegx.oneDigit.test(userPass) ? true : false))
+  this.passMatchInf.oneSpecialCharacter   = ((passRegx.oneSpecialCharacter.test(userPass) ? true : false))
+  this.passMatchInf.minimumEightLength    = ((passRegx.minimumEightLength.test(userPass) ? true : false))
+
+}
+
 }

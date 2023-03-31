@@ -29,6 +29,15 @@
         <a [hidden]="isLogedIn == true" class="register-button" routerLink="/register" routerLinkActive="active">
           <span class="register-button-text">register</span>
         </a>
+
+        <a  [hidden]="isAdmin == false" class="nav-link navbar-brand  admin-dashboard-icon" routerLink="/admin-dashboard" routerLinkActive="active">
+          <i class="fa-solid fa-gear"></i>
+        </a>
+
+        <a *ngIf="isLogedIn == true;" class="user-dashboard-img" routerLink="/user-dashboard" routerLinkActive="active">
+          <span class=""><img [src]="userImage"></span>
+        </a>
+
       </div>
     </div>
   </div>

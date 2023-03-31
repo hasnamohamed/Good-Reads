@@ -18,9 +18,10 @@ export interface loginInfo
 
 export interface tokenInfo
 {
-  email:any;
-  token:any;
-  expiresIn:any;
+  email:string;
+  token:string;
+  expiresIn:string;
+  userImage:string
 }
 
 export interface restInfo

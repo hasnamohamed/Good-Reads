@@ -30,9 +30,9 @@ export class LoginComponent implements OnInit {
   loginUser()
   {
     this.userService.login(this.userInfo).subscribe(userData => {
-    this.userService.tokenInfo = JSON.parse(userData.body!)
-    this.userService.tokenIntoLocal()
-    if(userData.status == 201){
+    this.userService.updateTokenInfo(JSON.parse(userData.body!))
+    this.userService.tokenIntoLocal(JSON.parse(userData.body!).token)
+    if(userData.status == 201 || 200){
       this.userService.updateUserStatus(true)
         swal({
           title: "You have loged successfully!",
@@ -41,7 +41,6 @@ export class LoginComponent implements OnInit {
 
         setTimeout(() => {
 
-          // @ts-ignore
           swal.close()
 
         }, 4000)
@@ -52,6 +51,43 @@ export class LoginComponent implements OnInit {
       }
     },
     err => {
+
+      if(err.status == 400)
+      {
+        swal({
+          title: "All filed are required!",
+          icon : "error"
+        });
+
+      }
+
+      if(err.status == 404)
+      {
+        swal({
+          title: "No account assoicated with that email!",
+          icon : "error"
+        });
+
+      }
+
+      if(err.status == 401)
+      {
+        swal({
+          title: "The password is incorrect!",
+          icon : "error"
+        });
+
+      }
+
+      if(err.status == 403)
+      {
+        swal({
+          title: "Access Denied, the action had been reported",
+          icon : "error"
+        });
+
+      }
+      setTimeout(() => {swal.close()}, 2000)
       console.log(err)
     })
   }

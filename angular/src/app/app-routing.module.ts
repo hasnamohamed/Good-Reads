@@ -34,6 +34,7 @@ const routes: Routes = [
   {path:'author/:id', component:AuthorDetailsComponent},
   {path:'categories/:id', component:CategoryDetailsComponent},
   {path:'admin-dashboard', component:AdminDashBoardComponent, children:[
+    {path:'', redirectTo:"/admin-dashboard/admin-categories", pathMatch:"full"},
     {path:'admin-authors', component:AdminAuthorsComponent},
     {path:'admin-categories', component:AdminCategoriesComponent},
     {path:'admin-categories/:id', component:AdminCategoriesComponent},

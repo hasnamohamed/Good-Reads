@@ -1,5 +1,6 @@
-<section class="container">
 
+
+<section class="container-fluid">
   <form class="register-form" #regForm='ngForm'>
     <div ngModelGroup="passwords" #passwords="ngModelGroup" passwordMatchChecker class="row">
       <div class="mb-3 form-group col-sm-12 col-md-6" >
@@ -29,15 +30,16 @@
 
         <div *ngIf="userEmail.errors && ( userEmail.touched)" class="alert alert-danger">
           <small   *ngIf="userEmail.errors?.['required']">email is required</small>
-          <small   *ngIf="userEmail.errors?.['pattern']">Please provide a valid email address</small>
+          <small   *ngIf="userEmail.errors?.['pattern']">the email must look like <strong>example@[email provider].something</strong>
+            replace [email provider] with gmail or hotmail ..etc
+          </small>
         </div>
       </div>
 
       <div class="mb-3 form-group col-sm-12 col-md-6">
-        <label for="userPassword" class="form-label">password</label>
-        <input type="password" class="form-control" id="userPassword" name="userPass"
+        <label  for="userPassword" class="form-label">password</label>
+        <input (input)="passwordChecker()" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$" type="password" class="form-control" id="userPassword" name="userPass"
             required #userPass="ngModel" [(ngModel)]="userInfo.password" >
-
       </div>
 
       <div class="mb-3 form-group col-sm-12 col-md-6">
@@ -47,6 +49,36 @@
 
       </div>
 
+      <div class="password-match-container" *ngIf="userPass.errors?.['pattern']  && ( userPass.touched)">
+        <h5>Password must contain: </h5>
+        <ul class="password-cases-container">
+          <li>
+            <i  *ngIf="passMatchInf.oneUpperCase"  class="fa-solid fa-check"></i>
+            <i  *ngIf="!passMatchInf.oneUpperCase"  class="fa-solid fa-xmark"></i>
+            one Upper Case Letter
+          </li>
+          <li>
+            <i  *ngIf="passMatchInf.oneLowerCase"  class="fa-solid fa-check"></i>
+            <i  *ngIf="!passMatchInf.oneLowerCase"  class="fa-solid fa-xmark"></i>
+            one Lower Case Letter
+          </li>
+          <li>
+            <i  *ngIf="passMatchInf.oneDigit"  class="fa-solid fa-check"></i>
+            <i  *ngIf="!passMatchInf.oneDigit"  class="fa-solid fa-xmark"></i>
+            <span>one Lower Case Letter</span>
+          </li>
+          <li>
+            <i  *ngIf="passMatchInf.oneSpecialCharacter"  class="fa-solid fa-check"></i>
+            <i  *ngIf="!passMatchInf.oneSpecialCharacter"  class="fa-solid fa-xmark"></i>
+            one Special Character
+          </li>
+          <li>
+            <i  *ngIf="passMatchInf.minimumEightLength"  class="fa-solid fa-check"></i>
+            <i  *ngIf="!passMatchInf.minimumEightLength"  class="fa-solid fa-xmark"></i>
+            minimum length Eight
+          </li>
+        </ul>
+      </div>
 
       <div *ngIf="userPass.errors?.['required'] && (userPass.touched)"  class="alert alert-danger">
         Password is required.
@@ -102,19 +134,17 @@
           <input (change)="readURL($event)" #userImage class="form-control" type="file" accept=".jpg, .png, .jpeg" id="formFile" name="userImage" alt="user Image">
         </div>
       </div>
-      <div class="mb-3 row image-preview-container">
+      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion" class="mb-3 row image-preview-container">
         <label for="formFile" class="col-sm-12 col-form-label">Image Preview</label>
         <img [src]="previewImage">
       </div>
-
+      <div>
+        <p>
+          Already Have Acoount?
+          <a class="login-link" routerLink="/login" routerLinkActive="active">login in!</a>
+        </p>
+      </div>
+      <button type="submit" class="btn btn-primary col-2" (click)="registerNewUser()" [disabled]="regForm.invalid">Submit</button>
     </div>
-    <div>
-      <p>
-        Already Have Acoount?
-        <a class="login-link" routerLink="/login" routerLinkActive="active">login in!</a>
-      </p>
-    </div>
-    <button type="submit" class="btn btn-primary col-2" (click)="registerNewUser()" [disabled]="regForm.invalid">Submit</button>
-
   </form>
 </section>

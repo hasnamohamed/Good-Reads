@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsersService } from 'src/app/services/users.service';
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'navbar',
@@ -26,6 +26,7 @@ export class NavbarComponent implements OnInit {
     this.userService.logout().subscribe(userData => {
       if(userData.status == 201 || 200){
         this.userService.updateUserStatus(false)
+        //@ts-ignore
           swal({
             title: "You have loged out successfully!",
             icon : "success"

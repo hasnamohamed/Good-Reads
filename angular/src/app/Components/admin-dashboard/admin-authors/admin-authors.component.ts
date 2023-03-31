@@ -83,13 +83,14 @@ export class AdminAuthorsComponent implements OnInit {
 
       if(fileSize > 2000)
       {
+        //@ts-ignore
         swal({
           title: "Maximum image size is 2M",
           icon : "error"
         });
 
         setTimeout(() => {
-
+          //@ts-ignore
           swal.close()
           this.closeButton.nativeElement.click();
         }, 2000)
@@ -116,7 +117,7 @@ export class AdminAuthorsComponent implements OnInit {
             this.authorsList.push(newAuthor)
 
           addAuthorForm.resetForm();
-
+          //@ts-ignore
           swal({
             title: "Author has been added successfully!",
             icon : "success"
@@ -124,7 +125,7 @@ export class AdminAuthorsComponent implements OnInit {
 
 
           setTimeout(() => {
-
+            //@ts-ignore
             swal.close()
           }, 2000)
         }
@@ -132,13 +133,14 @@ export class AdminAuthorsComponent implements OnInit {
 
       serverError =>
       {
+        //@ts-ignore
         swal({
           title: "Something went wrong, try again later",
           icon : "error"
         });
         console.log(serverError)
         setTimeout(() => {
-
+          //@ts-ignore
           swal.close()
         }, 2000)
       }
@@ -170,13 +172,14 @@ export class AdminAuthorsComponent implements OnInit {
 
       if(fileSize > 2000)
       {
+        //@ts-ignore
         swal({
           title: "Maximum image size is 2M",
           icon : "error"
         });
 
         setTimeout(() => {
-
+          //@ts-ignore
           swal.close()
         }, 2000)
 
@@ -210,6 +213,7 @@ export class AdminAuthorsComponent implements OnInit {
 
           updateAuthorForm.resetForm();
 
+          //@ts-ignore
           swal({
             title: "Author has been updated successfully!",
             icon : "success"
@@ -217,7 +221,7 @@ export class AdminAuthorsComponent implements OnInit {
 
 
           setTimeout(() => {
-
+            //@ts-ignore
             swal.close()
             this.closeButton.nativeElement.click();
           }, 2000)
@@ -226,13 +230,14 @@ export class AdminAuthorsComponent implements OnInit {
 
       serverError =>
       {
+        //@ts-ignore
         swal({
           title: "Something went wrong, try again later",
           icon : "error"
         });
         console.log(serverError)
         setTimeout(() => {
-
+          //@ts-ignore
           swal.close()
         }, 2000)
       }
@@ -253,13 +258,14 @@ export class AdminAuthorsComponent implements OnInit {
           var filteredAuthorsList = this.authorsList.filter((el) => { return el._id != this.authorID });
           this.authorsList = filteredAuthorsList
 
+          //@ts-ignore
           swal({
             title: "Author has been removed successfully!",
             icon : "success"
           });
 
           setTimeout(() => {
-
+            //@ts-ignore
             swal.close()
             this.closeButton.nativeElement.click();
           }, 2000)

@@ -3,13 +3,17 @@ const Route = express.Router();
 const  { 
     getCategories,
     getCategory,
+    getBooksByCat,
     createCategory,
     updateCategory,
-    deleteCategory
+    deleteCategory,
+    
 } = require('../controllers/categoriesController.js')
 Route.get('/',getCategories);
 
-Route.get('/:id',getCategory);
+Route.get('/:id',getBooksByCat);
+
+Route.get('/one/:id',getCategory);
 
 Route.post('/', createCategory);
 

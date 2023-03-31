@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { loginInfo } from 'src/app/db-models/userInfo';
 import { UsersService } from 'src/app/services/users.service';
-import swal from 'sweetalert';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
     this.userService.tokenIntoLocal()
     if(userData.status == 201){
       this.userService.updateUserStatus(true)
+      //@ts-ignore
         swal({
           title: "You have loged successfully!",
           icon : "success"

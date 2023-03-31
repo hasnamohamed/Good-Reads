@@ -1,15 +1,25 @@
 const Category = require('../models/category.js')
-
+const Book = require('../models/book.js')
 const getCategories = (async function (req, res) {
     try {
+        const pageSize = parseInt(req.query.pageSize) || 8;
+        const pageNumber = parseInt(req.query.pageNumber) || 1;
+
+        const totalRecords = await Category.countDocuments();
+
+        const totalPages =Math.ceil(totalRecords/pageSize)
         const Cats = await Category.find({})
-        res.json(Cats)
+        .skip((pageNumber-1)*pageSize)
+        .limit(pageSize);
+
+        res.json({Cats,totalPages})
     } catch (error) {
         res.status(400).json(error.message);
     }
 })
 
 const getCategory = (async function (req, res) {
+   
     try {
         const catId = req.params.id;
         const cat = await Category.findOne({ _id: catId })
@@ -23,6 +33,40 @@ const getCategory = (async function (req, res) {
         res.status(400);
         res.send(err);
     }
+})
+
+const getBooksByCat = (async function (req, res) {
+   
+    try {
+        const Id = req.params.id;
+        const limit = 6;
+        const pageNumber = parseInt(req.query.pageNumber) || 1;
+        let startIndex = (pageNumber - 1) * limit ;
+        let endIndex = pageNumber * limit;
+        const totalRecords = (await Book.find({catId: Id},null,{ skip: startIndex, limit: endIndex })).length;
+        const totalPages =Math.ceil(totalRecords/limit)
+        
+        const books = await Book.find({catId: Id},null,{ skip: startIndex, limit: endIndex });
+
+
+
+        res.send({books,totalPages});
+    } catch (err) {
+        res.send("something went wrong" + err);
+    }
+    // try {
+    //     const catId = req.params.id;
+    //     const cat = await Category.findOne({ _id: catId })
+    //     if (!cat) {
+    //         res.status(400).json({ message: 'Category not found' })
+    //     }
+    //     else {
+    //         res.status(200).send(cat);
+    //     }
+    // } catch (err) {
+    //     res.status(400);
+    //     res.send(err);
+    // }
 })
 
 const createCategory = (async function (req, res) {
@@ -68,5 +112,6 @@ module.exports = {
     getCategory,
     createCategory,
     updateCategory,
-    deleteCategory
+    deleteCategory,
+    getBooksByCat
 }

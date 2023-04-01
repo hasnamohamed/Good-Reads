@@ -9,9 +9,10 @@ import swal from 'sweetalert';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  isLogedIn:boolean = false;
+  isLogedIn:string = "false";
   isAdmin:boolean = false;
-  userImage:string = "http://localhost:9000/user-defualt-profile.jpeg"
+  userImage:string = "http://localhost:9000/images/user-defualt-profile.jpeg"
+
   constructor(
     private userService:UsersService,
     private routerService:Router,
@@ -20,13 +21,10 @@ export class NavbarComponent implements OnInit {
     }
 
   ngOnInit() {
+    this.userService.updateUserStatus();
     this.userService.currentUserStatus.subscribe(userStatus => this.isLogedIn = userStatus);
-    this.userService.currentTokenInfo.subscribe(
-      userTokenInfo =>
-      {
-        this.userImage = `http://localhost:9000/${userTokenInfo.userImage}`
-        console.log(userTokenInfo.email)
-      })
+    let userInfo = JSON.parse(localStorage.getItem("userInfo")!)
+    this.userImage = `http://localhost:9000/${userInfo.userImage}`
   }
 
 
@@ -34,9 +32,9 @@ export class NavbarComponent implements OnInit {
   {
     this.userService.logout().subscribe(userData => {
       if(userData.status == 201 || 200){
-        this.userService.updateUserStatus(false)
-        localStorage.removeItem("token")
-
+        localStorage.removeItem("userInfo")
+        localStorage.setItem('isLogedIn', "false")
+        this.userService.updateUserStatus()
           swal({
             title: "You have loged out successfully!",
             icon : "success"
@@ -45,11 +43,9 @@ export class NavbarComponent implements OnInit {
           setTimeout(() => {
 
             swal.close()
-
           }, 4000)
 
           this.routerService.navigate(["/"]);
-
         }
     },
     err => {

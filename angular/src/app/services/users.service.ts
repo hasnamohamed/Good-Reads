@@ -21,12 +21,8 @@ export class UsersService {
     userImage:""
   };
 
-  private isLogedStatus = new BehaviorSubject(false);
+  private isLogedStatus = new BehaviorSubject("false");
   currentUserStatus = this.isLogedStatus.asObservable();
-
-
-  private usertokenInfo = new BehaviorSubject(this.tokenInfo)
-  currentTokenInfo= this.usertokenInfo.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -50,18 +46,14 @@ export class UsersService {
 
   }
 
-  tokenIntoLocal(userToken:string)
-  {
-    localStorage.setItem('token', userToken)
-  }
 
   logout()
   {
     const headers = new HttpHeaders()
           .set('Content-Type', 'application/json');
 
-    this.tokenInfo.token = localStorage.getItem('token')!;
-    return this.http.post(this.logoutUrl, this.tokenInfo,
+    let userInfo = JSON.parse(localStorage.getItem("userInfo")!)
+    return this.http.post(this.logoutUrl, {token:userInfo.token},
     {headers: headers, responseType:"text", observe: 'response'})
   }
 
@@ -74,15 +66,13 @@ export class UsersService {
     {headers: headers, responseType:"text", observe: 'response'})
   }
 
-  updateUserStatus(userStatus:boolean)
+  updateUserStatus()
   {
-    this.isLogedStatus.next(userStatus)
+    let state = localStorage.getItem('isLogedIn')
+    this.isLogedStatus.next(state!)
   }
 
-  updateTokenInfo(tokenInfo:tokenInfo)
-  {
-    this.usertokenInfo.next(tokenInfo)
-  }
+
 
 }
 

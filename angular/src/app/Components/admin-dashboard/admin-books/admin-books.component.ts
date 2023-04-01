@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { populatedBook } from 'src/Models/books-populated';
-import { categoryInfo } from 'src/app/db-models/category';
-import { CategoriesService } from 'src/app/services/categories.service';
+import { categoryInfo } from 'src/Models/category';
+import { CategoriesService } from 'src/Services/categories.service';
 import { IAuthor } from 'src/Models/iauthor';
 import { AuthorServiceService } from 'src/Services/author-service.service';
 import { BookService } from 'src/Services/books.service';
@@ -109,7 +109,6 @@ export class AdminBooksComponent {
 
   addBook(addBookForm:any)
   {
-
     const formData = new FormData();
     formData.append("title", this.bookInfo.title);
     formData.append("description", this.bookInfo.description);

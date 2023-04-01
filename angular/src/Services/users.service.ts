@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { loginInfo, RegistrationInfo, restInfo, tokenInfo } from '../db-models/userInfo';
+import { loginInfo, RegistrationInfo, restInfo, tokenInfo } from '../Models/userInfo';
 import { tap } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 

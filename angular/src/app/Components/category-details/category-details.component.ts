@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BookService } from 'src/Services/books.service';
+import { populatedBook } from 'src/Models/books-populated';
 import { ICategory } from 'src/Models/icategory';
 import { CategoryService } from 'src/Services/category.service';
 import { ActivatedRoute, Route, Router } from '@angular/router';
@@ -13,9 +13,9 @@ import { IBook } from 'src/Models/ibook';
 })
 
 export class CategoryDetailsComponent implements OnInit {
-  category_id:string 
+  category_id:string
   category: ICategory | null = null
-  books_list:IBook[]=[];
+  books_list:populatedBook[]=[];
   numberPages : number[] = []
   pageNumber:number = 1;
   totalPages:number = 1;
@@ -32,9 +32,15 @@ export class CategoryDetailsComponent implements OnInit {
   fetchData()
   {
     this.category_service.getBooksByCat(this.category_id , this.pageNumber).subscribe(response=>{
-      this.books_list = response.books
-      console.log("123",this.books_list);
-      this.totalPages = response.totalPages
+      let booksDetlies =JSON.parse(response.body || "")
+      this.books_list = booksDetlies.books;
+      this.totalPages = booksDetlies.totalPages
+
+      this.books_list.forEach((book:any) => {
+        book.image = "http://localhost:9000/" + book.image
+      });
+
+
       this.numberPages = []
       this.numberPages = Array.from({length: this.totalPages}, (_, i) => i + 1);
       this.isLoading=false

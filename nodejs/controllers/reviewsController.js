@@ -3,7 +3,7 @@ const Review = require('../models/review.js')
 async function getReviews(req, res) {
     try {
         let book = req.query.bookId;
-        const reviews = await Review.find({bookId: book});
+        const reviews = await Review.find({bookId:book}).populate({ path: 'userId', select: 'firstName lastName image' });
         res.send(reviews);
     } catch (err) {
         res.send("something went wrong" + err);

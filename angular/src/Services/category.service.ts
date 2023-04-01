@@ -5,7 +5,7 @@ import { ICategory } from 'src/Models/icategory';
 import { HttpHeaders } from '@angular/common/http';
 import { ICategoryResponse } from 'src/Models/ICategoryResponse';
 import { IBookResponse } from 'src/Models/IBookResponse';
-
+import { populatedBook } from 'src/Models/books-populated';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ httpOptions = {
       'Content-Type':  'application/json',
     })
   };
-    
+
   constructor(private http:HttpClient) { }
 
   getAllCategories(pageNumber:number,pageSize:number) : Observable<ICategoryResponse>
@@ -32,13 +32,24 @@ httpOptions = {
 
     return this.http.get<ICategoryResponse> ('http://localhost:9000/category',{params})
   }
-  
 
-  getBooksByCat(category_id:string , pageNumber:number ) : Observable<IBookResponse>
+
+  // getBooksByCat(category_id:string , pageNumber:number ) : Observable<populatedBook>
+  // {
+  //   const params = new HttpParams()
+  //   .set('pageNumber',pageNumber.toString())
+  //   return this.http.get<populatedBook>(`http://localhost:9000/category/${category_id}`,{params})
+  // }
+
+  getBooksByCat(category_id:string , pageNumber:number )
   {
+    const headers = new HttpHeaders()
+    .set('Content-Type', 'application/json');
+
+
     const params = new HttpParams()
     .set('pageNumber',pageNumber.toString())
-    return this.http.get<IBookResponse>(`http://localhost:9000/category/${category_id}`,{params})
+    return this.http.get(`http://localhost:9000/category/${category_id}`,{params,headers: headers, responseType:"text",observe:"response"})
   }
 
   getCategory(category_id:string) : Observable<ICategory>
@@ -51,7 +62,7 @@ httpOptions = {
    return this.http.post <ICategory> ('http://localhost:9000/category',category,this.httpOptions)
   }
 
-  deleteCategory(category_id:string) : Observable<ICategory> 
+  deleteCategory(category_id:string) : Observable<ICategory>
   {
     return this.http.delete <ICategory> (`http://localhost:9000/category/${category_id}`,this.httpOptions)
   }

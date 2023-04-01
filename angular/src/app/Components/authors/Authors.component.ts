@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from 'src/app/services/users.service';
+import { UsersService } from 'src/Services/users.service';
 import { IAuthor } from 'src/Models/iauthor';
 import { AuthorServiceService } from 'src/Services/author-service.service';
 

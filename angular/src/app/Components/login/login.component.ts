@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { loginInfo } from 'src/app/db-models/userInfo';
-import { UsersService } from 'src/app/services/users.service';
+import { loginInfo } from 'src/Models/userInfo';
+import { UsersService } from 'src/Services/users.service';
 import swal from 'sweetalert';
 
 @Component({
@@ -30,11 +30,11 @@ export class LoginComponent implements OnInit {
   loginUser()
   {
     this.userService.login(this.userInfo).subscribe(userData => {
-    this.userService.updateTokenInfo(JSON.parse(userData.body!))
-    this.userService.tokenIntoLocal(JSON.parse(userData.body!).token)
     if(userData.status == 201 || 200){
-      this.userService.updateUserStatus(true)
-      //@ts-ignore
+      localStorage.setItem('userInfo', userData.body!)
+      localStorage.setItem('isLogedIn', "true")
+      this.userService.updateUserStatus()
+
         swal({
           title: "You have loged successfully!",
           icon : "success"
@@ -49,6 +49,8 @@ export class LoginComponent implements OnInit {
         setTimeout(() => {
           this.routerService.navigate(["/"]);
         }, 5000)
+        location.reload()
+
       }
     },
     err => {

@@ -63,10 +63,12 @@ export class AdminAuthorsComponent implements OnInit {
           author.authorImage = "http://localhost:9000/" + author.authorImage
         });
 
-        this.authorsList = authros.authors
+       this.authorsList = authros.authors
 
       },
       err => console.log(err));
+
+      return  this.authorsList
   }
 
   addAuthor(addAuthorForm:any)
@@ -155,14 +157,14 @@ export class AdminAuthorsComponent implements OnInit {
     const formData = new FormData();
 
     // this is not an effieient soluation ... what if we have 15 proprty?
-    if(this.authorInfo.name != '')
+    if(this.authorInfo.name)
       formData.append("name", this.authorInfo.name);
 
 
-    if(this.authorInfo.bio != '')
+    if(this.authorInfo.bio)
       formData.append("bio", this.authorInfo.bio);
 
-    if(this.authorInfo.birthDate != '')
+    if(this.authorInfo.birthDate)
       formData.append("birthDate", this.authorInfo.birthDate.toString());
 
 

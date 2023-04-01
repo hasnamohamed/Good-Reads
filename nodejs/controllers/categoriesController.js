@@ -2,17 +2,28 @@ const Category = require('../models/category.js')
 const Book = require('../models/book.js')
 const getCategories = (async function (req, res) {
     try {
-        const pageSize = parseInt(req.query.pageSize) || 8;
-        const pageNumber = parseInt(req.query.pageNumber) || 1;
 
-        const totalRecords = await Category.countDocuments();
+        
+        if(req.query.pageNumber == "infinity")
+        {
+            const cats =  await Category.find({"_id":{$ne:"64255372e01179a4a3fabfe9"}})
+            res.json({cats})
+        }
+        else
+        {
+            const pageSize = parseInt(req.query.pageSize) || 8;
+            const pageNumber = parseInt(req.query.pageNumber) || 1;
+    
+            const totalRecords = await Category.countDocuments();
+            const totalPages =Math.ceil(totalRecords/pageSize)
 
-        const totalPages =Math.ceil(totalRecords/pageSize)
-        const Cats = await Category.find({})
-        .skip((pageNumber-1)*pageSize)
-        .limit(pageSize);
+    
+            const cats = await Category.find({"_id":{$ne:"64255372e01179a4a3fabfe9"}})
+            .skip((pageNumber-1)*pageSize)
+            .limit(pageSize);
+            res.json({cats,totalPages})
+        }
 
-        res.json({Cats,totalPages})
     } catch (error) {
         res.status(400).json(error.message);
     }
@@ -71,10 +82,9 @@ const getBooksByCat = (async function (req, res) {
 
 const createCategory = (async function (req, res) {
     try {
-        let alldata = new Category();
-        alldata.name = req.body.name;
-        await alldata.save()
-        res.status(200).json(alldata)
+        const {name} = {...req.body};
+        let addedCat = await Category.create({name})
+        res.status(200).json(addedCat)
     } catch (err) {
         if (err.name === "ParallelSaveError") {
             console.log("There was a parallel save error for", keyA, keyB);
@@ -95,13 +105,19 @@ const updateCategory = (async (req, res) => {
 })
 const deleteCategory = (async (req, res) => {
     try{
-        const count = await Category.deleteOne({_id:req.params.id});
+        const cateId = req.params.id;
+        const count = await Category.deleteOne({_id:cateId});
         if(count === 0){
-            res.status(400).send("Category Not Found")
+           return res.status(400).send("Category Not Found")
         }
-        else{
-            res.status(200).send("Category Deleted Successfully")
-        }
+        
+
+        // look up for books written by this author and replaced with anoyminus author
+        const updateBooksWithoutCategory = await Book.updateMany({"cateId":cateId} , {"$set":{"cateId":"64255372e01179a4a3fabfe9"}})
+        console.log(cateId)
+        console.log(updateBooksWithoutCategory)
+        res.status(200).send("Category Deleted Successfully")
+    
 
     }catch(err){
         res.status(400).send(err.message);

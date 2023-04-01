@@ -15,7 +15,6 @@ nav {
 }
 
 
-
 .nav-link, .login-button, .register-button
 {
     padding: 25px;
@@ -44,19 +43,33 @@ nav {
     color: white !important;
 }
 
-.login-button {
+.login-button,
+.user-dashboard-img {
     padding-right: 0px;
     padding-left: 9px;
 }
 
 
 .login-button-text,
-.register-button-text
+.register-button-text,
+.user-dashboard-img
 {
     border: 1px solid #382110;
     padding: 9px;
     border-radius: 6px;
     transition: all .5s;
+}
+
+.user-dashboard-img
+{
+  border: none;
+}
+
+.user-dashboard-img img
+{
+  height: 4em;
+  width: 4em;
+  border-radius: 50%;
 }
 
 .login-button-text:hover,
@@ -65,4 +78,16 @@ nav {
     background-color: #382110;
     color: white;
     border: 1px solid transparent;
+}
+
+.admin-dashboard-icon
+{
+  transform: scale(1.7);
+  overflow: hidden;
+}
+
+.admin-dashboard-icon:hover
+{
+  background-color: transparent !important;
+  color: black !important;
 }

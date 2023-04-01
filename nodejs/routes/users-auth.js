@@ -1,6 +1,8 @@
 const express = require('express');
 const Route = express.Router();
 const auth = require('./../middleware/auth')
+const uploadFile = require('../middleware/uploadFile')
+
 const  { 
     login,
     logout,
@@ -8,7 +10,7 @@ const  {
     resetPassword
 } = require('../controllers/usersController.js')
 
-Route.post('/register',register);
+Route.post('/register',uploadFile().single('file') ,register);
 Route.post('/admin',login);
 Route.post('/login',login);
 Route.post('/logout', auth, logout);

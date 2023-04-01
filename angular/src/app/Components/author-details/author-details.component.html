@@ -5,7 +5,7 @@
         <img src="https://placar.abril.com.br/wp-content/uploads/2022/09/GettyImages-1242668441.jpg?quality=70&strip=info&w=1280&h=720&crop=1" class="img-fluid col-md-6 col-lg-4" alt="...">
         <div class="col-md-6 col-lg-4">
             <h1>{{author?.name}}</h1>
-            <p>{{author?.birthDate}}</p>
+            <p>{{author?.birthDate | date:'MM/dd/yyyy'}}</p>
             <p>{{author?.bio}}</p>
         </div>
     </div>

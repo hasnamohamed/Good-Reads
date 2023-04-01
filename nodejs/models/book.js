@@ -14,7 +14,6 @@ const books = new mongoose.Schema({
     },
     image: {
         type: String,
-        required: true
     },
     description: {
         type: String,
@@ -25,7 +24,7 @@ const books = new mongoose.Schema({
         ref: "Author",
         required: true
     },
-    catId: {
+    cateId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Category",
         required: true

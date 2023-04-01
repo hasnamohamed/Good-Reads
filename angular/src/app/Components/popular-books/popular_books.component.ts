@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IBook } from 'src/Models/iBook';
+import { populatedBook } from 'src/Models/books-populated';
 import { HomeServiceService } from 'src/Services/home-service.service';
 
 @Component({
@@ -10,13 +10,15 @@ import { HomeServiceService } from 'src/Services/home-service.service';
 
 export class Popular_booksComponent implements OnInit {
 
-  popular_books:IBook[] = []
+  popular_books:populatedBook[] =[]
   
   constructor(private home_service:HomeServiceService){}
   
   ngOnInit():void {
     this.home_service.getPopularBooks().subscribe(books=>{
       this.popular_books = books
+      console.log(this.popular_books);
+      
     })    
 };
 }

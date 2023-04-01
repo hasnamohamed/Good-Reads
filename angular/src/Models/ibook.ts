@@ -7,7 +7,7 @@ export interface IBook {
   }
   title:string;
   description:string;
-  image:string;
-  authorId:string
-  catId:string
+  image?:string;
+  authorId:string;
+  cateId:string;
 }

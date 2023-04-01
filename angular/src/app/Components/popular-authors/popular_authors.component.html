@@ -1,19 +1,8 @@
 <div class="border rounded">
       <h2 class="fw-bold text-danger mb-0 mt-3 px-4">Popular Authors</h2>
     <div class="d-flex justify-content-center">
-      <i class="icon fa-solid fs-2 my-auto fa-circle-chevron-left mx-3"></i>
-      <a class="nav-link col-xl-3 col-md-6" [routerLink]="'/author/10'">
-        <app-card></app-card>
+      <a class="nav-link col-xl-3 col-md-6" *ngFor="let author of popular_authors" [routerLink]="'/author/'+author._id">
+        <app-card [name]="author.name"></app-card>
       </a>
-      <a class="nav-link col-xl-3 col-md-6" [routerLink]="'/author/10'">
-        <app-card></app-card>
-      </a>
-      <a class="nav-link col-xl-3 col-md-6" [routerLink]="'/author/10'">
-        <app-card></app-card>
-      </a>
-      <a class="nav-link col-xl-3 col-md-6" [routerLink]="'/author/10'">
-        <app-card></app-card>
-      </a>
-      <i class="icon fa-solid fs-2 my-auto fa-circle-chevron-right mx-3"></i>
-    </div>
+      </div>
 </div>

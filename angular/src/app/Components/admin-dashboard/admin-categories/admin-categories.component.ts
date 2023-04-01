@@ -25,11 +25,22 @@ export class AdminCategoriesComponent implements OnInit, OnChanges{
     _id:"",
     name:""
   }
-
   catList:categoryInfo[]  = []
+
+  totalPageNumber:number = 1;
+  currentPageNumber:number = 1;
+
+
   constructor(private categoriesService:CategoriesService, private routerService:Router) {
-    this.categoriesService.getAllCate().subscribe(
-      catList => this.catList = JSON.parse(catList.body || ""),
+    this.categoriesService.getAllCate(this.currentPageNumber.toString()).subscribe(
+      catList =>
+      {
+        let incomingCateList = JSON.parse(catList.body || "")
+
+        this.catList = incomingCateList.cats
+        this.totalPageNumber = incomingCateList.totalPages
+      },
+
       err => console.log(err));
   }
 
@@ -155,5 +166,28 @@ export class AdminCategoriesComponent implements OnInit, OnChanges{
         }
       })
   }
+
+  prevPage()
+  {
+    if(this.currentPageNumber != 1)
+    {
+      this.currentPageNumber--
+      this.categoriesService.getAllCate(this.currentPageNumber.toString()).subscribe(
+        catList => this.catList = JSON.parse(catList.body || ""),
+        err => console.log(err));
+    }
+  }
+
+  nextPage()
+  {
+    if(this.currentPageNumber < this.totalPageNumber)
+    {
+      this.currentPageNumber++
+      this.categoriesService.getAllCate(this.currentPageNumber.toString()).subscribe(
+        catList => this.catList = JSON.parse(catList.body || ""),
+        err => console.log(err));
+    }
+  }
+
 
 }

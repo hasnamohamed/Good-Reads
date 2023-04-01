@@ -1,8 +1,9 @@
-<section class="container">
 
+
+<section class="container-fluid">
   <form class="register-form" #regForm='ngForm'>
     <div ngModelGroup="passwords" #passwords="ngModelGroup" passwordMatchChecker class="row">
-      <div class="mb-3 form-group col-6" >
+      <div class="mb-3 form-group col-sm-12 col-md-6" >
         <label for="firstName" class="form-label">first name</label>
         <input type="text" class="form-control" id="firstName" aria-describedby="firstName" name="first"
               required #firstName="ngModel" [(ngModel)]="userInfo.firstName" >
@@ -12,7 +13,7 @@
         </div>
       </div>
 
-      <div class="mb-3 col-6">
+      <div class="mb-3 col-sm-12 col-md-6">
         <label for="lastName" class="form-label">last name</label>
         <input type="text" class="form-control" id="lastName"  name="lastName"
               required #lastName="ngModel"  [(ngModel)]="userInfo.lastName " >
@@ -29,24 +30,55 @@
 
         <div *ngIf="userEmail.errors && ( userEmail.touched)" class="alert alert-danger">
           <small   *ngIf="userEmail.errors?.['required']">email is required</small>
-          <small   *ngIf="userEmail.errors?.['pattern']">Please provide a valid email address</small>
+          <small   *ngIf="userEmail.errors?.['pattern']">the email must look like <strong>example@[email provider].something</strong>
+            replace [email provider] with gmail or hotmail ..etc
+          </small>
         </div>
       </div>
 
-      <div class="mb-3 form-group col-6">
-        <label for="userPassword" class="form-label">password</label>
-        <input type="password" class="form-control" id="userPassword" name="userPass"
+      <div class="mb-3 form-group col-sm-12 col-md-6">
+        <label  for="userPassword" class="form-label">password</label>
+        <input (input)="passwordChecker()" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$" type="password" class="form-control" id="userPassword" name="userPass"
             required #userPass="ngModel" [(ngModel)]="userInfo.password" >
-
       </div>
 
-      <div class="mb-3 form-group col-6">
+      <div class="mb-3 form-group col-sm-12 col-md-6">
         <label for="userPassConfiorm" class="form-label">retype password</label>
         <input type="password" class="form-control" id="userPassConfiorm" name="userPassConfiorm"
             required #passConfiorm="ngModel" [(ngModel)]="userInfo.passwordConform" >
 
       </div>
 
+      <div class="password-match-container" *ngIf="userPass.errors?.['pattern']  && ( userPass.touched)">
+        <h5>Password must contain: </h5>
+        <ul class="password-cases-container">
+          <li>
+            <i  *ngIf="passMatchInf.oneUpperCase"  class="fa-solid fa-check"></i>
+            <i  *ngIf="!passMatchInf.oneUpperCase"  class="fa-solid fa-xmark"></i>
+            one Upper Case Letter
+          </li>
+          <li>
+            <i  *ngIf="passMatchInf.oneLowerCase"  class="fa-solid fa-check"></i>
+            <i  *ngIf="!passMatchInf.oneLowerCase"  class="fa-solid fa-xmark"></i>
+            one Lower Case Letter
+          </li>
+          <li>
+            <i  *ngIf="passMatchInf.oneDigit"  class="fa-solid fa-check"></i>
+            <i  *ngIf="!passMatchInf.oneDigit"  class="fa-solid fa-xmark"></i>
+            <span>one Lower Case Letter</span>
+          </li>
+          <li>
+            <i  *ngIf="passMatchInf.oneSpecialCharacter"  class="fa-solid fa-check"></i>
+            <i  *ngIf="!passMatchInf.oneSpecialCharacter"  class="fa-solid fa-xmark"></i>
+            one Special Character
+          </li>
+          <li>
+            <i  *ngIf="passMatchInf.minimumEightLength"  class="fa-solid fa-check"></i>
+            <i  *ngIf="!passMatchInf.minimumEightLength"  class="fa-solid fa-xmark"></i>
+            minimum length Eight
+          </li>
+        </ul>
+      </div>
 
       <div *ngIf="userPass.errors?.['required'] && (userPass.touched)"  class="alert alert-danger">
         Password is required.
@@ -58,6 +90,19 @@
 
       <div *ngIf="passwords.errors?.['passwordCheck'] && (passConfiorm.dirty || passConfiorm.touched)" class="alert alert-danger">
         Passwords do not match.
+      </div>
+
+      <div class="mb-3">
+        <label for="gender" class="form-label col-12 col-md-2"> gender</label>
+        <div class="form-check form-check-inline">
+          <input (change)="setUserDefualtImage()" [(ngModel)]="userInfo.gender" value="male" class="form-check-input" type="radio" name="genderMale" id="genderMale">
+          <label class="form-check-label" for="genderMale">male</label>
+        </div>
+
+        <div class="form-check form-check-inline">
+          <input (change)="setUserDefualtImage()" [(ngModel)]="userInfo.gender"  value="female" class="form-check-input" type="radio" name="genderFemale" id="genderFemale">
+          <label class="form-check-label" for="genderFemale">female</label>
+        </div>
       </div>
 
       <div class="mb-3">
@@ -74,7 +119,6 @@
         </div>
       </div>
 
-
       <div class="mb-3">
         <label for="secretAnswer" class="form-label">secret answer</label>
         <input type="text" class="form-control" id="secretAnswer" aria-describedby="firstName" name="secretAnswer"
@@ -84,14 +128,23 @@
           secret answer is required.
         </div>
       </div>
+      <div class="mb-3 row ">
+        <label for="formFile" class="col-sm-12 col-md-4 col-form-label">profile Image</label>
+        <div class="col-sm-12 col-md-8">
+          <input (change)="readURL($event)" #userImage class="form-control" type="file" accept=".jpg, .png, .jpeg" id="formFile" name="userImage" alt="user Image">
+        </div>
+      </div>
+      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion" class="mb-3 row image-preview-container">
+        <label for="formFile" class="col-sm-12 col-form-label">Image Preview</label>
+        <img [src]="previewImage">
+      </div>
+      <div>
+        <p>
+          Already Have Acoount?
+          <a class="login-link" routerLink="/login" routerLinkActive="active">login in!</a>
+        </p>
+      </div>
+      <button type="submit" class="btn btn-primary col-2" (click)="registerNewUser()" [disabled]="regForm.invalid">Submit</button>
     </div>
-    <div>
-      <p>
-        Already Have Acoount?
-        <a class="login-link" routerLink="/login" routerLinkActive="active">login in!</a>
-      </p>
-    </div>
-    <button type="submit" class="btn btn-primary col-2" (click)="registerNewUser()" [disabled]="regForm.invalid">Submit</button>
-
   </form>
 </section>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UsersService } from 'src/app/services/users.service';
 import { IAuthor } from 'src/Models/iauthor';
 import { AuthorServiceService } from 'src/Services/author-service.service';
 
@@ -16,13 +17,14 @@ export class AuthorsComponent implements OnInit {
   totalPages:number = 1;
   isLoading = true;
 
-  constructor(private author_service:AuthorServiceService) { }
+  constructor(private author_service:AuthorServiceService) {}
 
   newAuthor :IAuthor = {
     "name":"Mohamed Sabry",
     "birthDate":"",
     "bio":"new bio for mohamed sabry"
   }
+
 
   ngOnInit():void {
       this.fetchData()

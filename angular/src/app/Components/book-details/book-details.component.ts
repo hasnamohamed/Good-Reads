@@ -1,6 +1,5 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
-import { IBook } from 'src/Models/iBook';
 import { BookService } from 'src/Services/books.service';
 import {IAuthor} from "../../../Models/iauthor";
 import {AuthorServiceService} from "../../../Services/author-service.service";

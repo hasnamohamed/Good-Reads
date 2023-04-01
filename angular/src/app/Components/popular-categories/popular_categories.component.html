@@ -1,20 +1,10 @@
 <div class="border rounded">
 <h2 class="fw-bold text-warning mb-0 mt-3 px-4">Popular Categories</h2>
 <div class="d-flex justify-content-center">
-  <i class="icon fa-solid fs-2 my-auto fa-circle-chevron-left mx-3"></i>
-  <a class="nav-link col-xl-3 col-md-6" [routerLink]="'/categories/10'">
-    <app-card></app-card>
+  <a class="nav-link col-xl-3 col-md-6" *ngFor="let cat of popular_cats" [routerLink]="'/categories/'+cat._id">
+    <app-card [name]="cat.name"></app-card>
   </a>
-  <a class="nav-link col-xl-3 col-md-6" [routerLink]="'/categories/10'">
-    <app-card></app-card>
-  </a>
-  <a class="nav-link col-xl-3 col-md-6" [routerLink]="'/categories/10'">
-    <app-card></app-card>
-  </a>
-  <a class="nav-link col-xl-3 col-md-6" [routerLink]="'/categories/10'">
-    <app-card></app-card>
-  </a>
-  <i class="icon fa-solid fs-2 my-auto fa-circle-chevron-right mx-3"></i>
+ 
 </div>
 </div>
 

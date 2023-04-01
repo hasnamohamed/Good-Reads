@@ -3,7 +3,7 @@ const Book = require('../models/book.js')
 
 const popular_books = (async (req,res)=>{
     try{
-        const popularBooks = await Book.find().sort({ 'rating.rate': -1 }).limit(4);
+        const popularBooks = await Book.find().sort({ 'rating.rate': -1,'rating.totalVotes': -1 }).populate('cateId authorId' ).limit(4);
            return res.json(popularBooks);
         
     }catch(err)
@@ -12,10 +12,21 @@ const popular_books = (async (req,res)=>{
     }
 })
 
+    const getBooksByAuthorId = async (req, res) => {
+    try {
+      const authorId = req.params.id;
+      const books = await Book.find({ authorId });
+      res.status(200).json(books);
+    } catch (error) {
+      res.status(400).send('Something went wrong: ' + error);
+    }
+  };
+  
+  module.exports = { getBooksByAuthorId };
 
 const getBooks = (async(req, res) => {
     try {
-        let limit = 6;
+        let limit = 8;
         const pageNumber = parseInt(req.query.pageNumber) || 1;
 
         const totalRecords = await Book.countDocuments();
@@ -23,7 +34,8 @@ const getBooks = (async(req, res) => {
 
         let startIndex = (pageNumber - 1) * limit ;
         let endIndex = pageNumber * limit;
-        const books = await Book.find(null,null,{ skip: startIndex, limit: endIndex });
+        
+        const books = await Book.find(null,null,{ skip: startIndex, limit: endIndex, populate: 'cateId authorId' });
         res.status(200).json({books,totalPages});
     } catch (err) {
         res.send("something went wrong" + err);
@@ -42,7 +54,10 @@ const getBook = (async (req, res) => {
                 message: 'Book not found'
             })
         }
-        res.status(200).json(book)
+
+        let popluatedBook =  await book.populate('cateId authorId')
+
+        res.status(200).json(popluatedBook)
     } catch (err) {
         res.status(400).send('something went wrong : ' + err)
     }
@@ -50,16 +65,38 @@ const getBook = (async (req, res) => {
 
 const createBook = (async function (req, res) {
     try {
-        if (!req.body.title || !req.body.image || !req.body.description || !req.body.authorId || !req.body.catId) {
+
+        const {title, description, authorId, cateId} = {...req.body}
+        let bookCover;
+
+        if (!title || !description || !authorId || !cateId) {
             return res.status(400).json({
                 message: 'Missing required fields'
             });
         }
+
+
+        if(req.file != undefined)
+        {
+            bookCover =  `images/${req.file.filename}`
+        }
+        else
+        {
+            bookCover = `images/no-cover.png`
+        }
+
         let bookInfo = {
-            ...req.body
+            title:title,
+            description:description,
+            authorId:authorId,
+            cateId:cateId,
+            image:bookCover
         };
-        await Book.create(bookInfo);
-        res.status(200).send("Book saved successfully")
+        let newBook = await Book.create(bookInfo);
+        let popluatedBook =  await newBook.populate('cateId authorId')
+
+
+        res.status(200).send(popluatedBook)
     } catch (err) {
         if (err.name === "ParallelSaveError") {
             res.status(400).send("Parallel Save Error" + err);
@@ -71,27 +108,44 @@ const createBook = (async function (req, res) {
 
 const updateBook = (async (req, res) => {
     try {
-        const bookId = req.params.id;
-        if (!req.body.title || !req.body.image || !req.body.description || !req.body.authorId || !req.body.catId) {
-            return res.status(400).json({
-                message: 'Missing required fields'
-            });
-        }
-        const bookInfo = req.body;
+
+        if (Object.keys(req.body).length == 0) {
+            return res.status(400).json({ message: 'At least one filed must be provided' });
+          }
+        
+
+          const bookId = req.params.id;
+          let image;
+
+          let bookInfo = {
+            ...req.body
+          }
+
+          if(req.file != undefined)
+          {
+            image =  `images/${req.file.filename}`
+            bookInfo.image = image
+          }
+
+          console.log(bookInfo)
+
 
         const updatedBook = await Book.findByIdAndUpdate(
-            bookId, {
-                ...bookInfo
-            }, {
+            bookId, {...bookInfo} , {
                 new: true
             }
         );
+
         if (!updatedBook) {
             return res.status(404).json({
                 message: 'Book not found'
             });
         }
-        return res.status(200).json("Book updated");
+
+        let popluatedBook =  await updatedBook.populate('cateId authorId')
+
+        res.status(200).send(popluatedBook)
+
     } catch (err) {
         res.status(400).send(err);
     }
@@ -114,11 +168,14 @@ const deleteBook = (async (req, res) => {
     }
 
 })
+
+
 module.exports = {
     getBooks,
     getBook,
     createBook,
     updateBook,
     deleteBook,
-    popular_books
+    popular_books,
+    getBooksByAuthorId
 }

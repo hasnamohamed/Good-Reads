@@ -3,7 +3,7 @@ import { BookService } from 'src/Services/books.service';
 import { ICategory } from 'src/Models/icategory';
 import { CategoryService } from 'src/Services/category.service';
 import { ActivatedRoute, Route, Router } from '@angular/router';
-import { IBook } from 'src/Models/iBook';
+import { IBook } from 'src/Models/ibook';
 
 
 @Component({

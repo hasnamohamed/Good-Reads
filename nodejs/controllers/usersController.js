@@ -7,40 +7,52 @@ async function register(req, res)
 {
     try 
     {
-        const {firstName, lastName, image, email, password, secretQuestion, secretAnswer} = req.body
+        const {firstName, lastName, gender, email, password, secretQuestion, secretAnswer} = {...req.body}
 
         let existedUser = await User.findOne({email:email.toLowerCase()})
         let encryptedPassword = await bcrypt.hash(password, 10);
         let emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+        let userImage;
 
         if(existedUser != null)
             return res.status(409).json("The user is already exist, please login")
 
-        if(!(firstName && lastName && email && password && secretQuestion && secretAnswer))
+        if(!(firstName && lastName && email && password && gender && secretQuestion && secretAnswer))
             return res.status(400).send("All filed are required")
 
         if(emailPattern.test(email) == false)
-            return res.status(450).send(`
+            return res.status(403).send(`
             The proper email must:
                 Must have English letters and numbers only in the front
                 Must have the charchter @
                 Must have a domain like gmail or hotmail
                 Must have .com or .net ...etc`)
         
-        
+
+        if(req.file != undefined)
+        {
+            userImage =  `images/${req.file.filename}`
+        }
+        else
+        {
+            userImage = `images/user-defualt-profile.jpeg`
+        }
+
         let userInfo = 
         {
             firstName,
             lastName,
-            image,
             email:email.toLowerCase(),
             password:encryptedPassword,
+            gender:gender,
             secretQuestion,
-            secretAnswer
+            secretAnswer,
+            image:userImage,
+
         }
 
         let newUser = await User.create(userInfo)
-        
+        console.log(newUser)
         return res.sendStatus(200).send("user has been created successfully")
     
 
@@ -68,7 +80,7 @@ async function login(req, res)
         let existedUser = await User.findOne({email:email.toLowerCase()})
         let decryptedPasswordMatch = await bcrypt.compare(password, existedUser.password)
 
-        if(userEndPoint === "/admin" && existedUser.isAdmin != true)
+        if(userEndPoint === "/admin-dashboard" && existedUser.isAdmin != true)
         {
             return res.status(403).send("Access Denied, the action had been reported")
         }
@@ -87,15 +99,15 @@ async function login(req, res)
             // Update user's login status
             await User.updateOne({email:email}, {isLogedIn:true})
             
-            let tokenInfo = {email:existedUser.email, token:token, expiresIn:"8 hours"}
-            return res.status(201).send(tokenInfo);
+            let tokenInfo = {email:existedUser.email, token:token, expiresIn:"8 hours", userImage:existedUser.image}
+            return res.status(200).send(tokenInfo);
         }
         else
-            return res.status(403).send("The password is incorrect")
+            return res.status(401).send("The password is incorrect")
 
     } catch
     {
-        return res.status(403).send("No account assoicated with that email")
+        return res.status(404).send("No account assoicated with that email")
     }      
 
 

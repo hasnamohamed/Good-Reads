@@ -14,13 +14,13 @@ export class CategoriesService {
   constructor(private http: HttpClient) { }
 
 
-  getAllCate()
+  getAllCate(pageNumber:string)
   {
 
     const headers = new HttpHeaders()
           .set('Content-Type', 'application/json');
 
-    return this.http.get(this.categoriesURL,
+    return this.http.get(`${this.categoriesURL}?pageNumber=${pageNumber}`,
     {headers: headers, responseType:"text", observe: 'response'})
 
   }
@@ -43,7 +43,6 @@ export class CategoriesService {
 
     return this.http.put(updateCateURL, {name:cateName},
     {responseType:"text", observe: 'response'})
-
   }
 
   deleteCate(id:string)

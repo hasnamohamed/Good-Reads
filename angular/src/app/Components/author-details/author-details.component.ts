@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { IAuthor } from 'src/Models/iauthor';
-import { IBook } from 'src/Models/iBook';
+import { IBook } from 'src/Models/ibook';
 import { IBookResponse } from 'src/Models/IBookResponse';
 import { AuthorServiceService } from 'src/Services/author-service.service';
 import { BookService } from 'src/Services/books.service';
@@ -32,16 +32,25 @@ export class AuthorDetailsComponent implements OnInit{
 
   ngOnInit(): void {
     this.getAuhtorData()
+    this.getAuthorBooksById()
     // this.getAuthorBooks()
-    console.log(this.author_books.length); 
+    
   }
 
   getAuhtorData()
   {
-    this.author_service.getAuthorById(this.author_id).subscribe(response=>{
-      this.author = response.author
-      this.author_books = response.books
+    this.author_service.getAuthorById(this.author_id).subscribe(author=>{
+      this.author = author
       this.isLoading=false
+      console.log(this.author_books);
+      
+  })
+  }
+
+  getAuthorBooksById()
+  {
+    this.author_service.getAuthorBookById(this.author_id).subscribe(books=>{
+      this.author_books = books
   })
   }
 

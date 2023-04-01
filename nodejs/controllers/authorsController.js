@@ -1,5 +1,7 @@
 const Author = require('../models/author.js')
-const Book = require('../models/book.js');
+
+const Book = require('../models/book.js')
+
 // 1-get all authors from database
 const getAuthors = (async(req, res) => {
     try {
@@ -7,10 +9,10 @@ const getAuthors = (async(req, res) => {
         const pageNumber = parseInt(req.query.pageNumber) || 1;
 
         const totalRecords = await Author.countDocuments();
-
         const totalPages =Math.ceil(totalRecords/pageSize)
 
-        const authors = await Author.find({})
+        // remove Anonymous Author from the resualt so Adimns cannot remove it
+        const authors = await Author.find({"_id":{$ne:"642549bfa05640bd7a0f99e9"}})
         .skip((pageNumber-1)*pageSize)
         .limit(pageSize);
 
@@ -26,12 +28,11 @@ const getAuthor = (async(req, res) => {
         
         const authorID = req.params.id
         const author = await Author.findOne({_id:authorID});
-        const books = await Book.find({ authorId: authorID });
 
         if(!author){
             return res.status(404).json({message:'Author not found'})
         }
-            res.json({author,books})
+            res.json(author)
     } catch (error) {
         res.status(400).json(error.message);
     }
@@ -113,12 +114,19 @@ const deleteAuthor = (async(req, res) => {
         return res.status(404).json({ error: 'Author not found' });
       }
 
+      // look up for books written by this author and replaced with anoyminus author
+      const updateBooksWithoutAuthor	= await Book.updateMany({"authorId":authorID}, {"$set":{"authorId":"642549bfa05640bd7a0f99e9"}});
+
       res.status(200).json({ message: 'Author deleted successfully' });
 
    } catch (error) {
     res.status(400).json(error.message);
    }
 })
+
+
+
+
 module.exports = {
     getAuthors,
     getAuthor,

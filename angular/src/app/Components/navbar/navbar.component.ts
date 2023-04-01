@@ -10,14 +10,23 @@ import swal from 'sweetalert';
 })
 export class NavbarComponent implements OnInit {
   isLogedIn:boolean = false;
+  isAdmin:boolean = false;
+  userImage:string = "http://localhost:9000/user-defualt-profile.jpeg"
   constructor(
     private userService:UsersService,
-    private routerService:Router
-    ) {
-  }
+    private routerService:Router,
+    )
+    {
+    }
 
   ngOnInit() {
     this.userService.currentUserStatus.subscribe(userStatus => this.isLogedIn = userStatus);
+    this.userService.currentTokenInfo.subscribe(
+      userTokenInfo =>
+      {
+        this.userImage = `http://localhost:9000/${userTokenInfo.userImage}`
+        console.log(userTokenInfo.email)
+      })
   }
 
 
@@ -26,7 +35,8 @@ export class NavbarComponent implements OnInit {
     this.userService.logout().subscribe(userData => {
       if(userData.status == 201 || 200){
         this.userService.updateUserStatus(false)
-        //@ts-ignore
+        localStorage.removeItem("token")
+
           swal({
             title: "You have loged out successfully!",
             icon : "success"
@@ -34,14 +44,12 @@ export class NavbarComponent implements OnInit {
 
           setTimeout(() => {
 
-            // @ts-ignore
             swal.close()
 
           }, 4000)
 
-          setTimeout(() => {
-            this.routerService.navigate(["/"]);
-          }, 5000)
+          this.routerService.navigate(["/"]);
+
         }
     },
     err => {

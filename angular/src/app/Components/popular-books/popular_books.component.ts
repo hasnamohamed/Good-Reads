@@ -11,14 +11,14 @@ import { HomeServiceService } from 'src/Services/home-service.service';
 export class Popular_booksComponent implements OnInit {
 
   popular_books:populatedBook[] =[]
+  isLoading=true
   
   constructor(private home_service:HomeServiceService){}
   
   ngOnInit():void {
     this.home_service.getPopularBooks().subscribe(books=>{
       this.popular_books = books
-      console.log(this.popular_books);
-      
+      if(this.popular_books) this.isLoading=false      
     })    
 };
 }

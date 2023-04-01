@@ -19,15 +19,9 @@ export class AuthorsComponent implements OnInit {
 
   constructor(private author_service:AuthorServiceService) {}
 
-  newAuthor :IAuthor = {
-    "name":"Mohamed Sabry",
-    "birthDate":"",
-    "bio":"new bio for mohamed sabry"
-  }
-
-
   ngOnInit():void {
       this.fetchData()
+      
   };
 
 
@@ -35,6 +29,8 @@ export class AuthorsComponent implements OnInit {
   {
     this.author_service.getAllAuthors(this.pageNumber,this.pageSize).subscribe(response=>{
         this.authors_list = response.authors
+        console.log(this.authors_list);
+        
         this.totalPages = response.totalPages
         this.numberPages = []
         this.numberPages = Array.from({length: this.totalPages}, (_, i) => i + 1);

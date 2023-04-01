@@ -1,0 +1,19 @@
+.book-container {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 16px;
+    margin: 0 -10px;
+  }
+
+  .book-container::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+  }
+  
+  .nav-link {
+    flex: 0 0 auto;
+    width: 25%;
+  }
+
+  

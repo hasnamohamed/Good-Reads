@@ -5,6 +5,7 @@ import { IBook } from 'src/Models/ibook';
 import { IBookResponse } from 'src/Models/IBookResponse';
 import { AuthorServiceService } from 'src/Services/author-service.service';
 import { BookService } from 'src/Services/books.service';
+import { StarRatingColor } from '../Shared/star-rating/star-rating.component';
 
 @Component({
   selector: 'author-details',
@@ -14,7 +15,14 @@ import { BookService } from 'src/Services/books.service';
 export class AuthorDetailsComponent implements OnInit{
   author_id:string
   author: IAuthor | null = null
-  author_books : IBook[] = []
+  author_books : any[] = []
+  img:string = "http://localhost:9000/"
+  
+  starCount: number = 5;
+  starColor: StarRatingColor = StarRatingColor.accent;
+  starColorP: StarRatingColor = StarRatingColor.primary;
+  starColorW: StarRatingColor = StarRatingColor.yell;
+  
   // numberPages : number[] = []
   // pageSize:number =20 ;
   // pageNumber:number = 1;
@@ -41,9 +49,7 @@ export class AuthorDetailsComponent implements OnInit{
   {
     this.author_service.getAuthorById(this.author_id).subscribe(author=>{
       this.author = author
-      this.isLoading=false
-      console.log(this.author_books);
-      
+      this.isLoading=false      
   })
   }
 
@@ -51,6 +57,8 @@ export class AuthorDetailsComponent implements OnInit{
   {
     this.author_service.getAuthorBookById(this.author_id).subscribe(books=>{
       this.author_books = books
+      console.log(this.author_books);
+      
   })
   }
 

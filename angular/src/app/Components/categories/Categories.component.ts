@@ -13,6 +13,7 @@ export class CategoriesComponent implements OnInit {
   pageSize:number = 8;
   pageNumber:number = 1;
   totalPages:number = 1;
+  isLoading = true;
   constructor(private category_service:CategoryService) { }
 
   ngOnInit():void {
@@ -23,10 +24,11 @@ export class CategoriesComponent implements OnInit {
   fetchData()
   {
     this.category_service.getAllCategories(this.pageNumber,this.pageSize).subscribe(response=>{
-        this.cats_list = response.Cats
+        this.cats_list = response.cats
         this.totalPages = response.totalPages
         this.numberPages = []
         this.numberPages = Array.from({length: this.totalPages}, (_, i) => i + 1);
+        this.isLoading=false
     })
   }
 

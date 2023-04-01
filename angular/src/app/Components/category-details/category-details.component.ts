@@ -19,6 +19,7 @@ export class CategoryDetailsComponent implements OnInit {
   numberPages : number[] = []
   pageNumber:number = 1;
   totalPages:number = 1;
+  isLoading = true;
   constructor(private category_service:CategoryService,
     private active_route:ActivatedRoute,
     private router:Router ) {
@@ -26,14 +27,17 @@ export class CategoryDetailsComponent implements OnInit {
   }
   ngOnInit():void {
     this.fetchData()
+    
   };
   fetchData()
   {
     this.category_service.getBooksByCat(this.category_id , this.pageNumber).subscribe(response=>{
       this.books_list = response.books
+      console.log("123",this.books_list);
       this.totalPages = response.totalPages
       this.numberPages = []
       this.numberPages = Array.from({length: this.totalPages}, (_, i) => i + 1);
+      this.isLoading=false
     })
   }
   getPage(pageNumber:number){

@@ -15,10 +15,10 @@ export class Popular_categoriesComponent implements OnInit {
   constructor(private home_service:HomeServiceService){}
   
   ngOnInit():void {
-    this.getPopularAuthor()
+    this.getPopularCats()
  };
 
-getPopularAuthor()
+getPopularCats()
 {
   this.home_service.getPopularBooks().subscribe(books=>{
     this.popular_books = books

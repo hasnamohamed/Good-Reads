@@ -38,6 +38,7 @@ export class BookDetailsComponent {
   ngOnInit(): void {
     this.book_service.getBookById(this.book_id).subscribe(book=>{
       this.book = book
+      if(book) this.isLoading=false
       this.fetchAuthorsData()
       this.fetchReviewsData()
     })

@@ -1,8 +1,12 @@
-<div class="border rounded my-3">
+<app-spinner *ngIf="isLoading"></app-spinner>
+
+<div class="border rounded">
 <h2 class="fw-bold text-danger m-0 px-4">Popular Books</h2>
-<div class="d-flex justify-content-center">
-  <a class="nav-link col-xl-3 col-md-6" *ngFor="let book of popular_books" [routerLink]="'/books/'+book._id">
-    <app-card [name]="book.title"></app-card>
-  </a>  
+<div class="container d-flex justify-content-center">
+  <div class="book-container">
+    <a class="nav-link col-12 col-md-6 col-xxl-3" *ngFor="let book of popular_books" [routerLink]="'/books/'+book._id">
+      <app-card image={{book.image}} [name]="book.title"></app-card>
+    </a>  
+  </div>
 </div>
 </div>

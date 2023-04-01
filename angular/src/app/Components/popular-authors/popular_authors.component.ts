@@ -12,6 +12,7 @@ export class Popular_authorsComponent implements OnInit {
 
   popular_books:populatedBook[] = []
   popular_authors: IAuthor[] = []
+  isLoading = true
   constructor(private home_service:HomeServiceService){}
   
   ngOnInit():void {
@@ -24,9 +25,10 @@ getPopularAuthor()
 {
   this.home_service.getPopularBooks().subscribe(books=>{
     this.popular_books = books
+    this.isLoading=false
     this.popular_books.forEach(book => {
       const author = book.authorId
-      if(!this.popular_authors.find(a=>a._id ===author._id))
+      if(!this.popular_authors.find(a=>a._id === author._id))
         this.popular_authors.push(author)
     });
   }) 

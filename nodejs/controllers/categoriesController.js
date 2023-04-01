@@ -54,12 +54,10 @@ const getBooksByCat = (async function (req, res) {
         const pageNumber = parseInt(req.query.pageNumber) || 1;
         let startIndex = (pageNumber - 1) * limit ;
         let endIndex = pageNumber * limit;
-        const totalRecords = (await Book.find({catId: Id},null,{ skip: startIndex, limit: endIndex })).length;
+        const totalRecords = (await Book.find({cateId: Id},null,{ skip: startIndex, limit: endIndex })).length;
         const totalPages =Math.ceil(totalRecords/limit)
         
-        const books = await Book.find({catId: Id},null,{ skip: startIndex, limit: endIndex });
-
-
+        const books = await Book.find({cateId: Id},null,{ skip: startIndex, limit: endIndex });
 
         res.send({books,totalPages});
     } catch (err) {

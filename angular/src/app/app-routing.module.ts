@@ -18,6 +18,7 @@ import { RestPasswordComponent } from './Components/rest-password/rest-password.
 import { AuthorDetailsComponent } from './Components/author-details/author-details.component';
 import { CategoryDetailsComponent } from './Components/category-details/category-details.component';
 import { BookDetailsComponent } from './Components/book-details/book-details.component';
+import { UserDashboardComponent } from './Components/user-dashboard/user-dashboard.component';
 
 const routes: Routes = [
   {path:'', redirectTo:"/home", pathMatch:"full"},
@@ -30,6 +31,7 @@ const routes: Routes = [
   {path:'teams-and-condations', component:TeamsAndConditionComponent},
   {path:'login', component:LoginComponent},
   {path:'register', component:RegisterComponent},
+  {path:'user-dashboard', component:UserDashboardComponent},
   {path:'reset', component:RestPasswordComponent},
   {path:'author/:id', component:AuthorDetailsComponent},
   {path:'categories/:id', component:CategoryDetailsComponent},

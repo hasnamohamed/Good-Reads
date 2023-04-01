@@ -38,7 +38,7 @@ httpOptions = {
   {
     const params = new HttpParams()
     .set('pageNumber',pageNumber.toString())
-    return this.http.get<IBookResponse>(`http://localhost:9000/category/${category_id}`)
+    return this.http.get<IBookResponse>(`http://localhost:9000/category/${category_id}`,{params})
   }
 
   getCategory(category_id:string) : Observable<ICategory>

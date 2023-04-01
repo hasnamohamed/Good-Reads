@@ -3,7 +3,7 @@ const Book = require('../models/book.js')
 
 const popular_books = (async (req,res)=>{
     try{
-        const popularBooks = await Book.find().sort({ 'rating.rate': -1,'rating.totalVotes': -1 }).populate('cateId authorId' ).limit(4);
+        const popularBooks = await Book.find().sort({ 'rating.rate': -1,'rating.totalVotes': -1 }).populate('cateId authorId' ).limit(5);
            return res.json(popularBooks);
         
     }catch(err)

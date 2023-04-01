@@ -48,6 +48,7 @@ import { FooterComponent } from './Components/footer/footer.component';
 import { CategoryDetailsComponent } from './Components/category-details/category-details.component';
 import { ReviewComponent } from './Components/review/review.component';
 import { BookCardComponent } from './Components/Shared/book-card/book-card.component';
+import { UserDashboardComponent } from './Components/user-dashboard/user-dashboard.component';
 
 
 
@@ -88,7 +89,8 @@ import { BookCardComponent } from './Components/Shared/book-card/book-card.compo
    BookCardComponent,
    ReviewComponent,
    CategoryDetailsComponent,
-   FooterComponent
+   FooterComponent,
+   UserDashboardComponent
   ],
   imports: [
     BrowserModule,

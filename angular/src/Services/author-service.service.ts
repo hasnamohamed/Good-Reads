@@ -52,7 +52,7 @@ httpOptions = {
 
   getAuthorBookById(author_id:string) : Observable<IBook[]>
   {
-    return this.http.get<IBook[]>(`http://localhost:9000/book/author/${author_id}`)
+    return this.http.get<IBook[]>(`http://localhost:9000/author/${author_id}`)
   }
   //add author
   addAuthor(author:FormData)

@@ -1,6 +1,6 @@
 import { ICategory } from "./icategory";
 
 export interface ICategoryResponse {
-    Cats: ICategory[],
+    cats: ICategory[],
     totalPages: number
   }

@@ -99,7 +99,8 @@ async function login(req, res)
             // Update user's login status
             await User.updateOne({email:email}, {isLogedIn:true})
             
-            let tokenInfo = {email:existedUser.email, token:token, expiresIn:"8 hours", userImage:existedUser.image}
+            let userName = existedUser.firstName + existedUser.lastName;
+            let tokenInfo = {email:existedUser.email, token:token, expiresIn:"8 hours", userImage:existedUser.image, userName:userName}
             return res.status(200).send(tokenInfo);
         }
         else

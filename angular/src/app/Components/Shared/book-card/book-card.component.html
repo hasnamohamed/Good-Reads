@@ -3,7 +3,7 @@
   <div class="card-body text-center">
     <a class="nav-link" routerLink="/books/{{book._id}}">  <h5 class="card-title">{{book.title}}</h5></a>
     <a class="nav-link" [(ngModel)]="book.authorId._id" routerLink="/author/{{book.authorId._id}}">  <p class="card-title">by <i>{{book.authorId.name}}</i></p></a>
-    <mat-star-rating class="nav-link" [rating]="book.rating.rate" [color]="starColor" ></mat-star-rating>
+    <mat-star-rating class="nav-link" [rating]="book.rating.rate" [color]="starColorP" ></mat-star-rating>
     <!--      <p>Your Rating</p>-->
     <!--      <mat-star-rating [rating]="book.rating.rate" [starCount]="starCount" [color]="starColor" (ratingUpdated)="onRatingChanged({rating : $event})"></mat-star-rating>-->
     <a class="nav-link" routerLink="/categories/{{book.cateId._id}}">

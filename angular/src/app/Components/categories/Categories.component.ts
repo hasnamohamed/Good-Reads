@@ -23,8 +23,11 @@ export class CategoriesComponent implements OnInit {
   fetchData()
   {
     this.category_service.getAllCategories(this.pageNumber,this.pageSize).subscribe(response=>{
-        this.cats_list = response.Cats
+        this.cats_list = response.cats
+        console.log(response)
+
         this.totalPages = response.totalPages
+        console.log(this.cats_list)
         this.numberPages = []
         this.numberPages = Array.from({length: this.totalPages}, (_, i) => i + 1);
     })
@@ -52,7 +55,7 @@ export class CategoriesComponent implements OnInit {
       this.pageNumber++;
       this.fetchData()
     }
-  
+
   }
 
 }

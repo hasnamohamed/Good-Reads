@@ -14,7 +14,7 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 })
 
 export class CategoryDetailsComponent implements OnInit {
-  category_id:string 
+  category_id:string
   category: ICategory | null = null
   books_list:populatedBook[]=[];
   numberPages : number[] = []
@@ -31,8 +31,15 @@ export class CategoryDetailsComponent implements OnInit {
   fetchData()
   {
     this.category_service.getBooksByCat(this.category_id , this.pageNumber).subscribe(response=>{
-      this.books_list =JSON.parse(response.body || "")
-      this.totalPages = response.totalPages
+      let booksDetlies =JSON.parse(response.body || "")
+      this.books_list = booksDetlies.books;
+      this.totalPages = booksDetlies.totalPages
+
+      this.books_list.forEach((book:any) => {
+        book.image = "http://localhost:9000/" + book.image
+      });
+
+
       this.numberPages = []
       this.numberPages = Array.from({length: this.totalPages}, (_, i) => i + 1);
     })

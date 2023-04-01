@@ -5,7 +5,7 @@ import { ICategory } from 'src/Models/icategory';
 import { HttpHeaders } from '@angular/common/http';
 import { ICategoryResponse } from 'src/Models/ICategoryResponse';
 import { IBookResponse } from 'src/Models/IBookResponse';
-
+import { populatedBook } from 'src/Models/books-populated';
 
 @Injectable({
   providedIn: 'root'
@@ -34,11 +34,17 @@ httpOptions = {
   }
   
 
-  getBooksByCat(category_id:string , pageNumber:number ) : Observable<IBookResponse>
+  // getBooksByCat(category_id:string , pageNumber:number ) : Observable<populatedBook>
+  // {
+  //   const params = new HttpParams()
+  //   .set('pageNumber',pageNumber.toString())
+  //   return this.http.get<populatedBook>(`http://localhost:9000/category/${category_id}`,{params})
+  // }
+  getBooksByCat(category_id:string , pageNumber:number ) 
   {
     const params = new HttpParams()
     .set('pageNumber',pageNumber.toString())
-    return this.http.get<IBookResponse>(`http://localhost:9000/category/${category_id}`)
+    return this.http.get(`http://localhost:9000/category/${category_id}`,{params,observe:"response"})
   }
 
   getCategory(category_id:string) : Observable<ICategory>

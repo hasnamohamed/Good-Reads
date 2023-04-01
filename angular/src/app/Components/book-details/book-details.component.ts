@@ -38,8 +38,8 @@ export class BookDetailsComponent {
   ngOnInit(): void {
     this.book_service.getBookById(this.book_id).subscribe(book=>{
       this.book = book
-      this.fetchAuthorsData()
       this.fetchReviewsData()
+      console.log(this.book.image)
     })
 
 
@@ -50,15 +50,9 @@ export class BookDetailsComponent {
   onSelected(): void {
     this.selectedStatus = this.status.nativeElement.value;
   }
-  fetchAuthorsData(){
+  fetchReviewsData(){
     this.review_service.getAllReviews(this.book._id).subscribe(response=>{
       this.reviews=response;
-    })
-  }
-  //get reviews by book id
-  fetchReviewsData(){
-    this.author_service.getAuthorById(this.book.authorId).subscribe(response=>{
-      this.author=response;
     })
   }
   deleteBook(){

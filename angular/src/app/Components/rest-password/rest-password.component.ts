@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { restInfo } from 'src/app/db-models/userInfo';
-import { UsersService } from 'src/app/services/users.service';
+import { restInfo } from 'src/Models/userInfo';
+import { UsersService } from 'src/Services/users.service';
 import swal from "sweetalert";
 @Component({
   selector: 'app-rest-password',

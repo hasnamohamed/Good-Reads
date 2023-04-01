@@ -5,14 +5,14 @@
 <div class="container d-flex flex-wrap justify-content-center mt-4">
 <!--  <app-book-card class="col-xl-3 col-md-6" [book]=book ></app-book-card>-->
   <div class="card ">
-    <a class="nav-link" routerLink="/books/{{book._id}}"><img style="height: 12rem" src="{{book.image}}" class="card-img-top" alt="..."></a>
+    <a class="nav-link" routerLink="/books/{{book._id}}"><img style="height: 12rem" src="http://localhost:9000/{{book.image}}" class="card-img-top" alt="..."></a>
     <div class="card-body text-center">
       <a class="nav-link" routerLink="/books/{{book._id}}">  <h5 class="card-title">{{book.title}}</h5></a>
-      <a class="nav-link" [(ngModel)]="authorId" routerLink="/author/{{book.authorId}}">  <p class="card-title">by {{author.name}}</p></a>
+      <a class="nav-link" [(ngModel)]="authorId" routerLink="/author/{{book.authorId}}">  <p class="card-title">by {{book.authorId.name}}</p></a>
       <mat-star-rating class="nav-link" [rating]="book.rating.rate" [color]="starColor" ></mat-star-rating>
       <!--      <p>Your Rating</p>-->
       <!--      <mat-star-rating [rating]="book.rating.rate" [starCount]="starCount" [color]="starColor" (ratingUpdated)="onRatingChanged({rating : $event})"></mat-star-rating>-->
-      <a class="nav-link" routerLink="/category/{{book.catId}}">  <p class="card-title">{{book.catId}}</p></a>
+      <a class="nav-link" routerLink="/category/{{book.catId}}">  <p class="card-title">{{book.cateId.name}}</p></a>
       <select #status  [(ngModel)]="selectedStatus" class="form-select">
         <option value="0" disabled selected>Status</option>
         <option [attr.selected]="selectedStatus == 1 ? true : null"  value="1">Want to Read</option>

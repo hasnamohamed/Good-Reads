@@ -1,8 +1,8 @@
 import { Component, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { FormControl, NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
-import { categoryInfo } from 'src/app/db-models/category';
-import { CategoriesService } from 'src/app/services/categories.service';
+import { categoryInfo } from 'src/Models/category';
+import { CategoriesService } from 'src/Services/categories.service';
 
 
 @Component({

@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { UsersService } from 'src/app/services/users.service';
-import { RegistrationInfo } from '../../db-models/userInfo';
+import { UsersService } from 'src/Services/users.service';
+import { RegistrationInfo } from '../../../Models/userInfo';
 import swal from 'sweetalert';
 import { BehaviorSubject } from 'rxjs';
 

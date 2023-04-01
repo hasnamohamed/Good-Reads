@@ -1,5 +1,7 @@
 <app-spinner *ngIf="isLoading"></app-spinner>
 
+<div class="text-center fs-2 mt-5 p-5 fw-bold" *ngIf="books_list.length==0">No books in this category</div>
+
 <div class="container d-flex flex-wrap justify-content-center mt-4">
   
   <app-book-card  class="nav-link ms-2 mb-2 col-xxl-3 col-md-4" *ngFor="let book of books_list" [book]="book"></app-book-card>

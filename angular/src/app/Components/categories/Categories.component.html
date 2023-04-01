@@ -1,9 +1,11 @@
 <app-spinner *ngIf="isLoading"></app-spinner>
+<div class="text-center fs-2 mt-5 p-5 fw-bold" *ngIf="cats_list.length==0">No Books Yet!</div>
 
 <div class="container d-flex flex-wrap justify-content-center mt-4">
   <a *ngFor="let category of cats_list" class="nav-link col-xxl-3 col-md-6" [routerLink]="'/categories/'+category._id">
     <app-card [name]="category.name"></app-card>
   </a>
+
 
   <div class="col-12 p-3 fs-2 text-center d-flex justify-content-center align-items-center">
     <i class="icon fa-solid fa-circle-chevron-left mx-3" (click)="previous()"></i>

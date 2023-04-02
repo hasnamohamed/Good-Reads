@@ -52,7 +52,6 @@ async function register(req, res)
         }
 
         let newUser = await User.create(userInfo)
-        console.log(newUser)
         return res.sendStatus(200).send("user has been created successfully")
     
 
@@ -80,9 +79,13 @@ async function login(req, res)
         let existedUser = await User.findOne({email:email.toLowerCase()})
         let decryptedPasswordMatch = await bcrypt.compare(password, existedUser.password)
 
-        if(userEndPoint === "/admin-dashboard" && existedUser.isAdmin != true)
+        // handling adming status
+        if(userEndPoint === "/admin-dashboard")
         {
-            return res.status(403).send("Access Denied, the action had been reported")
+            if(existedUser.isAdmin != true)
+                return res.status(403).send("Access Denied, the action had been reported")
+            else
+               return res.status(200).send("You are admin, you can go")
         }
         
         if(existedUser != null && decryptedPasswordMatch)
@@ -97,10 +100,13 @@ async function login(req, res)
 
 
             // Update user's login status
-            await User.updateOne({email:email}, {isLogedIn:true})
+            let updatedUser = await User.updateOne({email:email}, {isLogedIn:true})
             
-            let userName = existedUser.firstName + existedUser.lastName;
-            let tokenInfo = {email:existedUser.email, token:token, expiresIn:"8 hours", userImage:existedUser.image, userName:userName}
+            const userStatus = {
+                isLogedIn:true,
+                isAdmin:existedUser.isAdmin
+            }
+            let tokenInfo = {email:existedUser.email, token:token, expiresIn:"8 hours", userImage:existedUser.image, userStatus}
             return res.status(200).send(tokenInfo);
         }
         else
@@ -151,9 +157,32 @@ async function resetPassword (req, res)
 };
 
 
+async function getUserStatus(req,res)
+{
+    let userInfo = await User.findOne({email:req.body.email})
+
+
+    if(userInfo)
+    {
+        let userStatus = 
+        {
+            isLogedIn:userInfo.isLogedIn,
+            isAdmin:userInfo.isAdmin
+        }
+        console.log(userStatus)
+        return res.status(200).json(userStatus);
+    }
+    else
+        return res.status(404).send("There is account with this email");
+
+    
+     
+}
+
 module.exports = {
     register,
     login,
     logout,
-    resetPassword
+    resetPassword,
+    getUserStatus
 }

@@ -50,6 +50,7 @@ const user = new mongoose.Schema({
             enum: ["read", "reading", "want to read"]
         }
     }],
+
 })
 
 const User = mongoose.model('User', user)

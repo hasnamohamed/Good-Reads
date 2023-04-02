@@ -7,16 +7,16 @@ import { UsersService } from './users.service';
 })
 export class UserAuthService {
 
-  isLogedIn:string ="";
+  loginStatus:string ="";
   constructor(private userService:UsersService, private routerService:Router) {
    }
 
-  isLoged()
-  {
-    this.userService.currentUserStatus.subscribe(userStatus => this.isLogedIn = userStatus);
-    if(this.isLogedIn == "true")
-     return true
-    else
-      return false
-  }
+  // isLogedIn()
+  // {
+  //   this.userService.currentUserStatus.subscribe(userStatus => this.loginStatus = userStatus);
+  //   if(this.loginStatus == "true")
+  //    return true
+  //   else
+  //     return false
+  // }
 }

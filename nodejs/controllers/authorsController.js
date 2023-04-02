@@ -1,4 +1,5 @@
 const Author = require('../models/author.js')
+
 const Book = require('../models/book.js')
 
 // 1-get all authors from database
@@ -24,8 +25,10 @@ const getAuthors = (async(req, res) => {
 // 2-get one author from database by id
 const getAuthor = (async(req, res) => {
     try {
+        
         const authorID = req.params.id
         const author = await Author.findOne({_id:authorID});
+
         if(!author){
             return res.status(404).json({message:'Author not found'})
         }

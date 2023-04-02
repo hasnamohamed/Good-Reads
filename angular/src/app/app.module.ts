@@ -42,11 +42,13 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import {BookDetailsComponent} from "./Components/book-details/book-details.component";
 import {FormsModule} from "@angular/forms";
 import {ReactiveFormsModule} from "@angular/forms";
-import {MatSelectModule} from "@angular/material/select";
-import { BookCardComponent } from './Components/Shared/book-card/book-card.component';
+import { MatSelectModule } from '@angular/material/select';
+import { SpinnerComponent } from './Components/spinner/spinner.component';
 import { FooterComponent } from './Components/footer/footer.component';
 import { CategoryDetailsComponent } from './Components/category-details/category-details.component';
 import { ReviewComponent } from './Components/review/review.component';
+import { BookCardComponent } from './Components/Shared/book-card/book-card.component';
+import { UserDashboardComponent } from './Components/user-dashboard/user-dashboard.component';
 
 
 
@@ -82,14 +84,13 @@ import { ReviewComponent } from './Components/review/review.component';
    CardComponent,
    CategoriesComponent,
    StarRatingComponent,
-   BookCardComponent,
    BookDetailsComponent,
-   RestPasswordComponent,
+   SpinnerComponent,
+   BookCardComponent,
    ReviewComponent,
    CategoryDetailsComponent,
    FooterComponent,
-   BookCardComponent,
-   CategoryDetailsComponent
+   UserDashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -109,8 +110,9 @@ import { ReviewComponent } from './Components/review/review.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatIconModule,
     MatSelectModule,
+    MatIconModule,
+    
     HttpClientModule,
     
    ],

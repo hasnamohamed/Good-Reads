@@ -1,16 +1,12 @@
-<div class="row justify-content-center border border-info rounded p-3">
-  <h2 class="fw-bold text-danger m-0 px-4">Popular Categories</h2>
-  <a class="nav-link col-xl-3 col-md-6" [routerLink]="'/categories/10'">
-    <app-card></app-card>
+<div class="border rounded">
+<h2 class="fw-bold text-danger mb-0 mt-3 px-4">Popular Categories</h2>
+<div class="container d-flex justify-content-center">
+ <div class="book-container">
+  <a class="nav-link col-xl-3 col-md-6" *ngFor="let cat of popular_cats" [routerLink]="'/categories/'+cat._id">
+    <app-card [image]="'public\images\no-cover.png'" [name]="cat.name"></app-card>
   </a>
-  <a class="nav-link col-xl-3 col-md-6" [routerLink]="'/categories/10'">
-    <app-card></app-card>
-  </a>
-  <a class="nav-link col-xl-3 col-md-6" [routerLink]="'/categories/10'">
-    <app-card></app-card>
-  </a>
-  <a class="nav-link col-xl-3 col-md-6" [routerLink]="'/categories/10'">
-    <app-card></app-card>
-  </a>
+
+ </div>
+</div>
 </div>
 

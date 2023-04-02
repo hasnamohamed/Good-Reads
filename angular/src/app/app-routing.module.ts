@@ -19,11 +19,12 @@ import { AuthorDetailsComponent } from './Components/author-details/author-detai
 import { CategoryDetailsComponent } from './Components/category-details/category-details.component';
 import { BookDetailsComponent } from './Components/book-details/book-details.component';
 import { AdminGuredGuard } from './admin-gured.guard';
+import { UserDashboardComponent } from './Components/user-dashboard/user-dashboard.component';
 
 const routes: Routes = [
   {path:'', redirectTo:"/home", pathMatch:"full"},
   {path:'books/:id', component:BookDetailsComponent},
-  {path:'home', component:HomePageComponent, canActivate:[AdminGuredGuard]},
+  {path:'home', component:HomePageComponent},
   {path:'books', component:BooksComponent},
   {path:'authors', component:AuthorsComponent},
   {path:'categories', component:CategoriesComponent},
@@ -31,6 +32,7 @@ const routes: Routes = [
   {path:'teams-and-condations', component:TeamsAndConditionComponent},
   {path:'login', component:LoginComponent},
   {path:'register', component:RegisterComponent},
+  {path:'user-dashboard', component:UserDashboardComponent},
   {path:'reset', component:RestPasswordComponent},
   {path:'author/:id', component:AuthorDetailsComponent},
   {path:'categories/:id', component:CategoryDetailsComponent},
@@ -41,7 +43,7 @@ const routes: Routes = [
     {path:'admin-categories/:id', component:AdminCategoriesComponent},
     {path:'admin-books', component:AdminBooksComponent},
 
-  ]},
+  ], canActivate:[AdminGuredGuard]},
   {path:'**', component:NotFoundComponent}
 ];
 

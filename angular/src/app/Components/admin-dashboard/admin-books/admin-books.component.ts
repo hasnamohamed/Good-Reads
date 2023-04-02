@@ -3,11 +3,11 @@ import { populatedBook } from 'src/Models/books-populated';
 import { categoryInfo } from 'src/Models/category';
 import { CategoriesService } from 'src/Services/categories.service';
 import { IAuthor } from 'src/Models/iauthor';
-import { IBook } from 'src/Models/ibook';
 import { AuthorServiceService } from 'src/Services/author-service.service';
 import { BookService } from 'src/Services/books.service';
 import { AdminAuthorsComponent } from '../admin-authors/admin-authors.component';
 import { AdminCategoriesComponent } from '../admin-categories/admin-categories.component';
+import { IBook } from 'src/Models/ibook';
 
 @Component({
   selector: 'admin-authors',

@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { IAuthor } from 'src/Models/iauthor';
 import { HttpHeaders } from '@angular/common/http';
 import { IAuthorResponse } from 'src/Models/IAuthorResponse';
+import { AuthorDetails } from 'src/app/view-models/author-details';
+import { IBook } from 'src/Models/ibook';
 
 
 @Injectable({
@@ -48,6 +50,10 @@ httpOptions = {
     return this.http.get<IAuthor>(`http://localhost:9000/author/${author_id}`)
   }
 
+  getAuthorBookById(author_id:string) : Observable<IBook[]>
+  {
+    return this.http.get<IBook[]>(`http://localhost:9000/book/author/${author_id}`)
+  }
   //add author
   addAuthor(author:FormData)
   {

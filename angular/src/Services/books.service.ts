@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IBook } from 'src/Models/ibook';
 import { HttpHeaders } from '@angular/common/http';
 import {IBookResponse} from "../Models/IBookResponse";
 import {tap} from "rxjs/operators";
+import { IBook } from 'src/Models/ibook';
 @Injectable({
   providedIn: 'root'
 })
@@ -65,6 +65,7 @@ export class BookService {
   deleteBook(book_id:string)
   {
     return this.http.delete(`http://localhost:9000/book/${book_id}`,
-    {responseType:"text", observe: 'response'})  }
+    {responseType:"text", observe: 'response'})
+  }
 
 }

@@ -21,7 +21,8 @@ export interface tokenInfo
   email:string;
   token:string;
   expiresIn:string;
-  userImage:string
+  userImage:string,
+  userStatus:userStatus
 }
 
 export interface restInfo
@@ -31,4 +32,10 @@ export interface restInfo
   passwordConform:string
   secretQuestion:string
   secretAnswer:string
+}
+
+export interface userStatus
+{
+  isLogedIn:boolean
+  isAdmin:boolean
 }

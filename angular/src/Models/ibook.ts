@@ -1,4 +1,3 @@
-
 export interface IBook {
   _id?:string;
   rating?:{

@@ -1,0 +1,20 @@
+table
+{
+    width: 100;
+    margin: auto;
+}
+
+table th, table td
+{
+    text-transform: capitalize;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: center;
+    vertical-align: middle
+}
+
+table tr:hover
+{
+  box-shadow: 0 4px 9px -4px #b8b5ac;
+}

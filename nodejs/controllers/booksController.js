@@ -1,5 +1,30 @@
 const Book = require('../models/book.js')
-const getBooks  = (async(req, res) => {
+
+
+const popular_books = (async (req,res)=>{
+    try{
+        const popularBooks = await Book.find().sort({ 'rating.rate': -1,'rating.totalVotes': -1 }).populate('cateId authorId' ).limit(5);
+           return res.json(popularBooks);
+        
+    }catch(err)
+    {
+        res.status(400).send("Something went wrong" + err);
+    }
+})
+
+    const getBooksByAuthorId = async (req, res) => {
+    try {
+      const authorId = req.params.id;
+      const books = await Book.find({ authorId });
+      res.status(200).json(books);
+    } catch (error) {
+      res.status(400).send('Something went wrong: ' + error);
+    }
+  };
+  
+  module.exports = { getBooksByAuthorId };
+
+const getBooks = (async(req, res) => {
     try {
         let limit = 8;
         const pageNumber = parseInt(req.query.pageNumber) || 1;
@@ -16,6 +41,7 @@ const getBooks  = (async(req, res) => {
         res.send("something went wrong" + err);
     }
 })
+
 
 const getBook = (async (req, res) => {
     try {
@@ -142,10 +168,14 @@ const deleteBook = (async (req, res) => {
     }
 
 })
+
+
 module.exports = {
     getBooks,
     getBook,
     createBook,
     updateBook,
-    deleteBook
+    deleteBook,
+    popular_books,
+    getBooksByAuthorId
 }

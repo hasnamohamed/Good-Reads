@@ -1,78 +1,38 @@
-<div class="container mt-5">
-    <button type="button" class="btn btn-primary" (click)="deleteAuthor()">Button</button>
+<app-spinner *ngIf="isLoading"></app-spinner>
+
+<div class="container mt-5 col-11">
     <div class="row mb-5">
-        <img src="https://placar.abril.com.br/wp-content/uploads/2022/09/GettyImages-1242668441.jpg?quality=70&strip=info&w=1280&h=720&crop=1" class="img-fluid col-md-6 col-lg-4" alt="...">
+        <img src={{img+author?.authorImage}} class="img-fluid w-25 col-md-6 col-lg-4" alt="...">
         <div class="col-md-6 col-lg-4">
             <h1>{{author?.name}}</h1>
-            <p>{{author?.birthDate}}</p>
+            <p>{{author?.birthDate | date:'MM/dd/yyyy'}}</p>
             <p>{{author?.bio}}</p>
         </div>
     </div>
-    <h1>Author Books</h1>
-    <div class="container border">
-        <div class="row my-4">
-            <img src="https://placar.abril.com.br/wp-content/uploads/2022/09/GettyImages-1242668441.jpg?quality=70&strip=info&w=1280&h=720&crop=1" class="img-fluid col-md-4 col-lg-2" alt="...">
+<h1>Author Books</h1>
+
+    <div class="text-center fs-2 mt-5 p-5 fw-bold" *ngIf="author_books.length==0">No Books Yet!</div>
+    <div *ngFor="let book of author_books" class="container book border fs-5">
+        <div class="row row-book my-3">
+            <img src={{img+book.image}} class="img-fluid col-md-4 col-lg-2 " alt="...">
             <div class="col-6 col-md-5 mt-sm-2">
-                <h3 class="text-sm-md">Book Name</h3>
-                <h6>***** 3.2 - 365 ratings</h6>
+                <p class="my-4">{{book.title}}</p>
+                <mat-star-rating class="nav-link" [rating]="book.rating.rate" [color]="starColorW" ></mat-star-rating>
             </div>
             <div class="col-5 col-md-2 mt-sm-2 ms-auto my-auto">
-                <select class="form-select form-select-sm">
+                <select class="form-select form-select-sm my-3">
                     <option value="">Currently read</option>
                     <option value="">Want to read</option>
                     <option value="">Read</option>
                 </select>
-                <p>*****</p>
+                <a class="nav-link link-primary fs-6 " routerLink="/books/{{book._id}}">See More Details</a>
             </div>
-
         </div>
-        <div class="row my-4">
-            <img src="https://placar.abril.com.br/wp-content/uploads/2022/09/GettyImages-1242668441.jpg?quality=70&strip=info&w=1280&h=720&crop=1" class="img-fluid col-md-4 col-lg-2" alt="...">
-            <div class="col-6 col-md-5 mt-sm-2">
-                <h3 class="text-sm-md">Book Name</h3>
-                <h6>***** 3.2 - 365 ratings</h6>
-            </div>
-            <div class="col-5 col-md-2 mt-sm-2 ms-auto my-auto">
-                <select class="form-select form-select-sm">
-                    <option value="">Currently read</option>
-                    <option value="">Want to read</option>
-                    <option value="">Read</option>
-                </select>
-                <p>*****</p>
-            </div>
+</div>
 
-        </div>
-        <div class="row my-4">
-            <img src="https://placar.abril.com.br/wp-content/uploads/2022/09/GettyImages-1242668441.jpg?quality=70&strip=info&w=1280&h=720&crop=1" class="img-fluid col-md-4 col-lg-2" alt="...">
-            <div class="col-6 col-md-5 mt-sm-2">
-                <h3 class="text-sm-md">Book Name</h3>
-                <h6>***** 3.2 - 365 ratings</h6>
-            </div>
-            <div class="col-5 col-md-2 mt-sm-2 ms-auto my-auto">
-                <select class="form-select form-select-sm">
-                    <option value="">Currently read</option>
-                    <option value="">Want to read</option>
-                    <option value="">Read</option>
-                </select>
-                <p>*****</p>
-            </div>
-
-        </div>
-        <div class="row my-4">
-            <img src="https://placar.abril.com.br/wp-content/uploads/2022/09/GettyImages-1242668441.jpg?quality=70&strip=info&w=1280&h=720&crop=1" class="img-fluid col-md-4 col-lg-2" alt="...">
-            <div class="col-6 col-md-5 mt-sm-2">
-                <h3 class="text-sm-md">Book Name</h3>
-                <h6>***** 3.2 - 365 ratings</h6>
-            </div>
-            <div class="col-5 col-md-2 mt-sm-2 ms-auto my-auto">
-                <select class="form-select form-select-sm">
-                    <option value="">Currently read</option>
-                    <option value="">Want to read</option>
-                    <option value="">Read</option>
-                </select>
-                <p>*****</p>
-            </div>
-
-        </div>
-    </div>
+<!-- <div class="col-12 p-3 fs-2 mt-1 text-center d-flex justify-content-center align-items-center" *ngIf="!isLoading">
+    <i class="icon fa-solid fa-circle-chevron-left mx-3" (click)="previous()"></i>
+    <button type="button" class="btn btn-secondary mx-1 btn-small" *ngFor="let item of numberPages" (click)="getPage(item)">{{item}}</button>
+    <i class="icon fa-solid fa-circle-chevron-right mx-3" (click)="next()"></i>
+  </div> -->
 </div>

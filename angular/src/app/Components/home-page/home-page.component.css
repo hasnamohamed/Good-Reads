@@ -1,0 +1,23 @@
+.masthead{
+    background-size: contain;
+    min-height: 80vh;
+    position: relative;
+    color: rgb(112, 41, 41);
+}
+
+
+h1{
+    font-size:7vw;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+h2{
+    font-size: 1.5vw;
+}
+
+
+.color-overlay{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}

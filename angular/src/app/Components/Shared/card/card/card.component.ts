@@ -8,6 +8,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CardComponent implements OnInit {
 @Input() name!:string;
+@Input() image?:string;
+img:string = "http://localhost:9000/"
   constructor() { }
   ngOnInit() {
   }

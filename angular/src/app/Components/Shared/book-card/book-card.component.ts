@@ -10,7 +10,7 @@ export class BookCardComponent implements OnInit {
   starCount: number = 5;
   starColor: StarRatingColor = StarRatingColor.accent;
   starColorP: StarRatingColor = StarRatingColor.primary;
-  starColorW: StarRatingColor = StarRatingColor.warn;
+  starColorW: StarRatingColor = StarRatingColor.yell;
 
   ngOnInit() {
   }

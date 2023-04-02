@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import { BookService } from 'src/Services/books.service';
-import {IBook} from 'src/Models/ibook';
 import { populatedBook } from 'src/Models/books-populated';
 import {AuthorServiceService} from "../../../Services/author-service.service";
 import {IAuthor} from "../../../Models/iauthor";
@@ -14,6 +13,7 @@ export class BooksComponent implements OnInit {
   numberPages : number[] = []
   pageNumber:number = 1;
   totalPages:number = 1;
+  isLoading = true;
   constructor(private book_service:BookService) {
   }
   ngOnInit():void {
@@ -36,8 +36,7 @@ export class BooksComponent implements OnInit {
         this.books_list = books.books
         this.numberPages = []
         this.numberPages = Array.from({length: this.totalPages}, (_, i) => i + 1);
-        console.log(this.books_list)
-
+        this.isLoading=false
       },
       err => console.log(err));
   }

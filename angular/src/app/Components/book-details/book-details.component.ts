@@ -1,6 +1,5 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
-import { IBook } from 'src/Models/ibook';
 import { BookService } from 'src/Services/books.service';
 import {IAuthor} from "../../../Models/iauthor";
 import {AuthorServiceService} from "../../../Services/author-service.service";
@@ -17,11 +16,12 @@ export class BookDetailsComponent {
   reviews:any;
   authorId:any=this.book.authorId;
   book_id:string
-   starCount:number=5;
+  starCount:number=5;
   userRating:number=3;
   starColor: StarRatingColor = StarRatingColor.accent;
   starColorP: StarRatingColor = StarRatingColor.primary;
   starColorW: StarRatingColor = StarRatingColor.warn;
+  isLoading=true
 
   onRatingChanged(rating: any) {
     this.userRating= rating.rating;
@@ -38,10 +38,10 @@ export class BookDetailsComponent {
   ngOnInit(): void {
     this.book_service.getBookById(this.book_id).subscribe(book=>{
       this.book = book
+      if(book) this.isLoading=false
       this.fetchReviewsData()
       console.log(this.book.image)
     })
-
 
 
   }

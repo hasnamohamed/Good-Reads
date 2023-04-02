@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { BookService } from 'src/Services/books.service';
-import {IBook} from 'src/Models/ibook';
 import { populatedBook } from 'src/Models/books-populated';
 import { ICategory } from 'src/Models/icategory';
 import { CategoryService } from 'src/Services/category.service';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { IBook } from 'src/Models/ibook';
 
 
 @Component({
@@ -20,6 +19,7 @@ export class CategoryDetailsComponent implements OnInit {
   numberPages : number[] = []
   pageNumber:number = 1;
   totalPages:number = 1;
+  isLoading = true;
   constructor(private category_service:CategoryService,
     private active_route:ActivatedRoute,
     private router:Router ) {
@@ -27,6 +27,7 @@ export class CategoryDetailsComponent implements OnInit {
   }
   ngOnInit():void {
     this.fetchData()
+    
   };
   fetchData()
   {
@@ -42,6 +43,7 @@ export class CategoryDetailsComponent implements OnInit {
 
       this.numberPages = []
       this.numberPages = Array.from({length: this.totalPages}, (_, i) => i + 1);
+      this.isLoading=false
     })
   }
   getPage(pageNumber:number){

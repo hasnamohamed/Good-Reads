@@ -7,13 +7,15 @@ const  {
     login,
     logout,
     register,
-    resetPassword
+    resetPassword,
+    getUserStatus
 } = require('../controllers/usersController.js')
 
 Route.post('/register',uploadFile().single('file') ,register);
-Route.post('/admin',login);
+// Route.post('/admin',login);
 Route.post('/login',login);
 Route.post('/logout', auth, logout);
 Route.post('/reset', resetPassword);
+Route.get('/userStatus',auth, getUserStatus);
 
 module.exports = Route;

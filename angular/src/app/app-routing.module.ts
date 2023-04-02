@@ -18,11 +18,12 @@ import { RestPasswordComponent } from './Components/rest-password/rest-password.
 import { AuthorDetailsComponent } from './Components/author-details/author-details.component';
 import { CategoryDetailsComponent } from './Components/category-details/category-details.component';
 import { BookDetailsComponent } from './Components/book-details/book-details.component';
+import { AdminGuredGuard } from './admin-gured.guard';
 
 const routes: Routes = [
   {path:'', redirectTo:"/home", pathMatch:"full"},
   {path:'books/:id', component:BookDetailsComponent},
-  {path:'home', component:HomePageComponent},
+  {path:'home', component:HomePageComponent, canActivate:[AdminGuredGuard]},
   {path:'books', component:BooksComponent},
   {path:'authors', component:AuthorsComponent},
   {path:'categories', component:CategoriesComponent},

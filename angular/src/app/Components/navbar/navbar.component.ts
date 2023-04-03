@@ -10,8 +10,8 @@ import swal from 'sweetalert';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  isLogedIn:boolean = false;
-  isAdmin:boolean = false;
+  isLogedIn:boolean | undefined = false;
+  isAdmin:boolean   | undefined = false;
   userImage:string = "http://localhost:9000/images/user-defualt-profile.jpeg"
 
   constructor(
@@ -20,14 +20,15 @@ export class NavbarComponent implements OnInit {
     ){}
 
   ngOnInit() {
+    this.userService.updateUserStatus()
     this.userService.currentUserStatus.subscribe(
       userStatus =>
       {
         this.isLogedIn = userStatus.isLogedIn
         this.isAdmin = userStatus.isAdmin
-      }
-      );
+      });
     let userInfo = JSON.parse(localStorage.getItem("userInfo")!)
+    this.isLogedIn = (localStorage.getItem("isLogedIn") === "true")
     this.userImage = `http://localhost:9000/${userInfo.userImage}`
 
   }
@@ -54,13 +55,19 @@ export class NavbarComponent implements OnInit {
             swal.close()
           }, 4000)
 
-          this.routerService.navigate(["login"]);
+          this.routerService.navigate(["/"]);
 
         }
     },
     err => {
       console.log(err)
     })
+  }
+
+  updateAdminStatus()
+  {
+    this.userService.updateUserStatus()
+
   }
 
 }

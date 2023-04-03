@@ -73,9 +73,9 @@ export class UsersService {
 
   updateUserStatus(givenUserStatus?:userStatus)
   {
-    console.log(givenUserStatus)
     if(givenUserStatus != undefined)
     {
+      localStorage.setItem("isLogedIn", givenUserStatus.isLogedIn.toString())
       this.userStatus.next(givenUserStatus)
       return
     }
@@ -85,6 +85,7 @@ export class UsersService {
     if(userInfo == null)
     {
       this.routerService.navigate(['/login'])
+      return
     }
 
       let userToken = userInfo.token;
@@ -95,34 +96,44 @@ export class UsersService {
       this.http.get(this.userStatusURL, {headers: toknedHeader, responseType:"text", observe: 'response'}).subscribe(
         sucessRes =>
         {
-          this.userStatus.next(JSON.parse(sucessRes.body!));
+          if(sucessRes.status == 200)
+          {
+            this.userStatus.next(JSON.parse(sucessRes.body!));
+          }
+        },
+
+        errRes =>
+        {
+          if(errRes.status == 401 || 403)
+          {
+            swal({
+              title: "Seassion has ended please login again",
+              icon : "error"
+            });
+
+            setTimeout(() => {
+              swal.close()
+            }, 1000)
+
+            localStorage.removeItem("userInfo")
+            localStorage.removeItem("isLogedIn")
+            this.updateUserStatus()
+
+            setTimeout(() => {
+
+              this.routerService.navigateByUrl('/login',{ skipLocationChange: true }).then(
+                () => {
+                  location.href = "/login"
+                })
+            }, 2000)
+
+
+          }
+
+
         }
       )
   }
-
-  getUserStatus()
-  {
-    return this.userStatus
-  }
-
-  // isLogedIn(stauts?:HttpResponse<string>)
-  // {
-  //   let userStat = JSON.parse(stauts?.body!).isLogedIn
-  //   return userStat? true : false
-  // }
-
-  // adminStatus:boolean | undefined = undefined;
-  // isAdmin()
-  // {
-  //   this.getUserStatus().subscribe(
-  //     sucessRes =>
-  //     {
-  //       this.adminStatus = JSON.parse(sucessRes.body!).isAdmin
-  //       console.log(this.adminStatus)
-  //     }
-  //   )
-  // }
-
 
 }
 

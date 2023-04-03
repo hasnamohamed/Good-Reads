@@ -15,18 +15,7 @@ export class BookService {
     })
   };
   constructor(private http: HttpClient) { }
-  /*
-    فيه مشكلة هنا اننا محتاجين الرسيبونس كامل عشان نقدر نوصل
-    للـ status code
-    وبالتالى نقدر ناخد قرار بناء على الكود اللى راجع
 
-    عشان نعمل كدا هنحتاج اننا نضيف خيار
-    observer
-    ولكن دا هيرجع رسيبونس كامل
-    فازاى هيخزنه فى
-    IBookResponse
-
-  */
   getAllBooks(pageNumber:number)
   {
 

@@ -29,7 +29,7 @@
           <span class="register-button-text">register</span>
         </a>
 
-        <a  [hidden]="isAdmin == false" class="nav-link navbar-brand  admin-dashboard-icon" routerLink="/admin-dashboard" routerLinkActive="active">
+        <a  [hidden]="isAdmin == false" class="nav-link navbar-brand  admin-dashboard-icon" (click)="updateAdminStatus()" routerLink="/admin-dashboard" routerLinkActive="active">
           <i class="fa-solid fa-gear"></i>
         </a>
 

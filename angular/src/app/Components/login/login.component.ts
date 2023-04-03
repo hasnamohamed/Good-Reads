@@ -45,12 +45,11 @@ export class LoginComponent implements OnInit {
 
         }, 4000)
 
-        setTimeout(() => {
-          this.routerService.navigate(["/"]);
-
-        }, 5000)
-        this.routerService.navigate(['/'])
-
+        this.routerService.navigateByUrl('/',{ skipLocationChange: true }).then(
+          () => {
+            location.href = "/"
+          }
+        )
       }
     },
     err => {

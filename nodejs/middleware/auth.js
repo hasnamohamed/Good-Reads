@@ -35,5 +35,25 @@ async function verifyToken (req, res, next)
   
 };
 
-module.exports = verifyToken;
+async function verifyAdmin (req, res, next) 
+{
+    const user = await User.findOne({email:req.body.email})
+    if(user && user.isLogedIn == false && user.isAdmin)
+    {
+        res.status(200).send("You can go");
+    }
+    else
+    {
+        return res.status(403).send("Unauthorized Action, real admins has been reported"); 
+    }
+
+    return next();
+  
+};
+
+
+module.exports = {
+    verifyToken,
+    verifyAdmin
+}
 

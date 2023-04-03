@@ -8,6 +8,7 @@ import { BookService } from 'src/Services/books.service';
 import { AdminAuthorsComponent } from '../admin-authors/admin-authors.component';
 import { AdminCategoriesComponent } from '../admin-categories/admin-categories.component';
 import { IBook } from 'src/Models/ibook';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'admin-authors',
@@ -42,7 +43,8 @@ export class AdminBooksComponent {
   constructor(
     private booksService:BookService,
     private authorServices:AuthorServiceService,
-    private categoryService:CategoriesService
+    private categoryService:CategoriesService,
+    private routerService:Router
     )
   {
 
@@ -163,14 +165,19 @@ export class AdminBooksComponent {
 
       serverError =>
       {
-        swal({
-          title: "Something went wrong, try again later",
-          icon : "error"
-        });
-        console.log(serverError)
-        setTimeout(() => { swal.close() }, 2000)
-      }
+        if(serverError.status == 403)
+        {
+          swal({
+            title: "Unauthorized Action, Real Admins Has Been Reported",
+            icon : "error"
+          });
 
+        }
+        console.log(serverError)
+        setTimeout(() => { swal.close() }, 1000)
+        setTimeout(() => { this.routerService.navigate(['/'])}, 2000)
+
+      }
 
     )
   }
@@ -257,15 +264,18 @@ export class AdminBooksComponent {
 
       serverError =>
       {
-        swal({
-          title: "Something went wrong, try again later",
-          icon : "error"
-        });
-        console.log(serverError)
-        setTimeout(() => {
+        if(serverError.status == 403)
+        {
+          swal({
+            title: "Unauthorized Action, Real Admins Has Been Reported",
+            icon : "error"
+          });
 
-          swal.close()
-        }, 2000)
+        }
+        console.log(serverError)
+        setTimeout(() => { swal.close() }, 1000)
+        setTimeout(() => { this.routerService.navigate(['/'])}, 2000)
+
       }
     )
   }
@@ -293,7 +303,23 @@ export class AdminBooksComponent {
           }, 2000)
 
         }
-      })
+      },
+      serverError =>
+      {
+        if(serverError.status == 403)
+        {
+          swal({
+            title: "Unauthorized Action, Real Admins Has Been Reported",
+            icon : "error"
+          });
+
+        }
+        console.log(serverError)
+        setTimeout(() => { swal.close() }, 1000)
+        setTimeout(() => { this.routerService.navigate(['/'])}, 2000)
+
+      }
+      )
   }
 
   prevPage()

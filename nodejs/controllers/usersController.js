@@ -79,15 +79,6 @@ async function login(req, res)
         let existedUser = await User.findOne({email:email.toLowerCase()})
         let decryptedPasswordMatch = await bcrypt.compare(password, existedUser.password)
 
-        // handling adming status
-        if(userEndPoint === "/admin-dashboard")
-        {
-            if(existedUser.isAdmin != true)
-                return res.status(403).send("Access Denied, the action had been reported")
-            else
-               return res.status(200).send("You are admin, you can go")
-        }
-        
         if(existedUser != null && decryptedPasswordMatch)
         {
             const token = jwt.sign(
@@ -161,7 +152,6 @@ async function getUserStatus(req,res)
 {
     let userInfo = await User.findOne({email:req.body.email})
 
-
     if(userInfo)
     {
         let userStatus = 
@@ -169,7 +159,6 @@ async function getUserStatus(req,res)
             isLogedIn:userInfo.isLogedIn,
             isAdmin:userInfo.isAdmin
         }
-        console.log(userStatus)
         return res.status(200).json(userStatus);
     }
     else

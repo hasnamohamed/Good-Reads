@@ -1,5 +1,7 @@
 const express = require('express');
 const Route = express.Router();
+const {verifyToken, verifyAdmin} = require('./../middleware/auth')
+
 const  { 
     getCategories,
     getCategory,
@@ -15,11 +17,11 @@ Route.get('/:id',getBooksByCat);
 
 Route.get('/one/:id',getCategory);
 
-Route.post('/', createCategory);
+Route.post('/',verifyAdmin, createCategory);
 
-Route.put('/:id',updateCategory);
+Route.put('/:id', verifyAdmin, updateCategory);
 
-Route.delete('/:id',deleteCategory);
+Route.delete('/:id', verifyAdmin, deleteCategory);
 
 
 

@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UsersService } from 'src/Services/users.service';
@@ -6,31 +6,25 @@ import { UsersService } from 'src/Services/users.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AdminGuredGuard implements CanActivate, OnInit {
+export class UserDashBoardGuard implements CanActivate {
 
   private currentUserStatus:boolean = false;
   constructor(private userService:UsersService, private routerService:Router){
     this.userService.currentUserStatus.subscribe(
       userStatus =>
        {
-        this.currentUserStatus = userStatus.isAdmin
-        if(userStatus.isAdmin)
-          this.routerService.navigate(['/admin-dashboard'])
+        this.currentUserStatus = userStatus.isLogedIn
+        console.log(userStatus.isLogedIn)
+        if(userStatus.isLogedIn)
+          this.routerService.navigate(['/user-dashboard'])
         else
         {
           swal({
             title: "Access Denied",
             icon : "error"
           });
-
-          if(userStatus.isLogedIn)
-            this.routerService.navigate(['/'])
         }
       });
-  }
-
-  ngOnInit(): void {
-
   }
 
   canActivate()

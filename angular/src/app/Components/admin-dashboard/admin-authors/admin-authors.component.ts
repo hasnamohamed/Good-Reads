@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { Form } from '@angular/forms';
+import { Router } from '@angular/router';
 import { BehaviorSubject, distinctUntilChanged } from 'rxjs';
 import { IAuthor } from 'src/Models/iauthor';
 import { AuthorServiceService } from 'src/Services/author-service.service';
@@ -29,10 +30,10 @@ export class AdminAuthorsComponent implements OnInit {
   currentPageNumber:number = 1;
 
   authorsList:IAuthor[] = []
-  constructor(private authorService:AuthorServiceService)
-  {
 
-  }
+    constructor(
+                private authorService:AuthorServiceService,
+                private routerService:Router, ){}
 
 
 
@@ -85,14 +86,14 @@ export class AdminAuthorsComponent implements OnInit {
 
       if(fileSize > 2000)
       {
-        //@ts-ignore
+
         swal({
           title: "Maximum image size is 2M",
           icon : "error"
         });
 
         setTimeout(() => {
-          //@ts-ignore
+
           swal.close()
           this.closeButton.nativeElement.click();
         }, 2000)
@@ -119,7 +120,7 @@ export class AdminAuthorsComponent implements OnInit {
             this.authorsList.push(newAuthor)
 
           addAuthorForm.resetForm();
-          //@ts-ignore
+
           swal({
             title: "Author has been added successfully!",
             icon : "success"
@@ -127,7 +128,7 @@ export class AdminAuthorsComponent implements OnInit {
 
 
           setTimeout(() => {
-            //@ts-ignore
+
             swal.close()
           }, 2000)
         }
@@ -135,18 +136,19 @@ export class AdminAuthorsComponent implements OnInit {
 
       serverError =>
       {
-        //@ts-ignore
-        swal({
-          title: "Something went wrong, try again later",
-          icon : "error"
-        });
-        console.log(serverError)
-        setTimeout(() => {
-          //@ts-ignore
-          swal.close()
-        }, 2000)
-      }
+        if(serverError.status == 403)
+        {
+          swal({
+            title: "Unauthorized Action, Real Admins Has Been Reported",
+            icon : "error"
+          });
 
+        }
+        console.log(serverError)
+        setTimeout(() => { swal.close() }, 1000)
+        setTimeout(() => { this.routerService.navigate(['/'])}, 2000)
+
+      }
 
     )
   }
@@ -174,14 +176,14 @@ export class AdminAuthorsComponent implements OnInit {
 
       if(fileSize > 2000)
       {
-        //@ts-ignore
+
         swal({
           title: "Maximum image size is 2M",
           icon : "error"
         });
 
         setTimeout(() => {
-          //@ts-ignore
+
           swal.close()
         }, 2000)
 
@@ -215,7 +217,7 @@ export class AdminAuthorsComponent implements OnInit {
 
           updateAuthorForm.resetForm();
 
-          //@ts-ignore
+
           swal({
             title: "Author has been updated successfully!",
             icon : "success"
@@ -223,7 +225,7 @@ export class AdminAuthorsComponent implements OnInit {
 
 
           setTimeout(() => {
-            //@ts-ignore
+
             swal.close()
             this.closeButton.nativeElement.click();
           }, 2000)
@@ -232,16 +234,18 @@ export class AdminAuthorsComponent implements OnInit {
 
       serverError =>
       {
-        //@ts-ignore
-        swal({
-          title: "Something went wrong, try again later",
-          icon : "error"
-        });
+        if(serverError.status == 403)
+        {
+          swal({
+            title: "Unauthorized Action, Real Admins Has Been Reported",
+            icon : "error"
+          });
+
+        }
         console.log(serverError)
-        setTimeout(() => {
-          //@ts-ignore
-          swal.close()
-        }, 2000)
+        setTimeout(() => { swal.close() }, 1000)
+        setTimeout(() => { this.routerService.navigate(['/'])}, 2000)
+
       }
 
 
@@ -260,20 +264,37 @@ export class AdminAuthorsComponent implements OnInit {
           var filteredAuthorsList = this.authorsList.filter((el) => { return el._id != this.authorID });
           this.authorsList = filteredAuthorsList
 
-          //@ts-ignore
+
           swal({
             title: "Author has been removed successfully!",
             icon : "success"
           });
 
           setTimeout(() => {
-            //@ts-ignore
+
             swal.close()
             this.closeButton.nativeElement.click();
           }, 2000)
 
         }
-      })
+      },
+      serverError =>
+      {
+        if(serverError.status == 403)
+        {
+          swal({
+            title: "Unauthorized Action, Real Admins Has Been Reported",
+            icon : "error"
+          });
+
+        }
+        console.log(serverError)
+        setTimeout(() => { swal.close() }, 1000)
+        setTimeout(() => { this.routerService.navigate(['/'])}, 2000)
+
+      }
+
+      )
   }
 
   prevPage()

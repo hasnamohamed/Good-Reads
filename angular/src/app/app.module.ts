@@ -17,11 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminDashBoardComponent } from './Components/admin-dashboard/admin-dash-board/admin-dash-board.component';
 import { AdminBooksComponent } from './Components/admin-dashboard/admin-books/admin-books.component';
 import { AdminCategoriesComponent } from './Components/admin-dashboard/admin-categories/admin-categories.component';
-import { addBookComponent } from './Components/admin-dashboard/admin-actions/create/add-book/add-book.component';
 import { AdminAuthorsComponent } from './Components/admin-dashboard/admin-authors/admin-authors.component';
-import { UpdateBookComponent } from './Components/admin-dashboard/admin-actions/update/update-book/update-book.component';
-import { DeleteBookComponent } from './Components/admin-dashboard/admin-actions/delete/delete-book/delete-book.component';
-import { DeleteAuthorComponent } from './Components/admin-dashboard/admin-actions/delete/delete-author/delete-author.component';
 import { RegisterComponent } from './Components/register/register.component';
 import { CheckPasswordDirective } from 'custom-dirictives/passwordMatchChecker';
 import { RestPasswordComponent } from './Components/rest-password/rest-password.component';
@@ -68,11 +64,6 @@ import { UserDashboardComponent } from './Components/user-dashboard/user-dashboa
    AdminAuthorsComponent,
    AdminBooksComponent,
    AdminCategoriesComponent,
-   addBookComponent,
-   addBookComponent,
-   UpdateBookComponent,
-   DeleteBookComponent,
-   DeleteAuthorComponent,
    RegisterComponent,
    LoginComponent,
    CheckPasswordDirective,
@@ -112,9 +103,9 @@ import { UserDashboardComponent } from './Components/user-dashboard/user-dashboa
     HttpClientModule,
     MatSelectModule,
     MatIconModule,
-    
+
     HttpClientModule,
-    
+
    ],
   providers: [],
   bootstrap: [AppComponent]

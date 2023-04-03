@@ -20,6 +20,7 @@ import { CategoryDetailsComponent } from './Components/category-details/category
 import { BookDetailsComponent } from './Components/book-details/book-details.component';
 import { AdminGuredGuard } from './admin-gured.guard';
 import { UserDashboardComponent } from './Components/user-dashboard/user-dashboard.component';
+import { UserDashBoardGuard } from './user-dash-board.guard';
 
 const routes: Routes = [
   {path:'', redirectTo:"/home", pathMatch:"full"},
@@ -32,7 +33,7 @@ const routes: Routes = [
   {path:'teams-and-condations', component:TeamsAndConditionComponent},
   {path:'login', component:LoginComponent},
   {path:'register', component:RegisterComponent},
-  {path:'user-dashboard', component:UserDashboardComponent},
+  {path:'user-dashboard', component:UserDashboardComponent, canActivate:[UserDashBoardGuard]},
   {path:'reset', component:RestPasswordComponent},
   {path:'author/:id', component:AuthorDetailsComponent},
   {path:'categories/:id', component:CategoryDetailsComponent},

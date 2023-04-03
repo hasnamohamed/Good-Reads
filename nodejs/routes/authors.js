@@ -1,6 +1,7 @@
 const express = require('express');
 const Route = express.Router();
 const uploadFile = require('../middleware/uploadFile')
+const {verifyAdmin} = require('./../middleware/auth')
 
 const  { 
     getAuthors,
@@ -13,10 +14,10 @@ Route.get('/',getAuthors);
 
 Route.get('/:id',getAuthor);
 
-Route.post('/', uploadFile().single('file') ,createAuthor);
+Route.post('/',verifyAdmin, uploadFile().single('file') ,createAuthor);
 
-Route.put('/:id',uploadFile().single('file'),updateAuthor);
+Route.put('/:id',verifyAdmin, uploadFile().single('file'),updateAuthor);
 
-Route.delete('/:id',deleteAuthor);
+Route.delete('/:id',verifyAdmin, deleteAuthor);
 
 module.exports = Route;

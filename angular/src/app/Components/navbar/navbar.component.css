@@ -82,8 +82,9 @@ nav {
 
 .admin-dashboard-icon
 {
-  transform: scale(1.7);
+  transform: scale(1.4);
   overflow: hidden;
+  margin-left: 10px;
 }
 
 .admin-dashboard-icon:hover

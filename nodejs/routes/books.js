@@ -1,6 +1,6 @@
 const express = require('express');
 const Route = express.Router();
-const Auth = require('../middleware/auth')
+const {verifyToken, verifyAdmin} = require('./../middleware/auth')
 const uploadFile = require('../middleware/uploadFile')
 
 const  { 
@@ -20,11 +20,11 @@ Route.get('/author/:id',getBooksByAuthorId)
 
 Route.get('/:id',getBook);
 
-Route.post('/',uploadFile().single('file'), createBook);
+Route.post('/',verifyAdmin, uploadFile().single('file'), createBook);
 
-Route.put('/:id', uploadFile().single('file'),updateBook);
+Route.put('/:id',verifyAdmin, uploadFile().single('file'),updateBook);
 
-Route.delete('/:id',deleteBook);
+Route.delete('/:id', verifyAdmin, deleteBook);
 
 
 

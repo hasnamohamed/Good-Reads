@@ -7,35 +7,46 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link" routerLink="/home" routerLinkActive="active">home</a>
-        <a class="nav-link" routerLink="/books" routerLinkActive="active" href="#">books</a>
-        <a class="nav-link" routerLink="/authors" routerLinkActive="active" href="#">authors</a>
-        <a class="nav-link" routerLink="/categories" routerLinkActive="active">categories</a>
-        <a class="nav-link" routerLink="/aboutus" routerLinkActive="active">about us</a>
-        <a class="nav-link" routerLink="/team-and-condations" routerLinkActive="active">teams & condations</a>
-        <a *ngIf="isLogedIn == false; else logOut " class="login-button" routerLink="/login" routerLinkActive="active">
-          <span  class="login-button-text">login</span>
-        </a>
+      <div class="navbar-nav row">
 
-        <ng-template #logOut class="login-button" >
-          <a class="login-button" routerLink="/logout" routerLinkActive="active" (click)="logoutUser()">
-            <span  class="login-button-text">logout</span>
-          </a>
-        </ng-template>
+        <div class="col-12 col-lg-8  site-navgations">
+          <div class="row">
+            <a class="nav-link col-4 col-lg-2" routerLink="/home" routerLinkActive="active">home</a>
+            <a class="nav-link col-4 col-lg-2" routerLink="/books" routerLinkActive="active" href="#">books</a>
+            <a class="nav-link col-4 col-lg-2" routerLink="/authors" routerLinkActive="active" href="#">authors</a>
+            <a class="nav-link col-4 col-lg-2" routerLink="/categories" routerLinkActive="active">categories</a>
+
+            <a class="nav-link col-4 col-lg-2" routerLink="/aboutus" routerLinkActive="active">aboutUs</a>
+            <a class="nav-link col-4 col-lg-2 text-center" routerLink="/team-and-condations" routerLinkActive="active">Terms</a>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-4">
+          <div class="row mangement-panel">
+            <a *ngIf="isLogedIn == false; else logOut " class="login-button col-4" routerLink="/login" routerLinkActive="active">
+              <span  class="login-button-text">login</span>
+            </a>
+
+            <ng-template #logOut class="login-button" >
+              <a class="login-button col-4" routerLink="/logout" routerLinkActive="active" (click)="logoutUser()">
+                <span  class="login-button-text">logout</span>
+              </a>
+            </ng-template>
 
 
-        <a [hidden]="isLogedIn == true" class="register-button" routerLink="/register" routerLinkActive="active">
-          <span class="register-button-text">register</span>
-        </a>
+            <a [hidden]="isLogedIn == true" class="register-button col-4" routerLink="/register" routerLinkActive="active">
+              <span class="register-button-text">register</span>
+            </a>
 
-        <a  [hidden]="isAdmin == false" class="nav-link navbar-brand  admin-dashboard-icon" (click)="updateAdminStatus()" routerLink="/admin-dashboard" routerLinkActive="active">
-          <i class="fa-solid fa-gear"></i>
-        </a>
+            <a  [hidden]="isAdmin == false" class="nav-link col-4 d-none d-lg-block   admin-dashboard-icon" (click)="updateAdminStatus()" routerLink="/admin-dashboard" routerLinkActive="active">
+              <i class="fa-solid fa-gear"></i>
+            </a>
 
-        <a *ngIf="isLogedIn == true" class="user-dashboard-img" routerLink="/user-dashboard" routerLinkActive="active">
-          <span class=""><img [src]="userImage"></span>
-        </a>
+            <a *ngIf="isLogedIn == true" class="user-dashboard-img col-4 d-none d-lg-block" routerLink="/user-dashboard" routerLinkActive="active">
+              <span class=""><img [src]="userImage"></span>
+            </a>
+          </div>
+        </div>
 
       </div>
     </div>

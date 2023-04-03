@@ -4,5 +4,8 @@
         <a href="#" class="btn btn-outline-dark" routerLink="/admin-dashboard/admin-books" routerLinkActive="active">books</a>
         <a href="#" class="btn btn-outline-dark" routerLink="/admin-dashboard/admin-authors" routerLinkActive="active">authors</a>
     </div>
+    <p class="alert alert-info d-block d-lg-none">Open the site on a large screen(tablet and above) to see the admin panel</p>
 </section>
-<router-outlet></router-outlet>
+<section class="d-none d-lg-block">
+  <router-outlet></router-outlet>
+</section>

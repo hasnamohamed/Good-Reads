@@ -13,8 +13,8 @@ export class UserDashBoardGuard implements CanActivate {
     this.userService.currentUserStatus.subscribe(
       userStatus =>
        {
+
         this.currentUserStatus = userStatus.isLogedIn
-        console.log(userStatus.isLogedIn)
         if(userStatus.isLogedIn)
           this.routerService.navigate(['/user-dashboard'])
         else

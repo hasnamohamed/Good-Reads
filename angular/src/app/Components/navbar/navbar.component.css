@@ -14,14 +14,24 @@ nav {
     color: #382110 !important;
 }
 
+.site-navgations
+{
+  text-align: center;
+}
+
+.mangement-panel
+{
+  justify-content: space-around;
+  text-align: center;
+}
 
 .nav-link, .login-button, .register-button
 {
-    padding: 25px;
-    text-transform: capitalize;
-    font-family: 'Cairo', sans-serif;
-    transition:.5s;
-    text-decoration: none;
+  padding: 25px 25px;
+  text-transform: capitalize;
+  font-family: 'Cairo', sans-serif;
+  transition: .5s;
+  text-decoration: none;
 }
 
 .login-button span, .register-button span
@@ -63,6 +73,7 @@ nav {
 .user-dashboard-img
 {
   border: none;
+  text-align: center;
 }
 
 .user-dashboard-img img
@@ -82,13 +93,24 @@ nav {
 
 .admin-dashboard-icon
 {
-  transform: scale(1.4);
-  overflow: hidden;
-  margin-left: 10px;
+  text-align: center;
+}
+
+.admin-dashboard-icon i
+{
+  transform: scale(2.5);
 }
 
 .admin-dashboard-icon:hover
 {
   background-color: transparent !important;
   color: black !important;
+}
+
+
+
+@media (min-width: 992px){
+  .navbar-expand-lg .navbar-nav .nav-link {
+      padding: 25px;
+  }
 }
